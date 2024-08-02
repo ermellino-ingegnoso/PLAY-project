@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="0b344c8f-ab9a-405b-a4dd-384e900f981f" name="PLAY H2DB Mapping">
+      <data-sources db="12d93745-4b9e-4d9e-8a4b-9294d78ceb95" ddl="02c26ecf-a0a0-4c77-bad2-253fb623e88f" />
+    </mapping>
+  </component>
+</project>
