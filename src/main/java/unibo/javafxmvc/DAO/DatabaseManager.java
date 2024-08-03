@@ -53,6 +53,8 @@ public class DatabaseManager {
                 pstmt.setString(6, usr.getColor());
                 return pstmt.executeUpdate() > 0;
             } catch (SQLException e) {
+                e.printStackTrace();
+
                 return false;
             }
         } else throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));

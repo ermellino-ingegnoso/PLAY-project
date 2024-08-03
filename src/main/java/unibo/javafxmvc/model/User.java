@@ -10,7 +10,7 @@ public class User {
     private String username;
     private String password; // memorizzata come SHA-256 hash
     private byte[] avatar;
-    private String color;
+    private String color;   // sul mio sistema: bianco: 0xffffffff
 
     public User(String nome, String cognome, String username, String password, byte[] avatar, String color) {
         this.nome = nome;

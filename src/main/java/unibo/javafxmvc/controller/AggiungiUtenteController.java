@@ -160,7 +160,6 @@ public class AggiungiUtenteController implements Initializable {
         setLblVisibility(lblRipetiPassword, false);
         return true;
     }
-
     private void addUser() {
         trimLbl(lblNome, lblCognome, lblUsername, lblPassword, lblRipetiPassword);
         if (FormValidator.validateName(tfNome.getText()) && FormValidator.validateName(tfCognome.getText())
