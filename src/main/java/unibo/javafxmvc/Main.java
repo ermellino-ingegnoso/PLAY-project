@@ -1,6 +1,8 @@
 package unibo.javafxmvc;
 
-import java.io.InputStream;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -53,16 +55,22 @@ public class Main extends Application {
             if (fxmlStream == null) {
                 System.out.println("File FXML non trovato: " + fxmlPath);
                 return;
-            }
-            currentScene = new Scene((new FXMLLoader()).load(fxmlStream));
+            }   //  vengono automaticamente rimossi tutti i tag <Image> e <Image ... /> che dovranno essere gestiti all'interno dei controllers
+            currentScene = new Scene((new FXMLLoader()).load(removeImageTags(fxmlStream)));
             thisStage.setMaximized(maximized);
             thisStage.setScene(currentScene);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    @FXML
+    //  La regex è stata testata su un numero limitato di casi, potrebbe non funzionare con tutti i file FXML
+    public static InputStream removeImageTags(InputStream inputStream) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+            String content = reader.lines().collect(Collectors.joining("\n"));
+            return new ByteArrayInputStream((content.replaceAll(
+                    "<Image\\b[^>]*>(?:.*?)?</Image>|<Image\\b[^>]*/>\n", "")).getBytes(StandardCharsets.UTF_8));
+        }
+    }
     public static void updateWindowBounds(){
         ObservableList<Screen> screens = Screen.getScreensForRectangle(new Rectangle2D(thisStage.getX(), thisStage.getY(), thisStage.getWidth(), thisStage.getHeight()));
         Rectangle2D bounds = screens.get(0).getVisualBounds();

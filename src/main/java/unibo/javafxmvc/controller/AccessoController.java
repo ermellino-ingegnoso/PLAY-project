@@ -52,7 +52,7 @@ public class AccessoController {
 
     @FXML
     private void openAddUser() {
-        Main.changeScene("View/AggiungiUtente.fxml");
+        Main.changeScene("View/Registrazione.fxml");
     }
 
     @FXML

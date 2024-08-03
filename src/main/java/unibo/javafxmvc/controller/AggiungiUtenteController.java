@@ -2,19 +2,27 @@ package unibo.javafxmvc.controller;
 
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
 import unibo.javafxmvc.DAO.DatabaseManager;
 import unibo.javafxmvc.Main;
 import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.User;
 import unibo.javafxmvc.model.FormValidator;
 
-public class AggiungiUtenteController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AggiungiUtenteController implements Initializable {
     @FXML
     Alert alert = new Alert(AlertType.INFORMATION);
     @FXML
@@ -39,7 +47,16 @@ public class AggiungiUtenteController {
     private TextField tfRipetiPassword;
     @FXML
     private Label lblRegistrato;
+    @FXML
+    private ImageView ivAvatar;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        ivAvatar.setImage(new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/avatar.png")));
+        Tooltip tooltipImg = new Tooltip("Trascina un'immagine");
+        tooltipImg.setShowDelay(Duration.ZERO);
+        Tooltip.install(ivAvatar, tooltipImg);
+    }
     @FXML
     protected void tfNomeOnKeyTyped(KeyEvent event) {
         if (!FormValidator.validateName(tfNome.getText().trim())) {

@@ -29,12 +29,13 @@ public class DatabaseManager {
         DatabaseManager.dbURL = dbURL;
         try {
             connection = DriverManager.getConnection(dbURL);
-            System.out.println("Connessione al database stabilita");
         } catch (Exception e) {
             throw new ConnectionException("Errore di connessione al database: " + e.getMessage(), e);
         }
-        // debug
-        System.out.println("Connessione al database stabilita con successo");
+        informStatus(Status.STABILITA);
+    }
+    public static void informStatus(Status st){
+        System.out.println(String.format("Connessione al database %-10s con successo", st));
     }
     /**@return true se la connessione è stata stabilita correttamente e l'inserimento è andato a termine; <br> false se l'inserimento non è andato a termine correttamente
      * @throws ConnectionException se la connessione non è stata stabilita correttamente
@@ -120,7 +121,7 @@ public class DatabaseManager {
         if (connection != null) {
             try {
                 connection.close();
-                System.out.println("Connessiona al database chiusa.");
+                informStatus(Status.CHIUSA);
             } catch (SQLException e) {
                 System.out.println("Fallimento durante la chiusura della connessione");
                 throw e;
