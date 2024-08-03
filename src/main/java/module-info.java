@@ -7,6 +7,7 @@ module unibo.javafxmvc {
     opens unibo.javafxmvc to javafx.fxml;
     opens unibo.javafxmvc.model to com.google.gson; //  gson accede agli attributi privati dei model
 
+    exports unibo.javafxmvc.exception;
     exports unibo.javafxmvc.model;
     exports unibo.javafxmvc;
     exports unibo.javafxmvc.controller;

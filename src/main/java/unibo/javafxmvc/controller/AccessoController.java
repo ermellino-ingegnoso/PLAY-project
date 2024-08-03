@@ -1,6 +1,8 @@
 package unibo.javafxmvc.controller;
 
+import unibo.javafxmvc.DAO.DatabaseManager;
 import unibo.javafxmvc.Main;
+import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.User;
 import unibo.javafxmvc.model.UserManager;
 import javafx.fxml.FXML;
@@ -12,6 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+
+import java.sql.SQLException;
 
 public class AccessoController {
     @FXML
@@ -54,21 +58,26 @@ public class AccessoController {
 
     @FXML
     private void accesso() {
-        User user = UserManager.findUserByUsername(tfUsername.getText());
-        if (user != null) {
-            lblUsername.setVisible(false);
-            if (user.checkPassword(UserManager.getSHA256Hash(tfPassword.getText().trim()))) {
-                lblPassword.setVisible(false);
-                Main.currentUser = user;
-                alert.setTitle("Accesso effettuato");
-                alert.setHeaderText("Benvenuto " + user.getNome());
-                alert.show();
-                // Main.changeScene("Views/Home.fxml");
-            } else {
+        String userName = tfUsername.getText().trim();
+        try{
+            if(DatabaseManager.checkPasswordForUser(userName, User.getSHA256Hash(tfPassword.getText()))){
+                User user = DatabaseManager.getUser(userName);
+                if(user != null){
+                    Main.currentUser = user;
+                } else{
+                    Main.changeScene("View/ErroreDatabase.fxml");
+                }
+            } else{
                 lblPassword.setVisible(true);
             }
-        } else {
+        } catch (SQLException e) {
             lblUsername.setVisible(true);
+        } catch (ConnectionException e) {
+            Main.changeScene("View/ErroreDatabase.fxml");
+            //  debug:
+            alert.setTitle("Errore Database");
+            alert.setHeaderText("Connessione non instaurata");
+            alert.show();
         }
     }
 

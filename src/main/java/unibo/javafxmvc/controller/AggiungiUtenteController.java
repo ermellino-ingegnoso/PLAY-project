@@ -8,7 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import unibo.javafxmvc.DAO.DatabaseManager;
 import unibo.javafxmvc.Main;
+import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.User;
 import unibo.javafxmvc.model.UserManager;
 import unibo.javafxmvc.model.FormValidator;
@@ -111,19 +113,30 @@ public class AggiungiUtenteController {
         if (FormValidator.validateName(tfNome.getText()) && FormValidator.validateName(tfCognome.getText())
                 && FormValidator.validateUsername(tfUsername.getText())
                 && validatePassword(tfPassword.getText(), tfRipetiPassword.getText())) {
-            Boolean check = UserManager.addUser(new User(tfNome.getText(), tfCognome.getText(), tfUsername.getText(),
-                    UserManager.getSHA256Hash(tfPassword.getText())));
-            if (check) {
-                setLblVisibility(lblRegistrato, false);
-                Main.changeScene("Views/Accesso.fxml");
-                alert.setTitle("Informativa aggiunta utente");
-                alert.setHeaderText("Utente aggiunto con successo");
+            try {
+                Boolean check = DatabaseManager.insertUser(new User(
+                        tfNome.getText(),
+                        tfCognome.getText(),
+                        tfUsername.getText(),
+                        User.getSHA256Hash(tfPassword.getText())));
+                if (check) {
+                    setLblVisibility(lblRegistrato, false);
+                    Main.changeScene("Views/Accesso.fxml");
+                    alert.setTitle("Informativa aggiunta utente");
+                    alert.setHeaderText("Utente aggiunto con successo");
+                    alert.show();
+                } else
+                    setLblVisibility(lblRegistrato, true);
+            } catch (ConnectionException e) {
+                Main.changeScene("Views/ErroreDatabase.fxml");
+            } catch (RuntimeException e) {
+                alert.setTitle("Errore");
+                alert.setHeaderText("Errore durante l'aggiunta dell'utente");
                 alert.show();
-            } else
-                setLblVisibility(lblRegistrato, true);
+                e.printStackTrace();
+            }
         }
     }
-
     @FXML
     void IndietroOnMouseClicked(MouseEvent event) {
         Main.changeScene("View/Accesso.fxml");
