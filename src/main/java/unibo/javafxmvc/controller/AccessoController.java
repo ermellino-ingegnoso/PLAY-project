@@ -59,19 +59,21 @@ public class AccessoController {
     private void accesso() {
         String userName = tfUsername.getText().trim();
         try{
-            if(DatabaseManager.checkPasswordForUser(userName, User.getSHA256Hash(tfPassword.getText()))){
-                User user = DatabaseManager.getUser(userName);
-                if(user != null){
-                    Main.currentUser = user;
+            User usr = DatabaseManager.getUser(userName);
+            if(usr != null){
+                lblUsername.setVisible(false);
+                if(usr.checkPassword(User.getSHA256Hash(tfPassword.getText()))){
+                    lblPassword.setVisible(false);
+                    Main.currentUser = usr;
                     Main.changeScene("View/Home.fxml");
                 } else{
-                    Main.changeScene("View/ErroreDatabase.fxml");
+                    lblPassword.setVisible(true);
                 }
             } else{
-                lblPassword.setVisible(true);
+                lblUsername.setVisible(true);
             }
         } catch (SQLException e) {
-            lblUsername.setVisible(true);
+            e.printStackTrace();
         } catch (ConnectionException e) {
             Main.changeScene("View/ErroreDatabase.fxml");
             //  debug:

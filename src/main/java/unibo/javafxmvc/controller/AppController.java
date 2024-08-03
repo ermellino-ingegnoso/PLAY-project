@@ -9,7 +9,6 @@ public class AppController {
     public static void handleWindowClose() {
         try {
             DatabaseManager.closeConnection();
-            System.out.println("Siummico chiuso");
         } catch (SQLException e) {
             e.printStackTrace();
         }

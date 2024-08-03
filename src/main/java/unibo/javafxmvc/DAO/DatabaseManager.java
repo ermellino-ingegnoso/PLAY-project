@@ -59,6 +59,18 @@ public class DatabaseManager {
      * @throws ConnectionException se la connessione non è stata stabilita correttamente
      * @throws SQLException se si verifica un errore durante l'esecuzione della query di recupero o l'Utente non è stato trovato o il dato è corrotto
      * */
+    public static Boolean userExists(String username) throws ConnectionException, SQLException {
+        if(connection != null){
+            try(PreparedStatement pstmt = connection.prepareStatement(
+        "SELECT USERNAME FROM \"User\" WHERE USERNAME = ?")) {
+                pstmt.setString(1, username);
+                ResultSet rs = pstmt.executeQuery();
+                return rs.next();
+            } catch (SQLException e) {
+                throw e;
+            }
+        } else throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));
+    }
     public static Boolean checkPasswordForUser(String username, String password) throws ConnectionException, SQLException {
         if(connection != null){
             try(PreparedStatement pstmt = connection.prepareStatement(
@@ -68,7 +80,7 @@ public class DatabaseManager {
                 if (rs.next()) {
                     return rs.getString("PASSWORD").equals(password);
                 } else {
-                    return null;
+                    throw new SQLException("Utente non trovato");
                 }
             } catch (SQLException e) {
                 throw e;

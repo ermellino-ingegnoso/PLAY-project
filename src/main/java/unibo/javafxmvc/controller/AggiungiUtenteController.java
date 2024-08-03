@@ -14,8 +14,6 @@ import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.User;
 import unibo.javafxmvc.model.FormValidator;
 
-import java.sql.SQLException;
-
 public class AggiungiUtenteController {
     @FXML
     Alert alert = new Alert(AlertType.INFORMATION);
@@ -123,22 +121,6 @@ public class AggiungiUtenteController {
                 if (check) {
                     setLblVisibility(lblRegistrato, false);
                     Main.changeScene("View/Accesso.fxml");
-                    try{
-                        User usr = DatabaseManager.getUser(tfUsername.getText());
-                        alert.setTitle("Vista User");
-                        alert.setHeaderText("Utente nel database: " + usr.toString());
-                        alert.show();
-                    } catch (SQLException e) {
-                        System.out.println("Errore SQL durante il recupero dell'utente");
-                        throw new RuntimeException(e);
-                    } catch (ConnectionException e) {
-                        System.out.println("Errore di connessione durante il recupero dell'utente");
-                        throw new RuntimeException(e);
-                    }
-                    /*
-                    alert.setTitle("Informativa aggiunta utente");
-                    alert.setHeaderText("Utente aggiunto con successo");
-                    alert.show();   */
                 } else
                     setLblVisibility(lblRegistrato, true);
             } catch (ConnectionException e) {
