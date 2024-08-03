@@ -12,8 +12,9 @@ import unibo.javafxmvc.DAO.DatabaseManager;
 import unibo.javafxmvc.Main;
 import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.User;
-import unibo.javafxmvc.model.UserManager;
 import unibo.javafxmvc.model.FormValidator;
+
+import java.sql.SQLException;
 
 public class AggiungiUtenteController {
     @FXML
@@ -121,14 +122,27 @@ public class AggiungiUtenteController {
                         User.getSHA256Hash(tfPassword.getText())));
                 if (check) {
                     setLblVisibility(lblRegistrato, false);
-                    Main.changeScene("Views/Accesso.fxml");
+                    Main.changeScene("View/Accesso.fxml");
+                    try{
+                        User usr = DatabaseManager.getUser(tfUsername.getText());
+                        alert.setTitle("Vista User");
+                        alert.setHeaderText("Utente nel database: " + usr.toString());
+                        alert.show();
+                    } catch (SQLException e) {
+                        System.out.println("Errore SQL durante il recupero dell'utente");
+                        throw new RuntimeException(e);
+                    } catch (ConnectionException e) {
+                        System.out.println("Errore di connessione durante il recupero dell'utente");
+                        throw new RuntimeException(e);
+                    }
+                    /*
                     alert.setTitle("Informativa aggiunta utente");
                     alert.setHeaderText("Utente aggiunto con successo");
-                    alert.show();
+                    alert.show();   */
                 } else
                     setLblVisibility(lblRegistrato, true);
             } catch (ConnectionException e) {
-                Main.changeScene("Views/ErroreDatabase.fxml");
+                Main.changeScene("View/ErroreDatabase.fxml");
             } catch (RuntimeException e) {
                 alert.setTitle("Errore");
                 alert.setHeaderText("Errore durante l'aggiunta dell'utente");

@@ -19,7 +19,7 @@ public class DatabaseManager {
     static{
         connection = null;
         connectionExceptionMessage = "Errore di connessione al database: connessione nulla. \n DatabaseManager.inizialize() non è stato eseguito o è stato invocato un metodo senza prevedere la connessione";
-        npeMessage = "Connection poit to null";
+        npeMessage = "Connection point to null";
     }
     /**inizializza la connessione al database con l'URL specificato
      * @param dbURL URL del database
@@ -28,39 +28,41 @@ public class DatabaseManager {
     public static void inizialize(String dbURL) throws ConnectionException {
         DatabaseManager.dbURL = dbURL;
         try {
-            Connection connection = DriverManager.getConnection(dbURL);
+            connection = DriverManager.getConnection(dbURL);
+            System.out.println("Connessione al database stabilita");
         } catch (Exception e) {
             throw new ConnectionException("Errore di connessione al database: " + e.getMessage(), e);
         }
+        // debug
+        System.out.println("Connessione al database stabilita con successo");
     }
-    /**@return true se la connessione è stata stabilita correttamente e l'inserimento è andato a termine
-     * @return false se l'inserimento non è andato a termine correttamente
-     * @trhow ConnectionException se la connessione non è stata stabilita correttamente
+    /**@return true se la connessione è stata stabilita correttamente e l'inserimento è andato a termine; <br> false se l'inserimento non è andato a termine correttamente
+     * @throws ConnectionException se la connessione non è stata stabilita correttamente
      * */
     public static Boolean insertUser(User usr) throws ConnectionException{
         if(connection != null){
+            int affectedRows = 0;
             try(PreparedStatement pstmt = connection.prepareStatement(
-        "INSERT INTO User (NOME, COGNOME, USERNAME, PASSSWORD) VALUES (?, ?, ?, ?)")){
+        "INSERT INTO \"User\" (NOME, COGNOME, USERNAME, PASSWORD) VALUES (?, ?, ?, ?)")){
                 pstmt.setString(1, usr.getNome());
                 pstmt.setString(2, usr.getCognome());
                 pstmt.setString(3, usr.getUsername());
                 pstmt.setString(4, usr.getPassword());
+                affectedRows = pstmt.executeUpdate();
+                return affectedRows > 0;
             } catch (SQLException e) {
-                e.printStackTrace();
                 return false;
             }
-            return true;
         } else throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));
     }
-    /**@return true se la password dell'utente corrisponde a quella memorizzata nel database
-     * @return false non corrisponde
-     * @trhow ConnectionException se la connessione non è stata stabilita correttamente
-     * @trhow SQLException se si verifica un errore durante l'esecuzione della query di recupero o l'Utente non è stato trovato o il dato è corrotto
+    /**@return true se la password dell'utente corrisponde a quella memorizzata nel database; <br> false non corrisponde
+     * @throws ConnectionException se la connessione non è stata stabilita correttamente
+     * @throws SQLException se si verifica un errore durante l'esecuzione della query di recupero o l'Utente non è stato trovato o il dato è corrotto
      * */
     public static Boolean checkPasswordForUser(String username, String password) throws ConnectionException, SQLException {
         if(connection != null){
             try(PreparedStatement pstmt = connection.prepareStatement(
-        "SELECT PASSWORD FROM User WHERE USERNAME = ?")) {
+        "SELECT PASSWORD FROM \"User\" WHERE USERNAME = ?")) {
                 pstmt.setString(1, username);
                 ResultSet rs = pstmt.executeQuery();
                 if (rs.next()) {
@@ -73,15 +75,14 @@ public class DatabaseManager {
             }
         } else throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));
     }
-    /**@return l'utente con lo username specificato
-     * @return null se l'utente non è stato trovato
-     * @trhow ConnectionException se la connessione non è stata stabilita correttamente
-     * @trhow SQLException se si verifica un errore durante l'esecuzione della query di recupero
+    /**@return l'utente con lo username specificato; <br> null se l'utente non è stato trovato
+     * @throws ConnectionException se la connessione non è stata stabilita correttamente
+     * @throws SQLException se si verifica un errore durante l'esecuzione della query di recupero
      * */
     public static User getUser(String username) throws ConnectionException, SQLException {
         if(connection != null) {
             try (PreparedStatement pstmt = connection.prepareStatement(
-        "SELECT NOME, COGNOME, USERNAME, PASSWORD FROM User WHERE USERNAME = ?")) {
+        "SELECT NOME, COGNOME, USERNAME, PASSWORD FROM \"User\" WHERE USERNAME = ?")) {
                 pstmt.setString(1, username);
                 ResultSet rs = pstmt.executeQuery();
                 if (rs.next()) {
@@ -100,14 +101,16 @@ public class DatabaseManager {
         else throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));
     }
     /**Chiude la connessione al database
-     * @trhow SQLException se si verifica un errore durante la chiusura della connessione
+     * @throws SQLException se si verifica un errore durante la chiusura della connessione
      * @see DatabaseManager#inizialize(String)
      * */
     public static void closeConnection() throws SQLException {
         if (connection != null) {
             try {
                 connection.close();
+                System.out.println("Connessiona al database chiusa.");
             } catch (SQLException e) {
+                System.out.println("Fallimento durante la chiusura della connessione");
                 throw e;
             }
         }

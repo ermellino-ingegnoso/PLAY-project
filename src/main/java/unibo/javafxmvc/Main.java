@@ -38,7 +38,7 @@ public class Main extends Application {
         try {
             InputStream fxmlStream = Main.class.getResourceAsStream(fxmlPath);
             if (fxmlStream == null) {
-                System.out.println("File FXML non trovato!");
+                System.out.println("File FXML non trovato: " + fxmlPath);
                 return;
             }
             currentScene = new Scene((new FXMLLoader()).load(fxmlStream));

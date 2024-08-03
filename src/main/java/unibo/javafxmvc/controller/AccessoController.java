@@ -4,7 +4,6 @@ import unibo.javafxmvc.DAO.DatabaseManager;
 import unibo.javafxmvc.Main;
 import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.User;
-import unibo.javafxmvc.model.UserManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -64,6 +63,7 @@ public class AccessoController {
                 User user = DatabaseManager.getUser(userName);
                 if(user != null){
                     Main.currentUser = user;
+                    Main.changeScene("View/Home.fxml");
                 } else{
                     Main.changeScene("View/ErroreDatabase.fxml");
                 }
