@@ -1,17 +1,14 @@
 package unibo.javafxmvc.controller;
 
-
+import java.nio.file.Files;
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.util.Duration;
 import unibo.javafxmvc.DAO.DatabaseManager;
 import unibo.javafxmvc.Main;
@@ -19,6 +16,7 @@ import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.User;
 import unibo.javafxmvc.model.FormValidator;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -49,6 +47,10 @@ public class AggiungiUtenteController implements Initializable {
     private Label lblRegistrato;
     @FXML
     private ImageView ivAvatar;
+    @FXML
+    private Label lblAvatar;
+    @FXML
+    private ColorPicker cpUser;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -56,6 +58,36 @@ public class AggiungiUtenteController implements Initializable {
         Tooltip tooltipImg = new Tooltip("Trascina un'immagine");
         tooltipImg.setShowDelay(Duration.ZERO);
         Tooltip.install(ivAvatar, tooltipImg);
+    }
+    @FXML
+    void ivAvatarOnDragDropped(DragEvent event) {
+        Dragboard db = event.getDragboard();
+        boolean success = false;
+        if (db.hasFiles()) {
+            File file = db.getFiles().get(0);
+            try{
+                ivAvatar.setImage(new Image(file.toURI().toString()));
+                lblAvatar.setText("Errore nel caricamento dell' immagine");
+                lblAvatar.setVisible(false);
+                success = true;
+            } catch(NullPointerException npe){
+                lblAvatar.setText("Errore nel caricamento dell' immagine");
+                lblAvatar.setVisible(true);
+            } catch(IllegalArgumentException iae){
+                lblAvatar.setText("Tipo del file non supportato");
+                lblAvatar.setVisible(true);
+            }
+        }
+        event.setDropCompleted(success);
+        event.consume();    // l'evento viene gestito e non propagato
+    }
+
+    @FXML
+    void ivAvatarOnDragOver(DragEvent event) {
+        if (event.getGestureSource() != ivAvatar && event.getDragboard().hasFiles()) {
+            event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+        }
+        event.consume();
     }
     @FXML
     protected void tfNomeOnKeyTyped(KeyEvent event) {
@@ -111,8 +143,13 @@ public class AggiungiUtenteController implements Initializable {
     }
 
     @FXML
-    protected void btnAddUserOnKeyPressed(MouseEvent event) {
-        addUser();
+    protected void btnAddUserOnKeyPressed(KeyEvent event) {
+        if(keyEnterPressed(event))
+            addUser();
+    }
+    @FXML
+    private Boolean keyEnterPressed(KeyEvent event) {
+        return (event.getCode() == KeyCode.ENTER);
     }
 
     private boolean validatePassword(String password, String ripetiPassword) {
@@ -130,11 +167,22 @@ public class AggiungiUtenteController implements Initializable {
                 && FormValidator.validateUsername(tfUsername.getText())
                 && validatePassword(tfPassword.getText(), tfRipetiPassword.getText())) {
             try {
+                byte[] avatar = null;
+                try{    // si cerca di recuperare l'immagine dell'avatar se disponibile
+                    avatar = Files.readAllBytes((new File(ivAvatar.getImage().getUrl().replace("file:/", ""))).toPath());
+                    lblAvatar.setVisible(false);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("IO");
+                } catch (NullPointerException e) {
+                    lblAvatar.setVisible(true);
+                }
                 Boolean check = DatabaseManager.insertUser(new User(
                         tfNome.getText(),
                         tfCognome.getText(),
                         tfUsername.getText(),
-                        User.getSHA256Hash(tfPassword.getText())));
+                        User.getSHA256Hash(tfPassword.getText()),
+                        avatar, cpUser.getValue().toString()));
                 if (check) {
                     setLblVisibility(lblRegistrato, false);
                     Main.changeScene("View/Accesso.fxml");

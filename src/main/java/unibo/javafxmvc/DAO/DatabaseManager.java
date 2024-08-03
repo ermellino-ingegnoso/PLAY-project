@@ -44,13 +44,14 @@ public class DatabaseManager {
         if(connection != null){
             int affectedRows = 0;
             try(PreparedStatement pstmt = connection.prepareStatement(
-        "INSERT INTO \"User\" (NOME, COGNOME, USERNAME, PASSWORD) VALUES (?, ?, ?, ?)")){
+        "INSERT INTO \"User\" (NOME, COGNOME, USERNAME, PASSWORD, AVATAR, COLOR) VALUES (?, ?, ?, ?, ?, ?)")){
                 pstmt.setString(1, usr.getNome());
                 pstmt.setString(2, usr.getCognome());
                 pstmt.setString(3, usr.getUsername());
                 pstmt.setString(4, usr.getPassword());
-                affectedRows = pstmt.executeUpdate();
-                return affectedRows > 0;
+                pstmt.setBytes(5, usr.getAvatar());
+                pstmt.setString(6, usr.getColor());
+                return pstmt.executeUpdate() > 0;
             } catch (SQLException e) {
                 return false;
             }
@@ -99,11 +100,14 @@ public class DatabaseManager {
                 pstmt.setString(1, username);
                 ResultSet rs = pstmt.executeQuery();
                 if (rs.next()) {
-                    String nome = rs.getString("NOME");
-                    String cognome = rs.getString("COGNOME");
-                    String user = rs.getString("USERNAME");
-                    String password = rs.getString("PASSWORD");
-                    return new User(nome, cognome, user, password);
+                    return new User(
+                            rs.getString("nome"),
+                            rs.getString("cognome"),
+                            rs.getString("username"),
+                            rs.getString("password"),
+                            rs.getBytes("avatar"),
+                            rs.getString("color")
+                    );
                 } else {
                     return null;
                 }

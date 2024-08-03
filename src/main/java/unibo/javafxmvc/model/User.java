@@ -9,12 +9,16 @@ public class User {
     private String cognome;
     private String username;
     private String password; // memorizzata come SHA-256 hash
+    private byte[] avatar;
+    private String color;
 
-    public User(String nome, String cognome, String username, String password) {
+    public User(String nome, String cognome, String username, String password, byte[] avatar, String color) {
         this.nome = nome;
         this.cognome = cognome;
         this.username = username;
         this.password = password;
+        this.avatar = avatar;
+        this.color = color;
     }
 
     // equals() e hashCode() sono necessari per la comparazione degli oggetti (User)
@@ -47,35 +51,39 @@ public class User {
     public int hashCode() {
         return Objects.hash(nome, cognome, username, password);
     }
-
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
-
     public String getCognome() {
         return cognome;
     }
-
     public void setCognome(String cognome) {
         this.cognome = cognome;
     }
-
     public String getUsername() {
         return username;
     }
-
     public String getPassword() {
         return password;
     }
-
     public Boolean checkPassword(String input) {
         return this.password.equals(input);
     }
-
+    public byte[] getAvatar() {
+        return avatar;
+    }
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
+    public String getColor() {
+        return color;
+    }
+    public void setColor(String color) {
+        this.color = color;
+    }
     @Override
     public String toString() {
         return String.format("%s,%s,%s,%s%n", nome, cognome, username, password);
