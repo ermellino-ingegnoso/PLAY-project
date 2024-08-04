@@ -132,12 +132,13 @@
                   <Font size="11.0" />
                </font>
             </Label>
-            <Label prefHeight="46.0" prefWidth="124.0" text="Seleziona il tuo colore (scuro)" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER" />
-            <ColorPicker fx:id="cpUser" prefWidth="128.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+            <Label fx:id="lblColorPicker" prefHeight="46.0" prefWidth="124.0" text="Seleziona il tuo colore (scuro)" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER" />
+            <ColorPicker fx:id="cpUser" onAction="#handleColorChange" prefWidth="128.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                <value>
                   <Color />
                </value>
             </ColorPicker>
+            <Label fx:id="lblConnessione" text="ERRORE DI CONNESSIONE: scollegarsi dal database" textFill="#9a0000" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
     </children>

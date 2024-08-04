@@ -2,6 +2,8 @@ package unibo.javafxmvc.controller;
 
 import java.nio.file.Files;
 import java.io.IOException;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -18,6 +20,7 @@ import unibo.javafxmvc.model.FormValidator;
 
 import java.io.File;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class AggiungiUtenteController implements Initializable {
@@ -51,6 +54,10 @@ public class AggiungiUtenteController implements Initializable {
     private Label lblAvatar;
     @FXML
     private ColorPicker cpUser;
+    @FXML
+    private Label lblColorPicker;
+    @FXML
+    private Label lblConnessione;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,6 +65,10 @@ public class AggiungiUtenteController implements Initializable {
         Tooltip tooltipImg = new Tooltip("Trascina un'immagine");
         tooltipImg.setShowDelay(Duration.ZERO);
         Tooltip.install(ivAvatar, tooltipImg);
+    }
+    @FXML
+    void handleColorChange(ActionEvent event) {
+        lblColorPicker.setTextFill(cpUser.getValue());
     }
     @FXML
     void ivAvatarOnDragDropped(DragEvent event) {
@@ -107,10 +118,23 @@ public class AggiungiUtenteController implements Initializable {
 
     @FXML
     protected void tfUsernameOnKeyTyped(KeyEvent event) {
-        if (!FormValidator.validateUsername(tfUsername.getText().trim())) {
+        String username = tfUsername.getText().trim().toLowerCase();
+        if (!FormValidator.validateUsername(username)) {
             setLblVisibility(lblUsername, true);
-        } else
+        } else {
             setLblVisibility(lblUsername, false);
+            try {
+                if (DatabaseManager.userExists(username)) {
+                    setLblVisibility(lblRegistrato, true);
+                } else setLblVisibility(lblRegistrato, false);
+            }catch(SQLException sqle){
+                sqle.printStackTrace(); //  errore di esecuzione della query
+            } catch (ConnectionException ce) {
+                lblConnessione.setVisible(true);
+            } catch (RuntimeException re) {
+                re.printStackTrace();
+            }
+        }
     }
 
     @FXML

@@ -59,14 +59,15 @@ public class DatabaseManager {
             }
         } else throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));
     }
-    /**@return true se la password dell'utente corrisponde a quella memorizzata nel database; <br> false non corrisponde
+    /**@param username username dell'utente da verificare
+     * @return true se l'utente con lo username specificato è presente nel database; <br> false se l'utente non è presente
      * @throws ConnectionException se la connessione non è stata stabilita correttamente
-     * @throws SQLException se si verifica un errore durante l'esecuzione della query di recupero o l'Utente non è stato trovato o il dato è corrotto
+     * @throws SQLException se si verifica un errore durante l'esecuzione della query di recupero
      * */
     public static Boolean userExists(String username) throws ConnectionException, SQLException {
         if(connection != null){
             try(PreparedStatement pstmt = connection.prepareStatement(
-        "SELECT USERNAME FROM \"User\" WHERE USERNAME = ?")) {
+        "SELECT USERNAME FROM \"User\" WHERE LOWER(USERNAME) = LOWER(?)")) {
                 pstmt.setString(1, username);
                 ResultSet rs = pstmt.executeQuery();
                 return rs.next();
@@ -75,10 +76,14 @@ public class DatabaseManager {
             }
         } else throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));
     }
+    /**@return true se la password dell'utente corrisponde a quella memorizzata nel database; <br> false non corrisponde
+     * @throws ConnectionException se la connessione non è stata stabilita correttamente
+     * @throws SQLException se si verifica un errore durante l'esecuzione della query di recupero o l'Utente non è stato trovato o il dato è corrotto
+     * */
     public static Boolean checkPasswordForUser(String username, String password) throws ConnectionException, SQLException {
         if(connection != null){
             try(PreparedStatement pstmt = connection.prepareStatement(
-        "SELECT PASSWORD FROM \"User\" WHERE USERNAME = ?")) {
+        "SELECT PASSWORD FROM \"User\" WHERE LOWER(USERNAME) = LOWER(?)")) {
                 pstmt.setString(1, username);
                 ResultSet rs = pstmt.executeQuery();
                 if (rs.next()) {
@@ -98,7 +103,7 @@ public class DatabaseManager {
     public static User getUser(String username) throws ConnectionException, SQLException {
         if(connection != null) {
             try (PreparedStatement pstmt = connection.prepareStatement(
-        "SELECT NOME, COGNOME, USERNAME, PASSWORD FROM \"User\" WHERE USERNAME = ?")) {
+        "SELECT NOME, COGNOME, USERNAME, PASSWORD, AVATAR, COLOR FROM \"User\" WHERE LOWER(USERNAME) = LOWER(?)")) {
                 pstmt.setString(1, username);
                 ResultSet rs = pstmt.executeQuery();
                 if (rs.next()) {
