@@ -28,7 +28,7 @@
     </rowConstraints>
     <children>
         <Label alignment="CENTER" text="Aggiungi un nuovo utente" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-        <Button mnemonicParsing="false" onKeyPressed="#btnAddUserOnKeyPressed" onMouseClicked="#btnAddUserOnMouseClicked" prefHeight="38.0" prefWidth="107.0" text="Registrati" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+        <Button fx:id="btnAddUser" mnemonicParsing="false" onKeyPressed="#btnAddUserOnKeyPressed" onMouseClicked="#btnAddUserOnMouseClicked" prefHeight="38.0" prefWidth="107.0" text="Registrati" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
             <font>
                 <Font size="13.0" />
             </font>
@@ -122,7 +122,7 @@
           <RowConstraints minHeight="40.0" prefHeight="50.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fx:id="ivAvatar" fitHeight="100.0" fitWidth="100.0" onDragDropped="#ivAvatarOnDragDropped" onDragOver="#ivAvatarOnDragOver" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowSpan="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <ImageView fx:id="ivAvatar" fitHeight="100.0" fitWidth="100.0" onDragDropped="#ivAvatarOnDragDropped" onDragOver="#ivAvatarOnDragOver" onMouseClicked="#ivAvatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowSpan="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <image>
                   <Image url="@../Images/avatar.png" />
                </image>

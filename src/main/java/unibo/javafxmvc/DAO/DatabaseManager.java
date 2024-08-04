@@ -9,6 +9,8 @@ import unibo.javafxmvc.model.User;
     Tempo di esecuzione della query: 18 ms
     Tempo di recupero dei dati: 47 ms
     Connessione al database stabilita: 20:12:28
+
+    ⚠️ per resettare gli id della tabella user: ALTER TABLE "User" ALTER COLUMN ID RESTART WITH 1;
  */
 public class DatabaseManager {
     private static String dbURL;
@@ -53,8 +55,6 @@ public class DatabaseManager {
                 pstmt.setString(6, usr.getColor());
                 return pstmt.executeUpdate() > 0;
             } catch (SQLException e) {
-                e.printStackTrace();
-
                 return false;
             }
         } else throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));

@@ -3,14 +3,17 @@ package unibo.javafxmvc.controller;
 import java.nio.file.Files;
 import java.io.IOException;
 
-import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import unibo.javafxmvc.DAO.DatabaseManager;
 import unibo.javafxmvc.Main;
@@ -21,6 +24,7 @@ import unibo.javafxmvc.model.FormValidator;
 import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AggiungiUtenteController implements Initializable {
@@ -58,29 +62,53 @@ public class AggiungiUtenteController implements Initializable {
     private Label lblColorPicker;
     @FXML
     private Label lblConnessione;
+    @FXML
+    private Button btnAddUser;
+    private FileChooser fileChooser;
+    private Boolean check;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ivAvatar.setImage(new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/avatar.png")));
+        Platform.runLater(() -> tfNome.requestFocus());
+        ivAvatar.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/unibo/javafxmvc/Images/avatar.png"))));
         Tooltip tooltipImg = new Tooltip("Trascina un'immagine");
         tooltipImg.setShowDelay(Duration.ZERO);
         Tooltip.install(ivAvatar, tooltipImg);
+        try{
+            tfUsername.setText(System.getProperty("user.name"));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
     @FXML
-    void handleColorChange(ActionEvent event) {
+    private void handleColorChange(ActionEvent event) {
         lblColorPicker.setTextFill(cpUser.getValue());
+        event.consume();
     }
     @FXML
-    void ivAvatarOnDragDropped(DragEvent event) {
-        Dragboard db = event.getDragboard();
-        boolean success = false;
-        if (db.hasFiles()) {
-            File file = db.getFiles().get(0);
+    private void ivAvatarOnMouseClicked(MouseEvent event) {
+        fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        System.out.println(System.getProperties());
+
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
+        );
+        File selectedFile = fileChooser.showOpenDialog(ivAvatar.getScene().getWindow());
+        if (selectedFile != null) {
+            addImageAsFileToIVAvatar(selectedFile);
+            File selectedDirectory = selectedFile.getParentFile();
+            fileChooser.setInitialDirectory(selectedDirectory);
+        }
+        event.consume();
+    }
+    private Boolean addImageAsFileToIVAvatar(File file){
+        if(file != null){
             try{
                 ivAvatar.setImage(new Image(file.toURI().toString()));
                 lblAvatar.setText("Errore nel caricamento dell' immagine");
                 lblAvatar.setVisible(false);
-                success = true;
+                return true;
             } catch(NullPointerException npe){
                 lblAvatar.setText("Errore nel caricamento dell' immagine");
                 lblAvatar.setVisible(true);
@@ -89,10 +117,19 @@ public class AggiungiUtenteController implements Initializable {
                 lblAvatar.setVisible(true);
             }
         }
+        return false;
+    }
+    @FXML
+    void ivAvatarOnDragDropped(DragEvent event) {
+        Dragboard db = event.getDragboard();
+        boolean success = false;
+        if (db.hasFiles()) {
+            File file = db.getFiles().get(0);
+            success = addImageAsFileToIVAvatar(file);
+        }
         event.setDropCompleted(success);
         event.consume();    // l'evento viene gestito e non propagato
     }
-
     @FXML
     void ivAvatarOnDragOver(DragEvent event) {
         if (event.getGestureSource() != ivAvatar && event.getDragboard().hasFiles()) {
@@ -102,31 +139,31 @@ public class AggiungiUtenteController implements Initializable {
     }
     @FXML
     protected void tfNomeOnKeyTyped(KeyEvent event) {
-        if (!FormValidator.validateName(tfNome.getText().trim())) {
-            setLblVisibility(lblNome, true);
-        } else
-            setLblVisibility(lblNome, false);
+        lblNome.setVisible(!tfNome.getText().trim().isEmpty() && !FormValidator.validateName(tfNome.getText()));
     }
-
+    /*
+    : `isEmpty()` : `validateName()`  : `!isEmpty()` : `!validateName()` : `(!isEmpty() && !validateName())` :
+    :-------------:-------------------:--------------:-------------------:-----------------------------------:
+    : true        : true              : false        : false             : false                             :
+    : true        : false             : false        : true              : false                             :
+    : false       : true              : true         : false             : false                             :
+    : false       : false             : true         : true              : true                              :
+    */
     @FXML
     protected void tfCognomeOnKeyTyped(KeyEvent event) {
-        if (!FormValidator.validateName(tfCognome.getText().trim())) {
-            setLblVisibility(lblCognome, true);
-        } else
-            setLblVisibility(lblCognome, false);
+        lblCognome.setVisible(!tfCognome.getText().trim().isEmpty() && !FormValidator.validateName(tfCognome.getText().trim()));
+        event.consume();
     }
-
     @FXML
     protected void tfUsernameOnKeyTyped(KeyEvent event) {
         String username = tfUsername.getText().trim().toLowerCase();
-        if (!FormValidator.validateUsername(username)) {
-            setLblVisibility(lblUsername, true);
-        } else {
-            setLblVisibility(lblUsername, false);
+        check = FormValidator.validateUsername(username);
+        lblUsername.setVisible(!check);
+        if(check){
             try {
-                if (DatabaseManager.userExists(username)) {
-                    setLblVisibility(lblRegistrato, true);
-                } else setLblVisibility(lblRegistrato, false);
+                Boolean checkIfuserExists = DatabaseManager.userExists(username);
+                lblRegistrato.setVisible(checkIfuserExists);
+                btnAddUser.setDisable(checkIfuserExists);
             }catch(SQLException sqle){
                 sqle.printStackTrace(); //  errore di esecuzione della query
             } catch (ConnectionException ce) {
@@ -136,55 +173,38 @@ public class AggiungiUtenteController implements Initializable {
             }
         }
     }
-
     @FXML
     protected void tfPasswordOnKeyTyped(KeyEvent event) {
-        if (!FormValidator.validatePassword(tfPassword.getText().trim())) {
-            setLblVisibility(lblPassword, true);
-        } else
-            setLblVisibility(lblPassword, false);
-
+        lblPassword.setVisible(!FormValidator.validatePassword(tfPassword.getText().trim()) && !tfPassword.getText().isEmpty());
     }
-
     @FXML
     protected void tfRipetiPasswordOnKeyTyped(KeyEvent event) {
-        setLblVisibility(lblRipetiPassword, false);
+        lblRipetiPassword.setVisible(false);
     }
-
     @FXML
     public void trimLbl(Label... lbls) {
         for (Label lbl : lbls)
             lbl.setText(lbl.getText().trim());
     }
-
-    private void setLblVisibility(Label lbl, Boolean visible) {
-        lbl.setVisible(visible);
-    }
-
     @FXML
     protected void btnAddUserOnMouseClicked(MouseEvent event) {
-        addUser();
+        addUser(event);
     }
-
     @FXML
     protected void btnAddUserOnKeyPressed(KeyEvent event) {
         if(keyEnterPressed(event))
-            addUser();
+            addUser(event);
     }
     @FXML
     private Boolean keyEnterPressed(KeyEvent event) {
         return (event.getCode() == KeyCode.ENTER);
     }
-
     private boolean validatePassword(String password, String ripetiPassword) {
-        if (!password.equals(ripetiPassword)) {
-            setLblVisibility(lblRipetiPassword, true);
-            return false;
-        }
-        setLblVisibility(lblRipetiPassword, false);
-        return true;
+        lblRipetiPassword.setVisible(!password.equals(ripetiPassword));
+        return !lblRipetiPassword.isVisible();
     }
-    private void addUser() {
+    private void addUser(Event event) {
+        btnAddUser.setDisable(true);
         trimLbl(lblNome, lblCognome, lblUsername, lblPassword, lblRipetiPassword);
         if (FormValidator.validateName(tfNome.getText()) && FormValidator.validateName(tfCognome.getText())
                 && FormValidator.validateUsername(tfUsername.getText())
@@ -196,7 +216,6 @@ public class AggiungiUtenteController implements Initializable {
                     lblAvatar.setVisible(false);
                 } catch (IOException e) {
                     e.printStackTrace();
-                    System.out.println("IO");
                 } catch (NullPointerException e) {
                     lblAvatar.setVisible(true);
                 }
@@ -206,11 +225,8 @@ public class AggiungiUtenteController implements Initializable {
                         tfUsername.getText(),
                         User.getSHA256Hash(tfPassword.getText()),
                         avatar, cpUser.getValue().toString()));
-                if (check) {
-                    setLblVisibility(lblRegistrato, false);
-                    Main.changeScene("View/Accesso.fxml");
-                } else
-                    setLblVisibility(lblRegistrato, true);
+                lblRegistrato.setVisible(!check);
+                if(!check) Main.changeScene("View/Accesso.fxml");
             } catch (ConnectionException e) {
                 Main.changeScene("View/ErroreDatabase.fxml");
             } catch (RuntimeException e) {
@@ -220,6 +236,7 @@ public class AggiungiUtenteController implements Initializable {
                 e.printStackTrace();
             }
         }
+        btnAddUser.setDisable(false);
     }
     @FXML
     void IndietroOnMouseClicked(MouseEvent event) {
