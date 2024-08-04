@@ -1,5 +1,7 @@
 package unibo.javafxmvc.controller;
 
+import javafx.application.Platform;
+import javafx.fxml.Initializable;
 import unibo.javafxmvc.DAO.DatabaseManager;
 import unibo.javafxmvc.Main;
 import unibo.javafxmvc.exception.ConnectionException;
@@ -14,9 +16,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class AccessoController {
+public class AccessoController implements Initializable {
     @FXML
     private Label lblPassword;
     @FXML
@@ -28,6 +32,10 @@ public class AccessoController {
     @FXML
     private Alert alert = new Alert(AlertType.INFORMATION);
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Platform.runLater(() -> tfUsername.requestFocus());
+    }
     @FXML
     private void AccediOnMousePressed(MouseEvent event) {
         accesso();
