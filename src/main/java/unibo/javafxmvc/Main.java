@@ -2,6 +2,7 @@ package unibo.javafxmvc;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.util.stream.Collectors;
 
 import javafx.application.Application;
@@ -34,6 +35,9 @@ public class Main extends Application {
         windowTitle = "Applicazione PLAY";
         fullScreen = false;
         maximized = false;
+    }
+    public static String getDbURLlikeAbsolutePath() {
+        return dbURL;
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -85,7 +89,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         try{
             DatabaseManager.inizialize(dbURL);
-            fxmlPath = "View/Accesso.fxml";
+            fxmlPath = "View/Accesso.fxml"; 
         } catch (ConnectionException e) {
             fxmlPath = "View/ErroreDatabase.fxml";
         }
