@@ -3,6 +3,7 @@ package unibo.javafxmvc;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import javafx.application.Application;
@@ -48,6 +49,7 @@ public class Main extends Application {
         thisStage.show();
         updateWindowBounds();
         changeScene(fxmlPath);
+
     }
     public void setFullScreen() {
         thisStage.setFullScreen(true);
@@ -63,6 +65,7 @@ public class Main extends Application {
                 return;
             }   //  vengono automaticamente rimossi tutti i tag <Image> e <Image ... /> che dovranno essere gestiti all'interno dei controllers
             currentScene = new Scene((new FXMLLoader()).load(removeImageTags(fxmlStream)));
+            currentScene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("/unibo/javafxmvc/css/stylesheet.css")).toExternalForm());
             thisStage.setMaximized(maximized);
             thisStage.setScene(currentScene);
         } catch (Exception e) {
@@ -89,7 +92,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         try{
             DatabaseManager.inizialize(dbURL);
-            fxmlPath = "View/Accesso.fxml"; 
+            fxmlPath = "View/Accesso.fxml";
         } catch (ConnectionException e) {
             fxmlPath = "View/ErroreDatabase.fxml";
         }
