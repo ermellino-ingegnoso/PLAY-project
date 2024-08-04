@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.stage.Screen;
@@ -30,6 +31,7 @@ public class Main extends Application {
     private static String windowTitle;
     private static Boolean fullScreen;
     private static Boolean maximized;
+    public static Image icon;
 
     static{
         dbURL = "jdbc:h2:~/playproj/playprojDB";
@@ -42,6 +44,9 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage primaryStage) throws Exception {
+        icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Seal_of_the_University_of_Bologna.png")));
+        primaryStage.getIcons().add(icon);  //5a201c
+
         thisStage = primaryStage;
         thisStage.setTitle(windowTitle);
         thisStage.setOnCloseRequest(event -> AppController.handleWindowClose());
@@ -49,7 +54,6 @@ public class Main extends Application {
         thisStage.show();
         updateWindowBounds();
         changeScene(fxmlPath);
-
     }
     public void setFullScreen() {
         thisStage.setFullScreen(true);
