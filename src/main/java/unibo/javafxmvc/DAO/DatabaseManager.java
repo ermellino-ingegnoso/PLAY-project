@@ -35,6 +35,13 @@ public class DatabaseManager {
             throw new ConnectionException("Errore di connessione al database: " + e.getMessage(), e);
         }
         informStatus(Status.STABILITA);
+        try{
+            createUserIfNotExists();
+            System.out.println("Tabella User creata con successo");
+        } catch (SQLException e) {
+            System.out.println("Creazione della tabella User fallita");
+            e.printStackTrace();
+        }
     }
     public static void informStatus(Status st){
         System.out.println(String.format("Connessione al database %-10s con successo", st));
@@ -52,6 +59,23 @@ public class DatabaseManager {
                 System.out.println("Fallimento durante la chiusura della connessione");
                 throw e;
             }
+        }
+    }
+    private static void createUserIfNotExists() throws SQLException {;
+        try (PreparedStatement prstmt = connection.prepareStatement(
+            "create table if not exists     \"User\" (" +
+                "    ID       INTEGER auto_increment," +
+                "    NOME     CHARACTER VARYING not null," +
+                "    COGNOME  CHARACTER VARYING not null," +
+                "    USERNAME CHARACTER VARYING not null" +
+                "        unique," +
+                "    PASSWORD CHARACTER(64)     not null," +
+                "    AVATAR   BINARY LARGE OBJECT," +
+                "    COLOR    CHARACTER(10)," +
+                "    constraint PK_USER" +
+                "        primary key (ID)" +
+                ");")) {
+            prstmt.execute();
         }
     }
 }
