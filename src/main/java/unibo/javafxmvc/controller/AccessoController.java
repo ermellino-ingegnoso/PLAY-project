@@ -40,29 +40,24 @@ public class AccessoController implements Initializable {
     private void AccediOnMousePressed(MouseEvent event) {
         accesso();
     }
-
     @FXML
     void AccediOnKeyPressed(KeyEvent event) {
         if (keyEnterPressed(event))
             accesso();
     }
-
     @FXML
     private void newUserBtnOnKeyPressed(KeyEvent event) {
         if (keyEnterPressed(event))
             openAddUser();
     }
-
     @FXML
     private void newUserBtnOnMouseClicked(MouseEvent event) {
         openAddUser();
     }
-
     @FXML
     private void openAddUser() {
         Main.changeScene("View/Registrazione.fxml");
     }
-
     @FXML
     private void accesso() {
         String userName = tfUsername.getText().trim();
@@ -90,7 +85,6 @@ public class AccessoController implements Initializable {
             alert.show();
         }
     }
-
     @FXML
     private Boolean keyEnterPressed(KeyEvent event) {
         return (event.getCode() == KeyCode.ENTER);
