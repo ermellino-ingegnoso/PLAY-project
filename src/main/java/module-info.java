@@ -3,8 +3,6 @@ module unibo.javafxmvc {
     requires javafx.fxml;
     requires com.google.gson;
     requires java.sql;
-    requires com.gluonhq.charm.glisten;
-    requires com.gluonhq.attach.util;
 
     opens unibo.javafxmvc to javafx.fxml;
     opens unibo.javafxmvc.model to com.google.gson; //  gson accede agli attributi privati dei model
