@@ -12,14 +12,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.10.0</junit.version>
+        <java.version>22</java.version>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>gluon-releases</id>
-            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>
@@ -38,11 +32,6 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.10.1</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
@@ -76,6 +65,31 @@
         </dependency>
     </dependencies>
 
+    <!--
+        <distributionManagement>
+            <repository>
+                <id>Deploy</id>
+                <url>file:///C:/Users/rabot/source/repos/PLAY-project/Deploy</url>
+            </repository>
+
+            <repository>
+                <id>local-repo</id>
+                <url>https://github.com/ermellino-ingegnoso/PLAY</url>
+            </repository>
+
+    </distributionManagement>
+    -->
+    <distributionManagement>
+        <repository>
+            <id>Deploy</id>
+            <url>file:///C:/Users/rabot/source/repos/PLAY-project/Deploy</url>
+        </repository>
+        <snapshotRepository>
+            <id>Deploy</id>
+            <url>file:///C:/Users/rabot/source/repos/PLAY-project/Deploy</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
@@ -83,10 +97,25 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <source>22</source>
-                    <target>22</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
+
+             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>unibo.javafxmvc.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
