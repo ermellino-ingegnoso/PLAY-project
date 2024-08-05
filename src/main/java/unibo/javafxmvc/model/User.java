@@ -3,16 +3,17 @@ package unibo.javafxmvc.model;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
+import javafx.scene.image.Image;
 
 public class User {
     private String nome;
     private String cognome;
     private String username;
     private String password; // memorizzata come SHA-256 hash
-    private byte[] avatar;
+    private Image avatar;
     private String color;   // sul mio sistema: bianco: 0xffffffff
 
-    public User(String nome, String cognome, String username, String password, byte[] avatar, String color) {
+    public User(String nome, String cognome, String username, String password, Image avatar, String color) {
         this.nome = nome;
         this.cognome = cognome;
         this.username = username;
@@ -72,10 +73,10 @@ public class User {
     public Boolean checkPassword(String input) {
         return this.password.equals(input);
     }
-    public byte[] getAvatar() {
+    public Image getAvatar() {
         return avatar;
     }
-    public void setAvatar(byte[] avatar) {
+    public void setAvatar(Image avatar) {
         this.avatar = avatar;
     }
     public String getColor() {

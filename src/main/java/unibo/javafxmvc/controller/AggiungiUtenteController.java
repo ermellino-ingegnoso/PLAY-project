@@ -69,16 +69,16 @@ public class AggiungiUtenteController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Platform.runLater(() -> tfNome.requestFocus());
+        Platform.runLater(() -> tfNome.requestFocus()); //  imposta il focus del cursore su tfNome
         ivAvatar.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/unibo/javafxmvc/Images/avatar.png"))));
-        Tooltip tooltipImg = new Tooltip("Trascina un'immagine");
-        tooltipImg.setShowDelay(Duration.ZERO);
-        Tooltip.install(ivAvatar, tooltipImg);
         try{
             tfUsername.setText(System.getProperty("user.name"));
         } catch (Exception e){
             e.printStackTrace();
         }
+        fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        AuxiliaryController.addTooltipTo(Duration.ZERO, ivAvatar);
     }
     @FXML
     private void handleColorChange(ActionEvent event) {
@@ -86,19 +86,15 @@ public class AggiungiUtenteController implements Initializable {
         event.consume();
     }
     @FXML
-    private void ivAvatarOnMouseClicked(MouseEvent event) {
-        fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+    private void ivAvatarOnMouseClicked(MouseEvent event) { // fileChooser inizializzato in initialize()
         System.out.println(System.getProperties());
-
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
-        );
+        );  //  la Dialog blocca il thread su cui viene aperta
         File selectedFile = fileChooser.showOpenDialog(ivAvatar.getScene().getWindow());
         if (selectedFile != null) {
             addImageAsFileToIVAvatar(selectedFile);
-            File selectedDirectory = selectedFile.getParentFile();
-            fileChooser.setInitialDirectory(selectedDirectory);
+            fileChooser.setInitialDirectory(selectedFile.getParentFile());
         }
         event.consume();
     }
@@ -106,8 +102,8 @@ public class AggiungiUtenteController implements Initializable {
         if(file != null){
             try{
                 ivAvatar.setImage(AuxiliaryController.cropImageToSquare(new Image(file.toURI().toString())));
-                lblAvatar.setText("Errore nel caricamento dell' immagine");
                 lblAvatar.setVisible(false);
+                lblAvatar.setText("Errore nel caricamento dell' immagine");
                 return true;
             } catch(NullPointerException npe){
                 lblAvatar.setText("Errore nel caricamento dell' immagine");
@@ -141,13 +137,12 @@ public class AggiungiUtenteController implements Initializable {
     protected void tfNomeOnKeyTyped(KeyEvent event) {
         lblNome.setVisible(!tfNome.getText().trim().isEmpty() && !FormValidator.validateName(tfNome.getText()));
     }
-    /*
-    : `isEmpty()` : `validateName()`  : `!isEmpty()` : `!validateName()` : `(!isEmpty() && !validateName())` :
+    /*`isEmpty()` : `validateName()`  : `!isEmpty()` : `!validateName()` : `(!isEmpty() && !validateName())` :
     :-------------:-------------------:--------------:-------------------:-----------------------------------:
-    : true        : true              : false        : false             : false                             :
-    : true        : false             : false        : true              : false                             :
-    : false       : true              : true         : false             : false                             :
-    : false       : false             : true         : true              : true                              :
+    :  tru        : true              : false        : false             : false                             :
+    :  true       : false             : false        : true              : false                             :
+    :  false      : true              : true         : false             : false                             :
+    :  false      : false             : true         : true              : true                              :
     */
     @FXML
     protected void tfCognomeOnKeyTyped(KeyEvent event) {
@@ -210,21 +205,13 @@ public class AggiungiUtenteController implements Initializable {
                 && FormValidator.validateUsername(tfUsername.getText())
                 && validatePassword(tfPassword.getText(), tfRipetiPassword.getText())) {
             try {
-                byte[] avatar = null;
-                try{    // si cerca di recuperare l'immagine dell'avatar se disponibile
-                    avatar = Files.readAllBytes((new File(ivAvatar.getImage().getUrl().replace("file:/", ""))).toPath());
-                    lblAvatar.setVisible(false);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (NullPointerException e) {
-                    lblAvatar.setVisible(true);
-                }
                 Boolean check = UserDBM.insertUser(new User(
                         tfNome.getText(),
                         tfCognome.getText(),
                         tfUsername.getText(),
                         User.getSHA256Hash(tfPassword.getText()),
-                        avatar, cpUser.getValue().toString()));
+                        ivAvatar.getImage(),
+                        cpUser.getValue().toString()));
                 lblRegistrato.setVisible(!check);
                 if(!check) Main.changeScene("View/Accesso.fxml");
             } catch (ConnectionException e) {

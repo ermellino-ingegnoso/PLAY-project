@@ -29,8 +29,6 @@ public class AccessoController implements Initializable {
     private PasswordField tfPassword;
     @FXML
     private TextField tfUsername;
-    @FXML
-    private Alert alert = new Alert(AlertType.INFORMATION);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -79,10 +77,6 @@ public class AccessoController implements Initializable {
             e.printStackTrace();
         } catch (ConnectionException e) {
             Main.changeScene("View/ErroreDatabase.fxml");
-            //  debug:
-            alert.setTitle("Errore Database");
-            alert.setHeaderText("Connessione non instaurata");
-            alert.show();
         }
     }
     @FXML

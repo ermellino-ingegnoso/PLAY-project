@@ -20,7 +20,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.util.ResourceBundle;
 
-public class MainController implements Initializable {
+public class HomeController implements Initializable {
     @FXML
     private Circle circleAvatar;
     @FXML
@@ -34,15 +34,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        byte[] avatar = Main.currentUser.getAvatar();
-        try{
-            if(avatar == null){
-                avatar = Files.readAllBytes((new File(getClass().getResource("/unibo/javafxmvc/Images/avatar.png").getPath())).toPath());
-            }
-            userAvatar.setImage(new Image(new ByteArrayInputStream(avatar)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        userAvatar.setImage(Main.currentUser.getAvatar());
         circle = new Circle(userAvatar.getFitWidth() / 2, userAvatar.getFitHeight() / 2, Math.min(userAvatar.getFitWidth(), userAvatar.getFitHeight()) / 2);
         circle.setStroke(Color.web(Main.currentUser.getColor()));
         circle.setStrokeWidth(0);

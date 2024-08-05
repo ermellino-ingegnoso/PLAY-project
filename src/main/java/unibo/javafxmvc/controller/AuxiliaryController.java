@@ -1,9 +1,16 @@
 package unibo.javafxmvc.controller;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritableImage;
+import javafx.scene.Node;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.*;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
+
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.nio.IntBuffer;
+
+import javax.imageio.ImageIO;
 
 public class AuxiliaryController {
     public static String toRgbString(Color color) {
@@ -17,7 +24,11 @@ public class AuxiliaryController {
         double y = (height - squareSize) / 2;
 
         PixelReader reader = originalImage.getPixelReader();
-        WritableImage croppedImage = new WritableImage(reader, (int) x, (int) y, (int) squareSize, (int) squareSize);
-        return croppedImage;
+        return (Image) new WritableImage(reader, (int) x, (int) y, (int) squareSize, (int) squareSize);
+    }
+    public static void addTooltipTo(Duration d, Node node) {
+        Tooltip tooltipImg = new Tooltip("Trascina un'immagine");
+        tooltipImg.setShowDelay(d);
+        Tooltip.install(node, tooltipImg);
     }
 }

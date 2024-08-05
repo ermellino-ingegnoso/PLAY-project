@@ -3,11 +3,20 @@ package unibo.javafxmvc.DAO;
 import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.User;
 
+import javafx.scene.image.Image;
+import javafx.embed.swing.SwingFXUtils;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDBM extends DatabaseManager {
+    //protected static ObjectOutputStream oos;
     /**@return true se la connessione è stata stabilita correttamente e l'inserimento è andato a termine; <br> false se l'inserimento non è andato a termine correttamente
      * @throws ConnectionException se la connessione non è stata stabilita correttamente
      * */
@@ -20,7 +29,7 @@ public class UserDBM extends DatabaseManager {
                 pstmt.setString(2, usr.getCognome());
                 pstmt.setString(3, usr.getUsername());
                 pstmt.setString(4, usr.getPassword());
-                pstmt.setBytes(5, usr.getAvatar());
+                pstmt.setBytes(5, convertImageToByteArray(usr.getAvatar()));
                 pstmt.setString(6, usr.getColor());
                 return pstmt.executeUpdate() > 0;
             } catch (SQLException e) {
@@ -81,7 +90,7 @@ public class UserDBM extends DatabaseManager {
                             rs.getString("cognome"),
                             rs.getString("username"),
                             rs.getString("password"),
-                            rs.getBytes("avatar"),
+                            convertByteArrayToImage(rs.getBytes("avatar")),
                             rs.getString("color")
                     );
                 } else {
@@ -93,4 +102,27 @@ public class UserDBM extends DatabaseManager {
         }
         else throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));
     }
+
+    public static byte[] convertImageToByteArray(Image img) {
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+            BufferedImage bImage = SwingFXUtils.fromFXImage(img, null);
+            ImageIO.write(bImage, "png", bos);
+            return bos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Image convertByteArrayToImage(byte[] img) {
+        try (ByteArrayInputStream bis = new ByteArrayInputStream(img)) {
+            BufferedImage bImage = ImageIO.read(bis);
+            return SwingFXUtils.toFXImage(bImage, null);
+        } catch (IOException e) {
+            System.err.println("Errore durante la conversione del byte[] in Image");
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
