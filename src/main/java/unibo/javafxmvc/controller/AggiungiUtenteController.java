@@ -1,8 +1,5 @@
 package unibo.javafxmvc.controller;
 
-import java.nio.file.Files;
-import java.io.IOException;
-
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,15 +12,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
-import unibo.javafxmvc.DAO.DatabaseManager;
+
+import unibo.javafxmvc.DAO.UserDBM;
 import unibo.javafxmvc.Main;
 import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.User;
 import unibo.javafxmvc.model.FormValidator;
 
-import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
+import java.nio.file.Files;
+import java.io.IOException;
+import java.io.File;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -161,7 +161,7 @@ public class AggiungiUtenteController implements Initializable {
         lblUsername.setVisible(!check);
         if(check){
             try {
-                Boolean checkIfuserExists = DatabaseManager.userExists(username);
+                Boolean checkIfuserExists = UserDBM.userExists(username);
                 lblRegistrato.setVisible(checkIfuserExists);
                 btnAddUser.setDisable(checkIfuserExists);
             }catch(SQLException sqle){
@@ -219,7 +219,7 @@ public class AggiungiUtenteController implements Initializable {
                 } catch (NullPointerException e) {
                     lblAvatar.setVisible(true);
                 }
-                Boolean check = DatabaseManager.insertUser(new User(
+                Boolean check = UserDBM.insertUser(new User(
                         tfNome.getText(),
                         tfCognome.getText(),
                         tfUsername.getText(),

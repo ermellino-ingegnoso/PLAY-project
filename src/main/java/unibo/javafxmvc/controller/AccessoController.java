@@ -2,7 +2,7 @@ package unibo.javafxmvc.controller;
 
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
-import unibo.javafxmvc.DAO.DatabaseManager;
+import unibo.javafxmvc.DAO.UserDBM;
 import unibo.javafxmvc.Main;
 import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.User;
@@ -67,7 +67,7 @@ public class AccessoController implements Initializable {
     private void accesso() {
         String userName = tfUsername.getText().trim();
         try{
-            User usr = DatabaseManager.getUser(userName);
+            User usr = UserDBM.getUser(userName);
             if(usr != null){
                 lblUsername.setVisible(false);
                 if(usr.checkPassword(User.getSHA256Hash(tfPassword.getText()))){
