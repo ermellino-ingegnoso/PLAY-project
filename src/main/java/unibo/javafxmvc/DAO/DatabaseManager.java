@@ -1,8 +1,18 @@
 package unibo.javafxmvc.DAO;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.sql.*;
+
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.User;
+
+import javax.imageio.ImageIO;
+
 /* Da un'analisi del log di refresh del database è risultato che:
     Inizio introspezione: 20:12:27
     Esecuzione della prima query: 20:12:28
@@ -77,5 +87,31 @@ public class DatabaseManager {
                 ");")) {
             prstmt.execute();
         }
+    }
+    /**@return byte[] che rappresenta l'immagine o <br> null se si verifica un errore durante la conversione
+     * @param img Immagine da convertire in byte[]
+    */
+    public static byte[] convertImageToByteArray(Image img) {
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+            BufferedImage bImage = SwingFXUtils.fromFXImage(img, null);
+            ImageIO.write(bImage, "png", bos);
+            return bos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    /**@return Image che rappresenta il byte[] o <br> null se si verifica un errore durante la conversione
+     * @param img un byte[] da convertire in Image
+    */
+    public static Image convertByteArrayToImage(byte[] img) {
+        try (ByteArrayInputStream bis = new ByteArrayInputStream(img)) {
+            BufferedImage bImage = ImageIO.read(bis);
+            return SwingFXUtils.toFXImage(bImage, null);
+        } catch (IOException e) {
+            System.err.println("Errore durante la conversione del byte[] in Image");
+            e.printStackTrace();
+        }
+        return null;
     }
 }

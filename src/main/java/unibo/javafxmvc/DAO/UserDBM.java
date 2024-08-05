@@ -102,27 +102,4 @@ public class UserDBM extends DatabaseManager {
         }
         else throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));
     }
-
-    public static byte[] convertImageToByteArray(Image img) {
-        try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
-            BufferedImage bImage = SwingFXUtils.fromFXImage(img, null);
-            ImageIO.write(bImage, "png", bos);
-            return bos.toByteArray();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static Image convertByteArrayToImage(byte[] img) {
-        try (ByteArrayInputStream bis = new ByteArrayInputStream(img)) {
-            BufferedImage bImage = ImageIO.read(bis);
-            return SwingFXUtils.toFXImage(bImage, null);
-        } catch (IOException e) {
-            System.err.println("Errore durante la conversione del byte[] in Image");
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 }

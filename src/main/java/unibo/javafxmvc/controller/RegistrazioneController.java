@@ -21,13 +21,11 @@ import unibo.javafxmvc.model.FormValidator;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.nio.file.Files;
-import java.io.IOException;
 import java.io.File;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class AggiungiUtenteController implements Initializable {
+public class RegistrazioneController implements Initializable {
     @FXML
     Alert alert = new Alert(AlertType.INFORMATION);
     @FXML
@@ -87,7 +85,6 @@ public class AggiungiUtenteController implements Initializable {
     }
     @FXML
     private void ivAvatarOnMouseClicked(MouseEvent event) { // fileChooser inizializzato in initialize()
-        System.out.println(System.getProperties());
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif")
         );  //  la Dialog blocca il thread su cui viene aperta
@@ -213,17 +210,18 @@ public class AggiungiUtenteController implements Initializable {
                         ivAvatar.getImage(),
                         cpUser.getValue().toString()));
                 lblRegistrato.setVisible(!check);
-                if(!check) Main.changeScene("View/Accesso.fxml");
+                if(check) Main.changeScene("View/Accesso.fxml");
             } catch (ConnectionException e) {
                 Main.changeScene("View/ErroreDatabase.fxml");
             } catch (RuntimeException e) {
-                alert.setTitle("Errore");
-                alert.setHeaderText("Errore durante l'aggiunta dell'utente");
+                alert.setTitle("Errore durante l'aggiunta dell'utente");
+                alert.setHeaderText("Si prega di riavviare l'applicazione");
                 alert.show();
                 e.printStackTrace();
             }
         }
         btnAddUser.setDisable(false);
+        event.consume();
     }
     @FXML
     void IndietroOnMouseClicked(MouseEvent event) {
