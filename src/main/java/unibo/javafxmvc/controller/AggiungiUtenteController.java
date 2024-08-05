@@ -105,7 +105,7 @@ public class AggiungiUtenteController implements Initializable {
     private Boolean addImageAsFileToIVAvatar(File file){
         if(file != null){
             try{
-                ivAvatar.setImage(new Image(file.toURI().toString()));
+                ivAvatar.setImage(AuxiliaryController.cropImageToSquare(new Image(file.toURI().toString())));
                 lblAvatar.setText("Errore nel caricamento dell' immagine");
                 lblAvatar.setVisible(false);
                 return true;
