@@ -1,5 +1,6 @@
 package unibo.javafxmvc.controller;
 
+import javafx.scene.input.MouseEvent;
 import unibo.javafxmvc.Main;
 
 import javafx.fxml.FXML;
@@ -53,6 +54,10 @@ public class HomeController implements Initializable {
         linePane.getChildren().add(line);
         linePane.setPrefSize(mainGridPane.getWidth(), line.getStrokeWidth());
         mainGridPane.add(linePane, 0, 1);
+    }
+    @FXML
+    private void OrdinaPassiOnMousePressed(MouseEvent event) {
+        Main.changeScene("View/OrdinaPassi.fxml");
     }
 
 }

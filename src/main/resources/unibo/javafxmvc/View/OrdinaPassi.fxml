@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<GridPane fx:id="lbNumero3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="562.0" prefWidth="769.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.OrdinaPassiController">
+  <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="598.0" minWidth="10.0" prefWidth="172.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="813.0" minWidth="10.0" prefWidth="450.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="813.0" minWidth="10.0" prefWidth="166.79999999999995" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints maxHeight="64.0" minHeight="10.0" prefHeight="64.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="115.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="110.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="171.0" minHeight="10.0" prefHeight="131.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="236.0" minHeight="0.0" prefHeight="146.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <StackPane prefHeight="150.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="ivAvatar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER_LEFT">
+               <image>
+                  <Image url="@../Images/avatar.png" />
+               </image>
+            </ImageView>
+            <Circle fx:id="cCerchio" blendMode="MULTIPLY" fill="WHITE" radius="25.0" stroke="BLACK" strokeLineJoin="ROUND" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
+            <Label fx:id="lbID" prefHeight="18.0" prefWidth="90.0" text="Username" textAlignment="CENTER" StackPane.alignment="CENTER_RIGHT">
+               <StackPane.margin>
+                  <Insets right="25.0" />
+               </StackPane.margin>
+            </Label>
+         </children>
+      </StackPane>
+      <ImageView fx:id="ivProva1" fitHeight="100.0" fitWidth="393.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <image>
+            <Image url="@../Images/Prova1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="ivProva2" fitHeight="92.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <image>
+            <Image url="@../Images/Prova3.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="ivProva3" fitHeight="108.0" fitWidth="393.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <image>
+            <Image url="@../Images/Prova2.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lbNumero1" alignment="CENTER" contentDisplay="CENTER" text="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+      <Label fx:id="lbNumero2" text="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+      <Label text="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+      <Label fx:id="lbTitolo" text="INDICARE LA SEQUENZA CORRETTA" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font size="25.0" />
+         </font>
+         <GridPane.margin>
+            <Insets right="200.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField fx:id="tfInput" promptText="Es. 123" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Label fx:id="lbIndicazione" text="Inserire la risposta corretta" GridPane.rowIndex="4" />
+      <Button mnemonicParsing="false" onMouseClicked="#IndietroOnMousePressed" text="Indietro" GridPane.columnIndex="2" />
+      <Button mnemonicParsing="false" onMouseClicked="#ControllaOnMousePressed" text="Invia" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+   </children>
+</GridPane>
