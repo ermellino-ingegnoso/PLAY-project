@@ -28,8 +28,8 @@
             </rowConstraints>
             <children>
                 <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="45.0" prefWidth="104.0" text="Accedi come Amministratore" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM" />
-                <TextField fx:id="tfUsername" alignment="CENTER" prefHeight="25.0" prefWidth="348.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <PasswordField fx:id="tfPassword" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="tfUsername" text="tavolo" alignment="CENTER" prefHeight="25.0" prefWidth="348.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <PasswordField fx:id="tfPassword" text="tavolo" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <Label alignment="CENTER" contentDisplay="CENTER" text="Nome utente" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                     <GridPane.margin>
                         <Insets right="10.0" />

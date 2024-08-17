@@ -5,12 +5,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import unibo.javafxmvc.Main;
+import unibo.javafxmvc.model.OrdinaPassiModel;
+
+import java.awt.event.ActionEvent;
 
 public class OrdinaPassiController {
+    private OrdinaPassiModel esercizioCorrente;
 
     @FXML
     private Circle cCerchio;
@@ -55,13 +60,39 @@ public class OrdinaPassiController {
      @FXML
     private void ControllaOnMousePressed(MouseEvent event) {
         int a = 132;
+         System.out.println("sCorretto");
         if (tfInput.getText().equals("132")) {
-            System.out.println("Corretto");
+
             Image im1 = new Image("/unibo/javafxmvc/Images/Ok.JPG");
 
             System.out.println("Corretto00000");
             ivProva1.setImage(im1);
         }
+    }
+
+    @FXML
+    void InviaOnKeyPressed() {
+        int a = 132;
+        System.out.println("Corretto");
+        if (tfInput.getText().equals("132")) {
+            // Controlla();
+            NuovoEsercizio();
+            System.out.println("Corretto00000");
+        } else {
+            System.out.println("Errore!");
+        }
+    }
+
+
+    public void NuovoEsercizio(){
+
+        Image im4 = new Image(getClass().getResource("/unibo/javafxmvc/Images/Ordina/Prova4.png").toExternalForm());
+        ivProva1.setImage(im4);
+        Image im5 = new Image(getClass().getResource("/unibo/javafxmvc/Images/Ordina/Prova5.png").toExternalForm());
+        ivProva2.setImage(im5);
+        Image im6 = new Image(getClass().getResource("/unibo/javafxmvc/Images/Ordina/Prova6.png").toExternalForm());
+        ivProva3.setImage(im6);
+
     }
 
 

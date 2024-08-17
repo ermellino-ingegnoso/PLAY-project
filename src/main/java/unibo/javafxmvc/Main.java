@@ -63,12 +63,7 @@ public class Main extends Application {
     }
     public static void changeScene(String fxmlPath) {
         try {
-            InputStream fxmlStream = Main.class.getResourceAsStream(fxmlPath);
-            if (fxmlStream == null) {
-                System.out.println("File FXML non trovato: " + fxmlPath);
-                return;
-            }   //  vengono automaticamente rimossi tutti i tag <Image> e <Image ... /> che dovranno essere gestiti all'interno dei controllers
-            currentScene = new Scene((new FXMLLoader()).load(removeImageTags(fxmlStream)));
+            currentScene = new Scene((new FXMLLoader(Main.class.getResource(fxmlPath))).load());    // removeImageTags(fxmlStream)
             currentScene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("/unibo/javafxmvc/css/stylesheet.css")).toExternalForm());
             thisStage.setMaximized(maximized);
             thisStage.setScene(currentScene);
@@ -84,6 +79,7 @@ public class Main extends Application {
                     "<Image\\b[^>]*>(?:.*?)?</Image>|<Image\\b[^>]*/>\n", "")).getBytes(StandardCharsets.UTF_8));
         }
     }
+
     public static void updateWindowBounds(){
         ObservableList<Screen> screens = Screen.getScreensForRectangle(new Rectangle2D(thisStage.getX(), thisStage.getY(), thisStage.getWidth(), thisStage.getHeight()));
         Rectangle2D bounds = screens.get(0).getVisualBounds();

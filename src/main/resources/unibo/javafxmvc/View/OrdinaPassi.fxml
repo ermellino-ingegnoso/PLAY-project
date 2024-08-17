@@ -44,17 +44,17 @@
       </StackPane>
       <ImageView fx:id="ivProva1" fitHeight="100.0" fitWidth="393.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <image>
-            <Image url="@../Images/Prova1.png" />
+            <Image url="@../Images/Ordina/Prova1.png" />
          </image>
       </ImageView>
       <ImageView fx:id="ivProva2" fitHeight="92.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <image>
-            <Image url="@../Images/Prova3.png" />
+            <Image url="@../Images/Ordina/Prova3.png" />
          </image>
       </ImageView>
       <ImageView fx:id="ivProva3" fitHeight="108.0" fitWidth="393.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <image>
-            <Image url="@../Images/Prova2.png" />
+            <Image url="@../Images/Ordina/Prova2.png" />
          </image>
       </ImageView>
       <Label fx:id="lbNumero1" alignment="CENTER" contentDisplay="CENTER" text="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
@@ -71,6 +71,6 @@
       <TextField fx:id="tfInput" promptText="Es. 123" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <Label fx:id="lbIndicazione" text="Inserire la risposta corretta" GridPane.rowIndex="4" />
       <Button mnemonicParsing="false" onMouseClicked="#IndietroOnMousePressed" text="Indietro" GridPane.columnIndex="2" />
-      <Button mnemonicParsing="false" onMouseClicked="#ControllaOnMousePressed" text="Invia" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <Button mnemonicParsing="false"  text="Invia" GridPane.columnIndex="2" GridPane.rowIndex="4" onAction="#InviaOnKeyPressed"  defaultButton="true" />
    </children>
 </GridPane>
