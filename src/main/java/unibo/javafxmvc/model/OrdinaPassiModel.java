@@ -2,31 +2,36 @@ package unibo.javafxmvc.model;
 
 import unibo.javafxmvc.controller.OrdinaPassiController;
 
-public class OrdinaPassiModel {
-    private String im1,im2,im3;
-    private String soluzione;
 
-    public OrdinaPassiModel(String im1, String im2, String im3, String soluzione){
-        this.im1 = im1;
-        this.im2 = im2;
-        this.im3 = im3;
+import java.util.ArrayList;
+
+public class OrdinaPassiModel {
+    private ArrayList<String> foto;
+    private int punteggio;
+    private String soluzione;
+    private String autore;
+
+    public OrdinaPassiModel(ArrayList<String> foto, int punteggio, String soluzione, String autore){
+        this.foto = foto;
+        this.punteggio = punteggio;
         this.soluzione = soluzione;
+        this.autore = autore;
     }
-    public String getIm1(){
-        return im1;
+    public ArrayList<String> getFoto(){
+        return foto;
     }
-    public String getIm2(){
-        return im2;
+    public int getPunteggio(){
+        return punteggio;
     }
-    public String getIm3(){
-        return im3;
-    }
-    public String getSoluzione(){
+    public String getSoluzione() {
         return soluzione;
+    }
+    public String gteAutore(){
+        return autore;
     }
 
     public String toString(){
-        return "Im1: " + im1 + " Im2: " + im2 + " Im3: " + im3 + " Soluzione: " + soluzione;
+        return punteggio + " - " + soluzione + " - " + autore;
     }
 
 }

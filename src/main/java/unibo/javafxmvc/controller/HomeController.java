@@ -36,12 +36,15 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         userAvatar.setImage(Main.currentUser.getAvatar());
+        /*
         circle = new Circle(userAvatar.getFitWidth() / 2, userAvatar.getFitHeight() / 2, Math.min(userAvatar.getFitWidth(), userAvatar.getFitHeight()) / 2);
         circle.setStroke(Color.web(Main.currentUser.getColor()));
         circle.setStrokeWidth(0);
         userAvatar.setClip(circle);
         drawBorders(Color.web(Main.currentUser.getColor()));
         lblUsername.setText(Main.currentUser.getUsername());
+
+         */
     }
     private void drawBorders(Color borderColor){
         circleAvatar.setStroke(borderColor);
@@ -59,5 +62,11 @@ public class HomeController implements Initializable {
     private void OrdinaPassiOnMousePressed(MouseEvent event) {
         Main.changeScene("View/OrdinaPassi.fxml");
     }
+
+    @FXML
+    private void QuizOnMousePressed(MouseEvent event) {
+        Main.changeScene("View/Quiz.fxml");
+    }
+
 
 }

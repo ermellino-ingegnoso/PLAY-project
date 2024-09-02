@@ -71,6 +71,6 @@
       <TextField fx:id="tfInput" promptText="Es. 123" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <Label fx:id="lbIndicazione" text="Inserire la risposta corretta" GridPane.rowIndex="4" />
       <Button mnemonicParsing="false" onMouseClicked="#IndietroOnMousePressed" text="Indietro" GridPane.columnIndex="2" />
-      <Button mnemonicParsing="false"  text="Invia" GridPane.columnIndex="2" GridPane.rowIndex="4" onAction="#InviaOnKeyPressed"  defaultButton="true" />
+      <Button defaultButton="true" mnemonicParsing="false" onAction="#InviaOnKeyPressed" text="Invia" GridPane.columnIndex="2" GridPane.rowIndex="4" />
    </children>
 </GridPane>

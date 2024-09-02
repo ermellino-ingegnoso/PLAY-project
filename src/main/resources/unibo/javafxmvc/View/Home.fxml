@@ -121,7 +121,7 @@
             </Label>
          </top>
       </BorderPane>
-      <BorderPane prefHeight="159.0" prefWidth="269.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <BorderPane prefHeight="159.0" prefWidth="269.0" GridPane.columnIndex="2" GridPane.rowIndex="3" onMouseClicked="#QuizOnMousePressed">
          <left>
             <Label prefHeight="62.0" prefWidth="160.0" text="Il quiz" wrapText="true" BorderPane.alignment="TOP_RIGHT">
                <BorderPane.margin>
