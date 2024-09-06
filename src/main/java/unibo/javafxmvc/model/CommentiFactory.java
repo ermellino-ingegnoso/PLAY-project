@@ -21,7 +21,7 @@ public class CommentiFactory {
 
     public CommentiFactory() {
         esercizi = new ArrayList<CommentiModel>();
-        esercizi.add(new CommentiModel("/unibo/javafxmvc/Images/Ordina/Prova1.png", new ArrayList<String>(Arrays.asList("gang1", "gang2","gang3")), "gang1"));
+        esercizi.add(new CommentiModel("/unibo/javafxmvc/Images/Ordina/Prova1.png", new ArrayList<String>(Arrays.asList("gang1", "Questo codice","gang3")), "gang1"));
         esercizi.add(new CommentiModel("/unibo/javafxmvc/Images/Ordina/Prova2.png", new ArrayList<String>(Arrays.asList("gang1", "gang2","gang3")), "gang2"));
         esercizi.add(new CommentiModel("/unibo/javafxmvc/Images/Ordina/Prova3.png", new ArrayList<String>(Arrays.asList("gang1", "gang2","gang3")), "gang3"));
     }
