@@ -100,7 +100,7 @@
       </BorderPane>
       <BorderPane prefHeight="159.0" prefWidth="269.0" GridPane.columnIndex="2" GridPane.rowIndex="2" onMouseClicked="#OrdinaPassiOnMousePressed">
          <left>
-            <Label prefHeight="62.0" prefWidth="160.0" text="Ordina2222" wrapText="true" BorderPane.alignment="TOP_RIGHT">
+            <Label prefHeight="62.0" prefWidth="160.0" text="Commenti" wrapText="true" BorderPane.alignment="TOP_RIGHT">
                <BorderPane.margin>
                   <Insets left="10.0" />
                </BorderPane.margin>
@@ -114,7 +114,7 @@
             </Label>
          </right>
          <top>
-            <Label text="Ordina i passi" BorderPane.alignment="CENTER">
+            <Label text="Commenti" BorderPane.alignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>

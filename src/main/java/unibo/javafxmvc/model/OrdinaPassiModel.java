@@ -9,7 +9,7 @@ public class OrdinaPassiModel {
     private ArrayList<String> foto;
     private int punteggio;
     private String soluzione;
-    private String autore;
+    private String autore;  // TO DO admin
 
     public OrdinaPassiModel(ArrayList<String> foto, int punteggio, String soluzione, String autore){
         this.foto = foto;

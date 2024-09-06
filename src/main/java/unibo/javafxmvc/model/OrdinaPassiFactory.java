@@ -9,11 +9,7 @@ public class OrdinaPassiFactory {
         /*
         return new OrdinaPassiModel(new ArrayList<String>(Arrays.asList("/unibo/javafxmvc/Images/Ordina/Prova4.png","/unibo/javafxmvc/Images/Ordina/Prova5.png","/unibo/javafxmvc/Images/Ordina/Prova6.png")), 2, "213", "Enrico");
         return new OrdinaPassiModel(new ArrayList<String>(Arrays.asList("/unibo/javafxmvc/Images/Ordina/Prova7.png","/unibo/javafxmvc/Images/Ordina/Prova8.png","/unibo/javafxmvc/Images/Ordina/Prova9.png")), 3, "312", "Enrico");
-
-         */
-    }
-
-    public OrdinaPassiFactory(){
+        */
 
     }
 

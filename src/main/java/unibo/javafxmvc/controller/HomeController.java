@@ -60,7 +60,7 @@ public class HomeController implements Initializable {
     }
     @FXML
     private void OrdinaPassiOnMousePressed(MouseEvent event) {
-        Main.changeScene("View/OrdinaPassi.fxml");
+        Main.changeScene("View/Commenti.fxml");
     }
 
     @FXML

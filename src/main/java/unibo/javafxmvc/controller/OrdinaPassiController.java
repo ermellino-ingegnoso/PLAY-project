@@ -1,5 +1,6 @@
 package unibo.javafxmvc.controller;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -10,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 import unibo.javafxmvc.Main;
 import unibo.javafxmvc.model.OrdinaPassiFactory;
 import unibo.javafxmvc.model.OrdinaPassiModel;
@@ -59,6 +61,9 @@ public class OrdinaPassiController implements Initializable {
     @FXML
     private TextField tfInput;
 
+    @FXML
+    private Label lbPunti;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         OrdinaPassiFactory factory1 = new OrdinaPassiFactory();
@@ -80,7 +85,6 @@ public class OrdinaPassiController implements Initializable {
         lbNumero3.setText(esercizioCorrente.getNumero3());
 
          */
-
     }
 
     @FXML
@@ -89,6 +93,7 @@ public class OrdinaPassiController implements Initializable {
     private void IndietroOnMousePressed(MouseEvent event) {
         Main.changeScene("View/Home.fxml");
     }
+    /*
      @FXML
     private void ControllaOnMousePressed(MouseEvent event) {
         int a = 132;
@@ -97,10 +102,11 @@ public class OrdinaPassiController implements Initializable {
 
             Image im1 = new Image("/unibo/javafxmvc/Images/Ok.JPG");
 
-            System.out.println("Corretto00000");
             ivProva1.setImage(im1);
         }
     }
+    */
+
 
     @FXML
     void InviaOnKeyPressed() {
@@ -108,11 +114,21 @@ public class OrdinaPassiController implements Initializable {
         System.out.println("Corretto");
         if (tfInput.getText().equals("132")) {
             // Controlla();
-            NuovoEsercizio();
+
             System.out.println("Corretto00000");
+            dueSecondi();
         } else {
             System.out.println("Errore!");
         }
+        NuovoEsercizio();
+    }
+
+
+    private void dueSecondi() {
+        lbPunti.setVisible(true);
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(event -> lbPunti.setVisible(false));
+        pause.play();
     }
 
 
@@ -124,7 +140,30 @@ public class OrdinaPassiController implements Initializable {
         ivProva2.setImage(im5);
         Image im6 = new Image(getClass().getResource("/unibo/javafxmvc/Images/Ordina/Prova6.png").toExternalForm());
         ivProva3.setImage(im6);
+        int b = 312;
+        if (tfInput.getText().equals("312")) {
+            System.out.println("CorrettoCorretto");
+            dueSecondi();
+            ultimoEsercizio();
+        } else {
+            System.out.println("Errore!");
+        }
+    }
 
+    public void ultimoEsercizio(){
+        Image im7 = new Image(getClass().getResource("/unibo/javafxmvc/Images/Ordina/Prova7.png").toExternalForm());
+        ivProva1.setImage(im7);
+        Image im8 = new Image(getClass().getResource("/unibo/javafxmvc/Images/Ordina/Prova8.png").toExternalForm());
+        ivProva2.setImage(im8);
+        Image im9 = new Image(getClass().getResource("/unibo/javafxmvc/Images/Ordina/Prova9.png").toExternalForm());
+        ivProva3.setImage(im9);
+        int c = 213;
+        if (tfInput.getText().equals("213")) {
+            System.out.println("Corretto");
+            dueSecondi();
+        } else {
+            System.out.println("Errore!");
+        }
     }
 
 
