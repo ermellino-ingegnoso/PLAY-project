@@ -1,16 +1,16 @@
 [
   {
-    "foto": ["/unibo/javafxmvc/Images/Ordina/Prova1.png"],
+    "percorsoFoto": ["/unibo/javafxmvc/Images/Ordina/Prova1.png"],
     "opzioni": ["gang1", "gang2", "gang3"],
     "soluzione": "gang1"
   },
   {
-    "foto": ["/unibo/javafxmvc/Images/Ordina/Prova1.png"],
+    "percorsoFoto": ["/unibo/javafxmvc/Images/Ordina/Prova1.png"],
     "opzioni": ["gang1", "gang2", "gang3"],
     "soluzione": "gang1"
   },
   {
-    "foto": ["/unibo/javafxmvc/Images/Ordina/Prova1.png"],
+    "percorsoFoto": ["/unibo/javafxmvc/Images/Ordina/Prova1.png"],
     "opzioni": ["gang1", "gang2", "gang3"],
     "soluzione": "gang1"
   }

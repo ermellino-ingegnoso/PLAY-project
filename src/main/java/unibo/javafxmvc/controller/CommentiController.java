@@ -38,32 +38,26 @@ public class CommentiController implements Initializable {
     private RadioButton rbOpzione3;
 
     private CommentiModel esercizio;
+    private int prossimoEsercizio  = 0;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("CommentiController.initialize");
-        CommentiFactory factory1 = new CommentiFactory();
-        this.esercizio = factory1.getCommentiModel();
-        System.out.println(esercizio.getOpzioni().get(0));
-        System.out.println(esercizio.getPercorsoFoto());
-
-            ivFoto.setImage(new Image(getClass().getResource(esercizio.getPercorsoFoto()).toExternalForm()));
-        rbOpzione1.setText(esercizio.getOpzioni().get(0));
-        rbOpzione2.setText(esercizio.getOpzioni().get(1));
-        rbOpzione3.setText(esercizio.getOpzioni().get(2));
+        CaricaEsercizio();
     }
     @FXML
     void InviaPressed(){
         if (rbOpzione1.isSelected() && rbOpzione1.getText().equals(esercizio.getSoluzione())) {
-            System.out.println("Corretto00000");
+            System.out.println("Corretto");
         } else if  (rbOpzione2.isSelected() && rbOpzione2.getText().equals(esercizio.getSoluzione())) {
-            System.out.println("Cooretto");
+            System.out.println("Coretto");
         } else if (rbOpzione3.isSelected() && rbOpzione3.getText().equals(esercizio.getSoluzione())) {
             System.out.println("Corretto");
         } else {
             System.out.println("Errore!");
         }
+        CaricaEsercizio();
     }
     @FXML
     void InviaOnKeyPressed(){
@@ -79,6 +73,26 @@ public class CommentiController implements Initializable {
     void IndietroOnMouseClicked(){
         Main.changeScene("View/Home.fxml");
     }
+
+    @FXML
+    public void CaricaEsercizio() {
+        CommentiFactory factory1 = new CommentiFactory();
+        this.esercizio = factory1.getCommentiModel(prossimoEsercizio);
+        prossimoEsercizio += 1;
+        if (esercizio == null){
+            Main.changeScene("View/Home.fxml");
+            return;
+        }
+        System.out.println(esercizio.getOpzioni().get(0));
+        System.out.println(esercizio.getPercorsoFoto());
+
+        ivFoto.setImage(new Image(getClass().getResource(esercizio.getPercorsoFoto()).toExternalForm()));
+        rbOpzione1.setText(esercizio.getOpzioni().get(0));
+        rbOpzione2.setText(esercizio.getOpzioni().get(1));
+        rbOpzione3.setText(esercizio.getOpzioni().get(2));
+    }
+
+
 
 
 
