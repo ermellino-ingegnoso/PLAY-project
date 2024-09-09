@@ -21,7 +21,7 @@ public class CommentiFactory {
     public CommentiModel getCommentiModel(int i) {
         if (i < 0 || i >= esercizi.size()) {
             return null;
-            VediPunteggio();
+            //VediPunteggio();
         } else {
             return esercizi.get(i);
         }
