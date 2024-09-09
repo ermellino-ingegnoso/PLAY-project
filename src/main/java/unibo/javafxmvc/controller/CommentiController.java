@@ -82,8 +82,6 @@ public class CommentiController implements Initializable {
         rotate.setPivotX(ivAvatar.getFitWidth() / 2);
         rotate.setPivotY(ivAvatar.getFitHeight() / 2);
         ivAvatar.getTransforms().add(rotate);
-
-
     }
 
     private void drawBorders(Color borderColor) {
@@ -128,7 +126,7 @@ public class CommentiController implements Initializable {
 
     @FXML
     void IndietroOnMouseClicked() {
-        Main.changeScene("View/Home.fxml");
+        Main.changeScene("View/UserHome.fxml");
     }
 
     @FXML
@@ -137,7 +135,7 @@ public class CommentiController implements Initializable {
         this.esercizio = factory1.getCommentiModel(prossimoEsercizio);
         prossimoEsercizio += 1;
         if (esercizio == null) {
-            Main.changeScene("View/Home.fxml");
+            Main.changeScene("View/UserHome.fxml");
             return;
         }
         System.out.println(esercizio.getOpzioni().get(0));

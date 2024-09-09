@@ -45,7 +45,6 @@ public class UserHomeController implements Initializable {
         lblUsername.setText(Main.currentUser.getUsername());
         
         Rotate rotate = new Rotate();
-        rotate.setAngle(270);
         rotate.setPivotX(userAvatar.getFitWidth() / 2);
         rotate.setPivotY(userAvatar.getFitHeight() / 2);
         userAvatar.getTransforms().add(rotate);
