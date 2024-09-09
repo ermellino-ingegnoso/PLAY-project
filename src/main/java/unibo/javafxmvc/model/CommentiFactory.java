@@ -1,18 +1,7 @@
 package unibo.javafxmvc.model;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import org.h2.store.fs.FileUtils;
 import unibo.javafxmvc.Main;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -25,14 +14,19 @@ public class CommentiFactory {
         esercizi.add(new CommentiModel("/unibo/javafxmvc/Images/Ordina/Prova2.png", new ArrayList<String>(Arrays.asList("gang1", "gang2","gang3")), "gang2"));
         esercizi.add(new CommentiModel("/unibo/javafxmvc/Images/Ordina/Prova3.png", new ArrayList<String>(Arrays.asList("gang1", "gang2","gang3")), "gang3"));
     }
+    public void VediPunteggio(){
+        Main.changeScene("View/Punteggi.fxml");
+    }
 
     public CommentiModel getCommentiModel(int i) {
         if (i < 0 || i >= esercizi.size()) {
             return null;
+            VediPunteggio();
         } else {
             return esercizi.get(i);
         }
     }
+
 
     /*
     public void Serialize() throws IOException {
