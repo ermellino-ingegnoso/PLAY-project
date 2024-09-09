@@ -6,12 +6,12 @@ import java.util.Objects;
 import javafx.scene.image.Image;
 
 public class User {
-    private String nome;
-    private String cognome;
-    private String username;
-    private String password; // memorizzata come SHA-256 hash
-    private Image avatar;
-    private String color;   // sul mio sistema: bianco: 0xffffffff
+    protected String nome;
+    protected String cognome;
+    protected String username;
+    protected String password; // memorizzata come SHA-256 hash
+    protected Image avatar;
+    protected String color;   // sul mio sistema: bianco: 0xffffffff
 
     public User(String nome, String cognome, String username, String password, Image avatar, String color) {
         this.nome = nome;

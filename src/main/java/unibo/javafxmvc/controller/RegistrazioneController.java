@@ -76,7 +76,7 @@ public class RegistrazioneController implements Initializable {
         }
         fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        AuxiliaryController.addTooltipTo(Duration.ZERO, ivAvatar);
+        AuxiliaryController.addTooltipTo(ivAvatar, Duration.ZERO, "Trascina un'immagine o clicca per selezionarla");
     }
     @FXML
     private void handleColorChange(ActionEvent event) {
@@ -153,7 +153,7 @@ public class RegistrazioneController implements Initializable {
         lblUsername.setVisible(!check);
         if(check){
             try {
-                Boolean checkIfuserExists = UserDBM.userExists(username);
+                Boolean checkIfuserExists = UserDBM.userExists(username, false);
                 lblRegistrato.setVisible(checkIfuserExists);
                 btnAddUser.setDisable(checkIfuserExists);
             }catch(SQLException sqle){
@@ -208,7 +208,7 @@ public class RegistrazioneController implements Initializable {
                         tfUsername.getText(),
                         User.getSHA256Hash(tfPassword.getText()),
                         ivAvatar.getImage(),
-                        cpUser.getValue().toString()));
+                        cpUser.getValue().toString()), false);
                 lblRegistrato.setVisible(!check);
                 if(check) Main.changeScene("View/Accesso.fxml");
             } catch (ConnectionException e) {

@@ -4,6 +4,7 @@ module unibo.javafxmvc {
     requires java.sql;
     requires java.desktop;
     requires javafx.swing;
+    requires java.compiler;
 
     opens unibo.javafxmvc to javafx.fxml;
 

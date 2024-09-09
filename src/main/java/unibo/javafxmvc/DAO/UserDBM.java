@@ -3,28 +3,22 @@ package unibo.javafxmvc.DAO;
 import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.User;
 
-import javafx.scene.image.Image;
-import javafx.embed.swing.SwingFXUtils;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDBM extends DatabaseManager {
-    //protected static ObjectOutputStream oos;
     /**@return true se la connessione è stata stabilita correttamente e l'inserimento è andato a termine; <br> false se l'inserimento non è andato a termine correttamente
      * @throws ConnectionException se la connessione non è stata stabilita correttamente
      * */
-    public static Boolean insertUser(User usr) throws ConnectionException{
+    public static Boolean insertUser(User usr, Boolean admin) throws ConnectionException{
+        return insertUser(usr, (admin ? "Admin" : "\"User\""));
+    }
+    public static Boolean insertUser(User usr, String table) throws ConnectionException{
         if(connection != null){
             int affectedRows = 0;
             try(PreparedStatement pstmt = connection.prepareStatement(
-                    "INSERT INTO \"User\" (NOME, COGNOME, USERNAME, PASSWORD, AVATAR, COLOR) VALUES (?, ?, ?, ?, ?, ?)")){
+                    "INSERT INTO "+ table +" (NOME, COGNOME, USERNAME, PASSWORD, AVATAR, COLOR) VALUES (?, ?, ?, ?, ?, ?)")){
                 pstmt.setString(1, usr.getNome());
                 pstmt.setString(2, usr.getCognome());
                 pstmt.setString(3, usr.getUsername());
@@ -42,10 +36,13 @@ public class UserDBM extends DatabaseManager {
      * @throws ConnectionException se la connessione non è stata stabilita correttamente
      * @throws SQLException se si verifica un errore durante l'esecuzione della query di recupero
      * */
-    public static Boolean userExists(String username) throws ConnectionException, SQLException {
+    public static Boolean userExists(String username, Boolean admin) throws ConnectionException, SQLException {
+        return userExists(username, (admin ? "Admin" : "\"User\""));
+    }
+    public static Boolean userExists(String username, String table) throws ConnectionException, SQLException {
         if(connection != null){
             try(PreparedStatement pstmt = connection.prepareStatement(
-                    "SELECT USERNAME FROM \"User\" WHERE LOWER(USERNAME) = LOWER(?)")) {
+                    "SELECT USERNAME FROM "+ table +" WHERE LOWER(USERNAME) = LOWER(?)")) {
                 pstmt.setString(1, username);
                 ResultSet rs = pstmt.executeQuery();
                 return rs.next();
@@ -58,10 +55,13 @@ public class UserDBM extends DatabaseManager {
      * @throws ConnectionException se la connessione non è stata stabilita correttamente
      * @throws SQLException se si verifica un errore durante l'esecuzione della query di recupero o l'Utente non è stato trovato o il dato è corrotto
      * */
-    public static Boolean checkPasswordForUser(String username, String password) throws ConnectionException, SQLException {
+    public static Boolean checkPasswordForUser(String username, String password, Boolean admin) throws ConnectionException, SQLException {
+        return checkPasswordForUser(username, password, (admin ? "Admin" : "\"User\""));
+    }
+    public static Boolean checkPasswordForUser(String username, String password, String table) throws ConnectionException, SQLException {
         if(connection != null){
             try(PreparedStatement pstmt = connection.prepareStatement(
-                    "SELECT PASSWORD FROM \"User\" WHERE LOWER(USERNAME) = LOWER(?)")) {
+                    "SELECT PASSWORD FROM "+ table +" WHERE LOWER(USERNAME) = LOWER(?)")) {
                 pstmt.setString(1, username);
                 ResultSet rs = pstmt.executeQuery();
                 if (rs.next()) {
@@ -78,10 +78,13 @@ public class UserDBM extends DatabaseManager {
      * @throws ConnectionException se la connessione non è stata stabilita correttamente
      * @throws SQLException se si verifica un errore durante l'esecuzione della query di recupero
      * */
-    public static User getUser(String username) throws ConnectionException, SQLException {
+    public static User getUser(String username, Boolean admin) throws ConnectionException, SQLException {
+        return getUser(username, (admin ? "Admin" : "\"User\""));
+    }
+    public static User getUser(String username, String table) throws ConnectionException, SQLException {
         if(connection != null) {
             try (PreparedStatement pstmt = connection.prepareStatement(
-                    "SELECT NOME, COGNOME, USERNAME, PASSWORD, AVATAR, COLOR FROM \"User\" WHERE LOWER(USERNAME) = LOWER(?)")) {
+                    "SELECT NOME, COGNOME, USERNAME, PASSWORD, AVATAR, COLOR FROM "+ table +" WHERE LOWER(USERNAME) = LOWER(?)")) {
                 pstmt.setString(1, username);
                 ResultSet rs = pstmt.executeQuery();
                 if (rs.next()) {
@@ -93,13 +96,65 @@ public class UserDBM extends DatabaseManager {
                             convertByteArrayToImage(rs.getBytes("avatar")),
                             rs.getString("color")
                     );
-                } else {
-                    return null;
-                }
+                } else return null;
             } catch (SQLException e) {
                 throw e;
             }
         }
         else throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));
+    }
+    /**@return l'ID dell'utente con lo username specificato; <br>null se l'utente non è stato trovato
+     * @param username username dell'utente da cercare
+     * @throws ConnectionException se la connessione non è stata stabilita correttamente
+     * */
+    public static Integer getUserID(String username, Boolean admin) throws ConnectionException{
+        return getUserID(username, (admin ? "ADMIN" : "\"User\""));
+    }
+    public static Integer getUserID(String username, String table) throws ConnectionException {
+        if (connection != null) {
+            String sql = "SELECT ID FROM "+ table +" WHERE USERNAME = ?";
+            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setString(1, username);
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("ID");
+                }
+            } catch (SQLException e) {
+                System.out.println("Tabella: " + table);
+                return null;
+            }
+        } else {
+            throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));
+        }
+        return null;
+    }
+    public static User getUserByID(Integer userID, Boolean admin) throws ConnectionException {
+        return getUserByID(userID, (admin ? "ADMIN" : "\"User\""));
+    }
+    public static User getUserByID(Integer userID, String table) throws ConnectionException {
+        if (connection != null) {
+            String sql = "SELECT NOME, COGNOME, USERNAME, PASSWORD, AVATAR, COLOR FROM "+ table +" WHERE ID = ?";
+            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setInt(1, userID);
+                ResultSet rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    return new User(
+                            rs.getString("NOME"),
+                            rs.getString("COGNOME"),
+                            rs.getString("USERNAME"),
+                            rs.getString("PASSWORD"),
+                            convertByteArrayToImage(rs.getBytes("AVATAR")),
+                            rs.getString("COLOR")
+                    );
+                } else {
+                    return null;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+        } else {
+            throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));
+        }
     }
 }

@@ -1,0 +1,11 @@
+public static Prodotto prodottoPiuCaro(ArrayList<Prodotto> lista) {
+        Prodotto prodotto = null;
+        double max = Double.MIN_VALUE;
+        for (Prodotto p : lista) {
+            if (p.getPrezzo() > max) {
+                max = p.getPrezzo();
+                prodotto = p;
+            }
+        }
+        return prodotto;
+    }

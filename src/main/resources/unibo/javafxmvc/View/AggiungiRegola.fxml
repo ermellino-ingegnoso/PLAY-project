@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="820.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.AggiungiRegolaController">
+  <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="60.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="40.0" percentHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="100.0" minHeight="60.0" percentHeight="12.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="100.0" minHeight="60.0" percentHeight="13.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" percentHeight="27.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" percentHeight="27.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="100.0" minHeight="50.0" percentHeight="12.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <TextField fx:id="tfTitolo" alignment="BOTTOM_CENTER" promptText="Titolo Esercizio" GridPane.columnSpan="3" GridPane.rowIndex="1">
+         <font>
+            <Font name="Segoe UI" size="24.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="tfDomanda" alignment="CENTER" promptText="Domanda?" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+         <font>
+            <Font name="Calibri Light" size="16.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextArea fx:id="tfDidascalia" promptText="Descrizione di come l' utente deve completare l' esercizio" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.rowSpan="2" GridPane.valignment="CENTER" />
+      <Button mnemonicParsing="false" onKeyPressed="#SaveOnKeyPressed" onMouseClicked="#SaveOnMouseClicked" prefHeight="43.0" prefWidth="100.0" text="Salva" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Button mnemonicParsing="false" onKeyPressed="#AnnullaOnKeyPressed" onMouseClicked="#AnnullaOnMouseClicked" prefHeight="43.0" prefWidth="100.0" text="Annulla" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+      <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Descrizione dello svolgimento:" textAlignment="CENTER" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+      <Label text="Aggiungi Regola" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font name="Georgia" size="18.0" />
+         </font>
+      </Label>
+      <Label prefWidth="144.0" text="Il layout visualizzato corrisponde al layout finale" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+   </children>
+</GridPane>

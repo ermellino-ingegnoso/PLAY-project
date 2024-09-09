@@ -2,58 +2,79 @@ package unibo.javafxmvc;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Paths;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.TransferMode;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import unibo.javafxmvc.DAO.DatabaseManager;
+
+import static unibo.javafxmvc.DAO.BloccoGenericoDBM.insertBloccoGenerico;
+import static unibo.javafxmvc.DAO.EsercizioGenericoDBM.insertEsercizioGenerico;
+import static unibo.javafxmvc.DAO.RegolaGenericaDBM.insertRegola;
+import static unibo.javafxmvc.DAO.RegolaGenericaDBM.regolaExists;
+import static unibo.javafxmvc.util.CodeValidator.checkCodice;
+import static unibo.javafxmvc.util.FileUtils.readFileFromResources;
+
+import unibo.javafxmvc.DAO.UserDBM;
+import unibo.javafxmvc.controller.AuxiliaryController;
 import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.*;
 import unibo.javafxmvc.controller.AppController;
+import unibo.javafxmvc.util.PropertiesUtil;
 
 public class Main extends Application {
+    //  Propretà statiche di configurazione:
+    private static final String iconPath;
+    private static final String dbURL;
+    private static final String windowTitle;
+
+    //  Proprietà staiche di configurazione:
+    private static String fxmlPath;
+    public static Image icon;
+    private static Boolean fullScreen;
+    private static Boolean maximized;
+
+    //  Proprietà statiche di stato:
     private static Scene currentScene;
     public static Stage thisStage;
     public static User currentUser;
-    private static String dbURL;
-    private static String fxmlPath;
-    private static String windowTitle;
-    private static Boolean fullScreen;
-    private static Boolean maximized;
-    public static Image icon;
+    public static EsercizioGenerico ultimoEsercizioGenerico;
+    public static EsercizioEsperto esercizioCorrente;
+    public static int bloccoIndex;
+    public static int generalCounter;   // Attenzione ad utilizzi multipli: gestire adeguatamente i controllers, controllare la gli usages in procedura (flow)
 
-    static{
-        dbURL = "jdbc:h2:~/playproj/playprojDB";
-        windowTitle = "Applicazione PLAY";
-        fullScreen = false;
-        maximized = false;
+    static {
+        fxmlPath = "View/Accesso.fxml";
+        PropertiesUtil.initialize("src/main/resources/config.properties");
+        dbURL = PropertiesUtil.getProperty("db.url");
+        windowTitle = PropertiesUtil.getProperty("window.title");
+        fullScreen = Boolean.parseBoolean(PropertiesUtil.getProperty("window.fullScreen"));
+        maximized = Boolean.parseBoolean(PropertiesUtil.getProperty("window.maximized"));
+        iconPath = PropertiesUtil.getProperty("icon.path");
+        bloccoIndex = 0;
+
+        Path playDir = Path.of(System.getProperty("java.io.tmpdir"), "PLAY");
+        try {   // Creazione della cartella temporanea PLAY (necessario ad ogni avvio per assicurare la compatibilità con git | alternativa: gitignore sulla proprietà)
+            Files.createDirectories(playDir);
+            PropertiesUtil.setProperty("temp.path", playDir.toString() + FileSystems.getDefault().getSeparator());
+        } catch (IOException e) {
+            System.err.println("Errore durante la creazione della cartella PLAY: " + e.getMessage());
+        }
     }
     public static String getDbURLlikeAbsolutePath() {
         return dbURL;
-    }
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Seal_of_the_University_of_Bologna.png")));
-        primaryStage.getIcons().add(icon);  //5a201c
-
-        thisStage = primaryStage;
-        thisStage.setTitle(windowTitle);
-        thisStage.setOnCloseRequest(event -> AppController.handleWindowClose());
-        thisStage.maximizedProperty().addListener((obs, wasMaximized, isNowMaximized) -> {maximized = isNowMaximized;});
-        thisStage.show();
-        updateWindowBounds();
-        changeScene(fxmlPath);
     }
     public void setFullScreen() {
         thisStage.setFullScreen(true);
@@ -61,14 +82,12 @@ public class Main extends Application {
     public void delFullScreen() {
         thisStage.setFullScreen(false);
     }
+    /** <code>changeScene</code> è un metodo che permette di cambiare la scena corrente della finestra principale
+     * @param fxmlPath Percorso del file FXML della nuova scena da caricare
+     * */
     public static void changeScene(String fxmlPath) {
         try {
-            InputStream fxmlStream = Main.class.getResourceAsStream(fxmlPath);
-            if (fxmlStream == null) {
-                System.out.println("File FXML non trovato: " + fxmlPath);
-                return;
-            }   //  vengono automaticamente rimossi tutti i tag <Image> e <Image ... /> che dovranno essere gestiti all'interno dei controllers
-            currentScene = new Scene((new FXMLLoader()).load(removeImageTags(fxmlStream)));
+            currentScene = new Scene((new FXMLLoader(Main.class.getResource(fxmlPath))).load());    // removeImageTags(fxmlStream)
             currentScene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("/unibo/javafxmvc/css/stylesheet.css")).toExternalForm());
             thisStage.setMaximized(maximized);
             thisStage.setScene(currentScene);
@@ -76,7 +95,11 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-    //  La regex è stata testata su un numero limitato di casi, potrebbe non funzionare con tutti i file FXML
+    /**<code>removeImageTags</code> è stato pensato con lo scopo di rimuovere i tag <code>Image</code> dai file FXML, nel caso in cui potessero presentare problemi di caricamento
+     * La regex è stata testata su un numero limitato di casi, potrebbe non funzionare con tutti i file FXML
+     * @deprecated Questo metodo è stato deprecato in quanto non è più necessario: il caricamento delle immagini è stato risolto
+     * @return InputStream contenente il file FXML senza i tag <code>Image</code>
+     * */
     public static InputStream removeImageTags(InputStream inputStream) throws IOException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             String content = reader.lines().collect(Collectors.joining("\n"));
@@ -84,6 +107,7 @@ public class Main extends Application {
                     "<Image\\b[^>]*>(?:.*?)?</Image>|<Image\\b[^>]*/>\n", "")).getBytes(StandardCharsets.UTF_8));
         }
     }
+    /**Aggiorna le dimensioni della finestra in base alla dimensione dello schermo allo scopo di consentire la corretta massimizzazione */
     public static void updateWindowBounds(){
         ObservableList<Screen> screens = Screen.getScreensForRectangle(new Rectangle2D(thisStage.getX(), thisStage.getY(), thisStage.getWidth(), thisStage.getHeight()));
         Rectangle2D bounds = screens.get(0).getVisualBounds();
@@ -93,13 +117,90 @@ public class Main extends Application {
         thisStage.setHeight((bounds.getHeight()/3)*2);
         thisStage.centerOnScreen();
     }
-    public static void main(String[] args) {
+    /**Configurazione iniziale di tutte le proprietà utilizzate in runtime*/
+    public static void initConfig(){
         try{
-            DatabaseManager.inizialize(dbURL);
-            fxmlPath = "View/Accesso.fxml";
-        } catch (ConnectionException e) {
-            fxmlPath = "View/ErroreDatabase.fxml";
+            User admin = new User("admin", "admin", "admin", User.getSHA256Hash("admin"), new Image(Objects.requireNonNull(Main.class.getResourceAsStream("/unibo/javafxmvc/Images/avatar.png"))), "0xffffffff");
+            if(!UserDBM.userExists("admin", true)) UserDBM.insertUser(admin, true);
+            Regola r = new Regola("Completa il blocco mancante", "quale codice è necessario per completare il blocco e compilare il codice?", "Ti verranno presentate delle classi che implementano un metodo. Il compito è quello di completare il blocco mancante nel metodo chiamato in modo da poter eseguire il programma");
+            if(!regolaExists(r.getTitolo())){
+                insertRegola(r);
+                String codice = readFileFromResources("/unibo/javafxmvc/Text/User.txt");
+                String metodo = readFileFromResources("/unibo/javafxmvc/Text/UserMethod.txt");
+                if(checkCodice(codice, metodo)){
+                    AuxiliaryController.alertWindow("Validazione", "Validazione del codice compleatata", "Il codice di user è stato validato correttamente");
+                    BloccoGenerico bgUser = new BloccoGenerico("Implementa il metodo userConMenoAnni() che prende in input una lista di User e ritorna lo User con meno anni.\n" +
+                            "Avrai raggiunto lo scopo se il tuo metodo funzionerà correttamente", codice, metodo);
+
+                    codice = readFileFromResources("/unibo/javafxmvc/Text/Prodotto.txt");
+                    metodo = readFileFromResources("/unibo/javafxmvc/Text/ProdottoMethod.txt");
+                    if(checkCodice(codice, metodo)){
+                        AuxiliaryController.alertWindow("Validazione", "Validazione del codice compleatata", "Il codice di Prodotto è stato validato correttamente");
+                        BloccoGenerico bgProdotto = new BloccoGenerico("Inserisci il codice nel metodo prodottoPiuCaro tale da rintracciare il prodotto più caro presente nella lista e ritornarlo come output del metodo.", codice, metodo);
+                        EsercizioGenerico eg = new EsercizioGenerico(null, admin, r, new ArrayList<BloccoGenerico>(){{add(bgUser); add(bgProdotto);}});
+                        try{
+                            eg.setId(Objects.requireNonNull(insertEsercizioGenerico(eg), "ID Esercizio Generico non recuperato"));
+                            bgUser.setId(Objects.requireNonNull(insertBloccoGenerico(bgUser, eg), "ID Blocco Generico User non recuperato"));     // Objects.requireNonNull lancia NullPointerException se il valore è null
+                            bgProdotto.setId(Objects.requireNonNull(insertBloccoGenerico(bgProdotto, eg), "ID Blocco Generico Prodotto non recuperato"));
+                        } catch(NullPointerException npe){
+                            System.err.println("Main.initConfig: Errore durante il recupero degli ID dal database: " + npe.getMessage());
+                        }
+                        AuxiliaryController.alertWindow("Inizializzazione", "Inizializzazione completata", "L'inizializzazione dell'applicazione è stata completata con successo");
+                    } else AuxiliaryController.alertWindow("Errore", "Errore di validazione del codice", "Il codice di Prodotto non è stato validato correttamente");
+                } else AuxiliaryController.alertWindow("Errore", "Errore di validazione del codice", "Il codice di user non è stato validato correttamente");
+            }
+        } catch(ConnectionException ce){
+              Main.changeScene("View/ErroreDatabase.fxml");
+              AuxiliaryController.alertWindow("Errore", "Errore di connessione al database: troppe connessioni inizializzate", "Errore durante la configurazione dell'utente Admin: chiudere e riavviare l'applicazione");
+        } catch (SQLException e){ AuxiliaryController.alertWindow("Errore", "Errore nel caricamento degli utenti amministratori", "Chiudere e riavviare l'applicazione");
+        } catch(IOException ioe){ AuxiliaryController.alertWindow("Errore", "Errore di I/O", "Errore durante la lettura del file di testo: " + ioe.getMessage());
         }
+    }
+    /** Inizializza la connessione al database */
+    public static void initializeDB() {
+        try{DatabaseManager.inizialize(dbURL);}
+        catch (ConnectionException e) {fxmlPath = "View/ErroreDatabase.fxml";}
+    }
+    /** Riporta il valore della proprietà <code>first.run</code>
+     * @see Main#initConfig()
+     * @see Main#setFirstRun(Boolean)
+     * @return <code>true</code> se l'applicazione è stata avviata per la prima volta, <code>false</code> altrimenti
+     * */
+    public static Boolean isFirstRun() {
+        return PropertiesUtil.getProperty("first.run").equals("true");
+    }
+    /**<code>first.run</code> indica se l'applicazione è stata avviata per la prima volta
+     * @see Main#initConfig()
+     * @param value Valore da assegnare alla proprietà <code>first.run</code>
+     *  */
+    public static void setFirstRun(Boolean value) {
+        try{
+            PropertiesUtil.setProperty("first.run", value.toString());
+        } catch (IOException ioe) {
+            System.err.println("Main.setFirstRun: Errore durante il salvataggio della proprietà first.run: " + ioe.getMessage());
+            ioe.printStackTrace();
+        }
+    }
+    @Override
+    public void init() throws Exception {
+        initConfig();
+    }
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(iconPath)));
+        primaryStage.getIcons().add(icon);  //5a201c
+
+        thisStage = primaryStage;
+        thisStage.setTitle(windowTitle);
+        thisStage.setOnCloseRequest(event -> AppController.handleWindowClose());
+        thisStage.maximizedProperty().addListener((obs, wasMaximized, isNowMaximized) -> {maximized = isNowMaximized;});
+        thisStage.show();
+
+        updateWindowBounds();
+        changeScene(fxmlPath);
+    }
+    public static void main(String[] args) {
+        initializeDB();   // Fondamentale per l'inizializzazione di tutte le componenti dell'applicazione
         launch(args);
     }
 }

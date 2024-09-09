@@ -9,7 +9,6 @@ import java.sql.*;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import unibo.javafxmvc.exception.ConnectionException;
-import unibo.javafxmvc.model.User;
 
 import javax.imageio.ImageIO;
 
@@ -45,11 +44,18 @@ public class DatabaseManager {
             throw new ConnectionException("Errore di connessione al database: " + e.getMessage(), e);
         }
         informStatus(Status.STABILITA);
-        try{
+        createAllTablesIfNotExists();
+    }
+    public static void createAllTablesIfNotExists(){
+        try{// I metodi di creazione devono essere chiamati in ordine di dipendenza: PK --> FK (PK) --> FK...
             createUserIfNotExists();
-            System.out.println("Tabella User creata con successo");
+            createAdminIfNotExists();
+            createRegolaIfNotExists();
+            createEsercizioGenericoIfNotExists();
+            createBloccoGenericoIfNotExists();
+            createEsercizioEspertoIfNotExists();
+            createBloccoEspertoIfNotExists();
         } catch (SQLException e) {
-            System.out.println("Creazione della tabella User fallita");
             e.printStackTrace();
         }
     }
@@ -88,6 +94,49 @@ public class DatabaseManager {
             prstmt.execute();
         }
     }
+    private static void createAdminIfNotExists() throws SQLException {;
+        try (PreparedStatement prstmt = connection.prepareStatement(
+                "create table if not exists     Admin (" +
+                        "    ID       INTEGER auto_increment," +
+                        "    NOME     CHARACTER VARYING not null," +
+                        "    COGNOME  CHARACTER VARYING not null," +
+                        "    USERNAME CHARACTER VARYING not null" +
+                        "        unique," +
+                        "    PASSWORD CHARACTER(64)     not null," +
+                        "    AVATAR   BINARY LARGE OBJECT," +
+                        "    COLOR    CHARACTER(10)," +
+                        "    constraint PK_ADMIN" +
+                        "        primary key (ID)" +
+                        ");")) {
+            prstmt.execute();
+        }
+    }
+    public static void createBloccoEspertoIfNotExists() throws SQLException{
+        try (PreparedStatement prstmt = connection.prepareStatement(
+            "create table if not exists BLOCCO_ESPERTO(ID INTEGER auto_increment, ESERCIZIO_ESPERTO_ID INTEGER not null, CODICE_UTENTE CHARACTER VARYING, SUPERATO BOOLEAN, BLOCCO_GENERICO_ID INTEGER, constraint BLOCCO_ESPERTO_PK primary key (ID), constraint BLOCCO_ESPERTO_BLOCCO_GENERICO_FK foreign key (BLOCCO_GENERICO_ID) references BLOCCO_GENERICO on update cascade on delete cascade, constraint ESERCIZIO_ESPERTO_FK foreign key (ESERCIZIO_ESPERTO_ID) references ESERCIZIO_ESPERTO on update cascade on delete cascade );"
+        )){prstmt.execute();}
+    }
+    public static void createBloccoGenericoIfNotExists() throws SQLException{
+        try (PreparedStatement prstmt = connection.prepareStatement(
+        "create table if not exists BLOCCO_GENERICO(ID INTEGER auto_increment, ESERCIZIO_GENERICO_ESPERTO_ID INTEGER not null,CONSEGNA CHARACTER VARYING not null, CODICE CHARACTER VARYING not null, constraint BLOCCO_PK primary key (ID), constraint ESERCIZIO_GENERICO_ESPERTO_FK foreign key (ESERCIZIO_GENERICO_ESPERTO_ID) references ESERCIZIO_GENERICO on update cascade on delete cascade );"
+        )){prstmt.execute();}
+    }
+    public static void createEsercizioEspertoIfNotExists() throws SQLException{
+        try (PreparedStatement prstmt = connection.prepareStatement(
+        "create table if not exists ESERCIZIO_ESPERTO (ID INTEGER auto_increment, ESERCIZIO_GENERICO_ID INTEGER, UTENTE_ID INTEGER, constraint ESERCIZIO_ESPERTO_PK primary key (ID), constraint ESERCIZIO_ESPERTO_GENERICO_FK foreign key (ESERCIZIO_GENERICO_ID) references ESERCIZIO_GENERICO on update cascade on delete cascade, constraint ESERCIZIO_ESPERTO_UTENTE_FK foreign key (UTENTE_ID) references \"User\" on update cascade on delete cascade );"
+        )){prstmt.execute();}
+    }
+    public static void createEsercizioGenericoIfNotExists() throws SQLException{
+        try (PreparedStatement prstmt = connection.prepareStatement(
+        "create table if not exists ESERCIZIO_GENERICO ( ID INTEGER auto_increment, CREATORE_ID INTEGER not null, REGOLA_ID   INTEGER, constraint ESERCIZIO_GENERICO_ID primary key (ID), constraint ADMIN_ID foreign key (CREATORE_ID) references ADMIN on update cascade on delete cascade, constraint REGOLA_ID foreign key (REGOLA_ID) references REGOLA_GENERICA on update cascade on delete cascade );"
+        )){prstmt.execute();}
+    }
+    public static void createRegolaIfNotExists() throws SQLException{
+        try (PreparedStatement prstmt = connection.prepareStatement(
+        "create table if not exists REGOLA_GENERICA ( ID INTEGER auto_increment, TITOLO CHARACTER VARYING, DOMANDA CHARACTER VARYING, DESCRIZIONE CHARACTER VARYING, constraint ID primary key (ID));"
+        )){prstmt.execute();}
+    }
+
     /**@return byte[] che rappresenta l'immagine o <br> null se si verifica un errore durante la conversione
      * @param img Immagine da convertire in byte[]
     */

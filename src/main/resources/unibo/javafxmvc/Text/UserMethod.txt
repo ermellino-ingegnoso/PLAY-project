@@ -1,0 +1,12 @@
+public static User userConMenoAnni(ArrayList<User> lista) {
+        User user = null;
+        int min = Integer.MAX_VALUE;
+        for (User u : lista) {
+            int anni = Integer.parseInt(u.getAnni());
+            if (anni < min) {
+                min = anni;
+                user = u;
+            }
+        }
+        return user;
+    }
