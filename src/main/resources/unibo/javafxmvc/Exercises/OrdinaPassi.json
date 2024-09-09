@@ -1,0 +1,20 @@
+[
+  {
+    "percorsoFoto": ["/unibo/javafxmvc/Images/Ordina/Prova1.png", "/unibo/javafxmvc/Images/Ordina/Prova2.png", "/unibo/javafxmvc/Images/Ordina/Prova3.png"],
+    "punteggio": 1,
+    "soluzione": [1, 3, 2],
+    "autore": "Giovanni Squillero"
+  },
+  {
+    "percorsoFoto": ["/unibo/javafxmvc/Images/Ordina/Prova4.png", "/unibo/javafxmvc/Images/Ordina/Prova5.png", "/unibo/javafxmvc/Images/Ordina/Prova6.png"],
+    "punteggio": 2,
+    "soluzione": [2, 1, 3],
+    "autore": "Giovanni Squillero"
+  },
+  {
+    "percorsoFoto": ["/unibo/javafxmvc/Images/Ordina/Prova7.png", "/unibo/javafxmvc/Images/Ordina/Prova8.png", "/unibo/javafxmvc/Images/Ordina/Prova9.png"],
+    "punteggio": 3,
+    "soluzione": [3, 2, 1],
+    "autore": "Giovanni Squillero"
+  }
+]

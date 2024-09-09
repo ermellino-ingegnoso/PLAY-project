@@ -4,6 +4,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import unibo.javafxmvc.DAO.EsercizioEspertoDBM;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.transform.Rotate;
 import unibo.javafxmvc.Main;
 
 import javafx.fxml.FXML;
@@ -34,12 +36,20 @@ public class UserHomeController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         userAvatar.setImage(Main.currentUser.getAvatar());
+
         circle = new Circle(userAvatar.getFitWidth() / 2, userAvatar.getFitHeight() / 2, Math.min(userAvatar.getFitWidth(), userAvatar.getFitHeight()) / 2);
         circle.setStroke(Color.web(Main.currentUser.getColor()));
         circle.setStrokeWidth(0);
         userAvatar.setClip(circle);
         drawBorders(Color.web(Main.currentUser.getColor()));
         lblUsername.setText(Main.currentUser.getUsername());
+        
+        Rotate rotate = new Rotate();
+        rotate.setAngle(270);
+        rotate.setPivotX(userAvatar.getFitWidth() / 2);
+        rotate.setPivotY(userAvatar.getFitHeight() / 2);
+        userAvatar.getTransforms().add(rotate);
+
     }
     @FXML
     void AvanzatoOnMouseClicked(MouseEvent event) {
@@ -70,5 +80,13 @@ public class UserHomeController implements Initializable {
         linePane.getChildren().add(line);
         linePane.setPrefSize(mainGridPane.getWidth(), line.getStrokeWidth());
         mainGridPane.add(linePane, 0, 1);
+    }
+    @FXML
+    private void OrdinaPassiOnMousePressed(MouseEvent event) {
+        Main.changeScene("View/Commenti.fxml");
+    }
+    @FXML
+    private void QuizOnMousePressed(MouseEvent event) {
+        Main.changeScene("View/Quiz.fxml");
     }
 }

@@ -15,147 +15,187 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="mainGridPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="995.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.UserHomeController">
+<GridPane fx:id="mainGridPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+          minWidth="-Infinity" prefHeight="654.0" prefWidth="995.0" xmlns="http://javafx.com/javafx/22"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.UserHomeController">
     <columnConstraints>
-        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="250.0" minWidth="100.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="250.0" minWidth="100.0" />
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="250.0" minWidth="100.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="250.0" minWidth="100.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="100.0" minHeight="40.0" prefHeight="50.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="100.0" minHeight="40.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-         <children>
-              <HBox alignment="CENTER_LEFT" layoutX="26.0" layoutY="15.0" prefHeight="100.0" prefWidth="200.0">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-              </HBox>
-         </children>
-      </AnchorPane>
-      <StackPane prefHeight="76.0" prefWidth="250.0">
-         <children>
-            <ImageView fx:id="userAvatar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="avatar" StackPane.alignment="CENTER_LEFT">
-               <image>
-                  <Image url="@../Images/avatar.png" />
-               </image>
-            </ImageView>
-            <Circle fx:id="circleAvatar" blendMode="MULTIPLY" fill="WHITE" radius="25.0" stroke="BLACK" strokeLineJoin="ROUND" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
-            <Label fx:id="lblUsername" prefHeight="18.0" prefWidth="160.0" text="Username" textAlignment="CENTER" StackPane.alignment="CENTER_RIGHT" />
-         </children>
-         <padding>
-            <Insets left="30.0" />
-         </padding>
-      </StackPane>
-      <BorderPane prefHeight="159.0" prefWidth="269.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-         <left>
-            <Label prefHeight="62.0" prefWidth="160.0" text="Cosa manca?" wrapText="true" BorderPane.alignment="TOP_RIGHT">
-               <BorderPane.margin>
-                  <Insets left="10.0" />
-               </BorderPane.margin>
-            </Label>
-         </left>
-         <right>
-            <Label text="Avanzato" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets right="10.0" />
-               </BorderPane.margin>
-            </Label>
-         </right>
-         <top>
-            <Label onMouseClicked="#AvanzatoOnMouseClicked" text="Scrivi il codice" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-         </top>
-         <bottom>
-            <ProgressBar prefWidth="200.0" progress="0.0" BorderPane.alignment="CENTER" />
-         </bottom>
-      </BorderPane>
-      <BorderPane prefHeight="159.0" prefWidth="269.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <left>
-            <Label prefHeight="62.0" prefWidth="160.0" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500l" wrapText="true" BorderPane.alignment="TOP_RIGHT">
-               <BorderPane.margin>
-                  <Insets left="10.0" />
-               </BorderPane.margin>
-            </Label>
-         </left>
-         <right>
-            <Label text="Esperto" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets right="10.0" />
-               </BorderPane.margin>
-            </Label>
-         </right>
-         <top>
-            <Label onMouseClicked="#EspertoOnMouseClicked" text="Leggi il codice" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-         </top>
-         <bottom>
-            <ProgressBar prefWidth="200.0" progress="0.0" BorderPane.alignment="CENTER" />
-         </bottom>
-      </BorderPane>
-      <BorderPane prefHeight="159.0" prefWidth="269.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-         <left>
-            <Label prefHeight="62.0" prefWidth="160.0" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500l" wrapText="true" BorderPane.alignment="TOP_RIGHT">
-               <BorderPane.margin>
-                  <Insets left="10.0" />
-               </BorderPane.margin>
-            </Label>
-         </left>
-         <right>
-            <Label text="Intermedio" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets right="10.0" />
-               </BorderPane.margin>
-            </Label>
-         </right>
-         <top>
-            <Label text="Leggi il codice" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-         </top>
-         <bottom>
-            <ProgressBar prefWidth="200.0" progress="0.0" BorderPane.alignment="CENTER" />
-         </bottom>
-      </BorderPane>
-      <BorderPane prefHeight="159.0" prefWidth="269.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
-         <left>
-            <Label prefHeight="62.0" prefWidth="160.0" text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500l" wrapText="true" BorderPane.alignment="TOP_RIGHT">
-               <BorderPane.margin>
-                  <Insets left="10.0" />
-               </BorderPane.margin>
-            </Label>
-         </left>
-         <right>
-            <Label text="Principiante" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets right="10.0" />
-               </BorderPane.margin>
-            </Label>
-         </right>
-         <top>
-            <Label text="Leggi il codice" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-         </top>
-         <bottom>
-            <ProgressBar prefWidth="200.0" progress="0.0" BorderPane.alignment="CENTER" />
-         </bottom>
-      </BorderPane>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <children>
+                <HBox alignment="CENTER_LEFT" layoutX="26.0" layoutY="15.0" prefHeight="100.0" prefWidth="200.0">
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                </HBox>
+            </children>
+        </AnchorPane>
+        <StackPane prefHeight="76.0" prefWidth="250.0">
+            <children>
+                <ImageView fx:id="userAvatar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true"
+                           styleClass="avatar" StackPane.alignment="CENTER_LEFT">
+                    <image>
+                        <Image url="@../Images/avatar.png"/>
+                    </image>
+                </ImageView>
+                <Circle fx:id="circleAvatar" blendMode="MULTIPLY" fill="WHITE" radius="25.0" stroke="BLACK"
+                        strokeLineJoin="ROUND" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT"/>
+                <Label fx:id="lblUsername" prefHeight="18.0" prefWidth="160.0" text="Username" textAlignment="CENTER"
+                       StackPane.alignment="CENTER_RIGHT"/>
+            </children>
+            <padding>
+                <Insets left="30.0"/>
+            </padding>
+        </StackPane>
+        <BorderPane prefHeight="159.0" prefWidth="269.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <left>
+                <Label prefHeight="62.0" prefWidth="160.0" text="Cosa manca?" wrapText="true"
+                       BorderPane.alignment="TOP_RIGHT">
+                <Label prefHeight="62.0" prefWidth="160.0" text="Cosa stampa?" wrapText="true"
+                       BorderPane.alignment="TOP_RIGHT">
+                    <BorderPane.margin>
+                        <Insets left="10.0"/>
+                    </BorderPane.margin>
+                </Label>
+            </left>
+            <right>
+                <Label text="Avanzato" BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets right="10.0"/>
+                    </BorderPane.margin>
+                </Label>
+            </right>
+            <top>
+                <Label onMouseClicked="#AvanzatoOnMouseClicked" text="Scrivi il codice" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Label>
+            </top>
+            <bottom>
+                <ProgressBar prefWidth="200.0" progress="0.0" BorderPane.alignment="CENTER"/>
+            </bottom>
+        </BorderPane>
+        <BorderPane prefHeight="159.0" prefWidth="269.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <top>
+                <Label text="Trova l'errore" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Label>
+            </top>
+            <left>
+                <Label prefHeight="62.0" prefWidth="160.0" text="Il debug" wrapText="true"
+                       BorderPane.alignment="TOP_RIGHT">
+                    <BorderPane.margin>
+                        <Insets left="10.0"/>
+                    </BorderPane.margin>
+                </Label>
+            </left>
+            <right>
+                <Label text="Label" BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets right="10.0"/>
+                    </BorderPane.margin>
+                </Label>
+            </right>
+        </BorderPane>
+        <BorderPane prefHeight="159.0" prefWidth="269.0" GridPane.columnIndex="2" GridPane.rowIndex="2"
+                    onMouseClicked="#OrdinaPassiOnMousePressed">
+            <left>
+                <Label prefHeight="62.0" prefWidth="160.0" text="Commenti" wrapText="true"
+                       BorderPane.alignment="TOP_RIGHT">
+                    <BorderPane.margin>
+                        <Insets left="10.0"/>
+                    </BorderPane.margin>
+                </Label>
+            </left>
+            <right>
+                <Label text="Esperto" BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets right="10.0"/>
+                    </BorderPane.margin>
+                </Label>
+            </right>
+            <top>
+                <Label onMouseClicked="#EspertoOnMouseClicked" text="Leggi il codice" BorderPane.alignment="CENTER">
+                <Label text="Commenti" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Label>
+            </top>
+            <bottom>
+                <ProgressBar prefWidth="200.0" progress="0.0" BorderPane.alignment="CENTER"/>
+            </bottom>
+        </BorderPane>
+        <BorderPane prefHeight="159.0" prefWidth="269.0" GridPane.columnIndex="2" GridPane.rowIndex="3"
+                    onMouseClicked="#QuizOnMousePressed">
+            <left>
+                <Label prefHeight="62.0" prefWidth="160.0" text="Il quiz" wrapText="true"
+                       BorderPane.alignment="TOP_RIGHT">
+                    <BorderPane.margin>
+                        <Insets left="10.0"/>
+                    </BorderPane.margin>
+                </Label>
+            </left>
+            <right>
+                <Label text="Intermedio" BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets right="10.0"/>
+                    </BorderPane.margin>
+                </Label>
+            </right>
+            <top>
+                <Label text="Leggi il codice" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Label>
+            </top>
+            <bottom>
+                <ProgressBar prefWidth="200.0" progress="0.0" BorderPane.alignment="CENTER"/>
+            </bottom>
+        </BorderPane>
+        <BorderPane prefHeight="159.0" prefWidth="269.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <left>
+                <Label prefHeight="62.0" prefWidth="160.0"
+                       text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500l"
+                       wrapText="true" BorderPane.alignment="TOP_RIGHT">
+                    <BorderPane.margin>
+                        <Insets left="10.0"/>
+                    </BorderPane.margin>
+                </Label>
+            </left>
+            <right>
+                <Label text="Principiante" BorderPane.alignment="CENTER">
+                    <BorderPane.margin>
+                        <Insets right="10.0"/>
+                    </BorderPane.margin>
+                </Label>
+            </right>
+            <top>
+                <Label text="Leggi il codice" BorderPane.alignment="CENTER">
+                <Label text="Studia i concetti" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font size="18.0"/>
+                    </font>
+                </Label>
+            </top>
+            <bottom>
+                <ProgressBar prefWidth="200.0" progress="0.0" BorderPane.alignment="CENTER"/>
+            </bottom>
+        </BorderPane>
     </children>
 </GridPane>

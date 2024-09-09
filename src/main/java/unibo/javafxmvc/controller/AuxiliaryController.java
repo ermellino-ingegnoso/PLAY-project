@@ -96,7 +96,6 @@ public class AuxiliaryController {  //TODO: separare le resonsabilità per ambit
         alert.getDialogPane().setContent(textArea);
         alert.show();
     }
-    
     /** Mostra una finestra di conferma
      * @param title il titolo della finestra
      * @param headerText il testo dell'intestazione
