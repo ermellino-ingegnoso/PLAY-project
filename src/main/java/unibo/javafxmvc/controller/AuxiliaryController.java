@@ -29,10 +29,10 @@ public class AuxiliaryController {  //TODO: separare le resonsabilità per ambit
         PixelReader reader = originalImage.getPixelReader();
         return (Image) new WritableImage(reader, (int) x, (int) y, (int) squareSize, (int) squareSize);
     }
-    public static void addTooltipTo(Duration d, Node node) {    //TODO: aggiungere il parametro: String text
-        Tooltip tooltipImg = new Tooltip("Trascina un'immagine");
-        tooltipImg.setShowDelay(d);
-        Tooltip.install(node, tooltipImg);
+    public static void addTooltipTo(Node node, Duration d, String text) {    //TODO: aggiungere il parametro: String text
+        Tooltip tooltip = new Tooltip(text);
+        tooltip.setShowDelay(d);
+        Tooltip.install(node, tooltip);
     }
     public static Boolean keyEnterPressed(KeyEvent event) {
         return (event.getCode() == KeyCode.ENTER);

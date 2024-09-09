@@ -76,7 +76,7 @@ public class RegistrazioneController implements Initializable {
         }
         fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        AuxiliaryController.addTooltipTo(Duration.ZERO, ivAvatar);
+        AuxiliaryController.addTooltipTo(ivAvatar, Duration.ZERO, "Trascina per caricare un'immagine");
     }
     @FXML
     private void handleColorChange(ActionEvent event) {
