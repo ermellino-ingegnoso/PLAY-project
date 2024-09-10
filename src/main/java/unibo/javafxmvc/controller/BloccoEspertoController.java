@@ -38,6 +38,7 @@ public class BloccoEspertoController{
     public void initialize() {    //  Logica di inizializzazione iterativa
         AuxiliaryController.addTooltipTo(lblFirma,  Duration.millis(500), "Reimposta la firma del metodo ed elimina il corpo");
         initFields();
+        tfClasse.setEditable(false);
     }
     @FXML
     void AnnullaOnKeyPressed(KeyEvent event) { if(AuxiliaryController.keyEnterPressed(event)) annulla();}
@@ -97,7 +98,7 @@ public class BloccoEspertoController{
             System.out.println("Correct Output: " + correctOutput);
             return userOutput.equals(correctOutput);
         } catch (Exception e) {
-            System.err.println("Errore durante la compilazione o l'esecuzione del Blocco Esperto: " + e.getMessage());
+            System.err.println("Errore per la compilazione o esecuzione durante la verifica del Blocco Esperto: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
