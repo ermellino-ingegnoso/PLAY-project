@@ -1,5 +1,6 @@
 package unibo.javafxmvc.controller;
 
+import javafx.fxml.Initializable;
 import unibo.javafxmvc.Main;
 
 import javafx.fxml.FXML;
@@ -10,7 +11,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
-public class AdminHomeController {
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AdminHomeController implements Initializable {
     @FXML
     private Circle circleAvatar;
     @FXML
@@ -22,6 +27,10 @@ public class AdminHomeController {
     @FXML
     private ImageView userAvatar;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        AuxiliaryController.initAvatar(Main.currentUser, userAvatar, circleAvatar, lblUsername, mainGridPane);
+    }
     @FXML
     protected void AggiungiEsercizioBtnOnKeyPressed(KeyEvent event) {
         if(AuxiliaryController.keyEnterPressed(event)) AggiungiEsercizio();
@@ -37,4 +46,6 @@ public class AdminHomeController {
     void btnSchermataAccessoOnMouseClicked(MouseEvent event) {
         Main.changeScene("View/Accesso.fxml");
     }
+
+
 }
