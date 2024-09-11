@@ -12,8 +12,12 @@ import unibo.javafxmvc.DAO.BloccoEspertoDBM;
 import unibo.javafxmvc.Main;
 import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.BloccoEsperto;
+import unibo.javafxmvc.model.Grado;
+import unibo.javafxmvc.model.Punteggio;
 import unibo.javafxmvc.util.Compiler;
 import unibo.javafxmvc.util.SignatureFinder;
+
+import java.util.ArrayList;
 
 import static unibo.javafxmvc.util.CodeValidator.combineCode;
 
@@ -61,7 +65,10 @@ public class BloccoEspertoController{
             AuxiliaryController.alertWindow("Errore", "Errore di connessione", "EsercizioEsperto non inserito");
             Main.changeScene("View/ErroreDatabase.fxml");
         }
-        if(Main.bloccoIndex >= Main.esercizioCorrente.getNblocchiEsperto()-1) Main.changeScene("View/UserHome.fxml");
+        if(Main.bloccoIndex >= Main.esercizioCorrente.getNblocchiEsperto()-1){
+            Main.punteggio = Main.esercizioCorrente.getPunteggi();
+            Main.changeScene("View/PunteggiEsercizio.fxml");
+        }
         else Main.bloccoIndex++;
         initFields();
         btnProsegui.setDisable(false);

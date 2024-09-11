@@ -10,6 +10,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 import unibo.javafxmvc.Main;
 
@@ -17,12 +19,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-// ricorda di impostare main.punteggio prima di chiamare la vista associata a questo controller
+/** Ricorda di impostare main.punteggio di chiamare la vista associata a questo controller */
 public class PunteggiEsercizioController implements Initializable {
     @FXML
     private Circle circleAvatar;
     @FXML
-    private Label lblInfo;
+    private ImageView userAvatar;
     @FXML
     private Label lblUsername;
     @FXML
@@ -30,37 +32,30 @@ public class PunteggiEsercizioController implements Initializable {
     @FXML
     private TableView<List<Integer>> tbView;
     @FXML
-    private ImageView userAvatar;
-    //  alert.showAndWait();
+    private Label lblInfo;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        AuxiliaryController.setAvatar(Main.currentUser, userAvatar, circleAvatar, lblUsername, mainGridPane);
+
         lblInfo.setText("Nell' esercizio "+ Main.punteggio.getTitolo() +" di difficoltà "+ Main.punteggio.getGrado().toString().toLowerCase() +" hai ottenuto un totale di: "+ Main.punteggio.getPunteggio() +" punti");
 
-        // Creiamo le colonne dinamiche basate sulla dimensione dell'array
         for (int i = 0; i < Main.punteggio.getPunteggi().size(); i++) {
             final int colIndex = i;
-            TableColumn<List<Integer>, Integer> column = new TableColumn<>("Col " + i);
-
-            // Ogni colonna utilizza i valori dell'Main.punteggio.punteggi in base al suo indice
-            column.setCellValueFactory(cellData ->
-                    new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().get(colIndex))
-            );
-
+            TableColumn<List<Integer>, Integer> column = new TableColumn<>("Esercizio " + i);
+            column.setCellValueFactory(cellData ->new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().get(colIndex)));
             tbView.getColumns().add(column);
         }
-
-        // Creiamo le righe: ogni riga è un Main.punteggio.punteggi con gli indici e i punteggi
-        List<Integer> indicesRow = new ArrayList<Integer>();
-        List<Integer> scoresRow = new ArrayList<Integer>();
-
+        List<Integer> punti = new ArrayList<Integer>();
         for (int i = 0; i < Main.punteggio.getPunteggi().size(); i++) {
-            indicesRow.add(i);        // Prima riga: gli indici
-            scoresRow.add(Main.punteggio.getPunto(i));  // Seconda riga: i punteggi
+            punti.add(Main.punteggio.getPunto(i));
         }
-        ObservableList<List<Integer>> rows = FXCollections.observableArrayList();
-        rows.add(indicesRow);  // Aggiungi la riga con gli indici
-        rows.add(scoresRow);   // Aggiungi la riga con i punteggi
-
-        tbView.setItems(rows);  // Settiamo i dati nella tabella
+        ObservableList<List<Integer>> righe = FXCollections.observableArrayList();
+        righe.add(punti);
+        tbView.setItems(righe);
     }
+    @FXML
+    void EsciOnKeyPressed(KeyEvent event) {Main.changeScene("View/UserHome.fxml");}
+    @FXML
+    void EsciOnMouseClicked(MouseEvent event) {Main.changeScene("View/UserHome.fxml");}
 }

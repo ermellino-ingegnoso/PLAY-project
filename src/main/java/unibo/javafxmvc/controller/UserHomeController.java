@@ -22,7 +22,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UserHomeController implements Initializable {
-
     @FXML
     private Circle circleAvatar;
     @FXML
@@ -35,20 +34,7 @@ public class UserHomeController implements Initializable {
     private Circle circle;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        userAvatar.setImage(Main.currentUser.getAvatar());
-
-        circle = new Circle(userAvatar.getFitWidth() / 2, userAvatar.getFitHeight() / 2, Math.min(userAvatar.getFitWidth(), userAvatar.getFitHeight()) / 2);
-        circle.setStroke(Color.web(Main.currentUser.getColor()));
-        circle.setStrokeWidth(0);
-        userAvatar.setClip(circle);
-        drawBorders(Color.web(Main.currentUser.getColor()));
-        lblUsername.setText(Main.currentUser.getUsername());
-        
-        Rotate rotate = new Rotate();
-        rotate.setPivotX(userAvatar.getFitWidth() / 2);
-        rotate.setPivotY(userAvatar.getFitHeight() / 2);
-        userAvatar.getTransforms().add(rotate);
-
+        AuxiliaryController.setAvatar(Main.currentUser, userAvatar, circleAvatar, lblUsername, mainGridPane);
     }
     @FXML
     void AvanzatoOnMouseClicked(MouseEvent event) {
@@ -68,18 +54,7 @@ public class UserHomeController implements Initializable {
             Main.changeScene("View/ErroreDatabase.fxml");
         }
     }
-    private void drawBorders(Color borderColor){
-        circleAvatar.setStroke(borderColor);
-        lblUsername.setTextFill(borderColor);
-        Line line = new Line(0, 0, mainGridPane.getWidth(), 0);
-        line.setStroke(borderColor);
-        line.setStrokeWidth(2);
 
-        Pane linePane = new Pane();
-        linePane.getChildren().add(line);
-        linePane.setPrefSize(mainGridPane.getWidth(), line.getStrokeWidth());
-        mainGridPane.add(linePane, 0, 1);
-    }
     @FXML
     private void OrdinaPassiOnMousePressed(MouseEvent event) {
         Main.changeScene("View/Commenti.fxml");
