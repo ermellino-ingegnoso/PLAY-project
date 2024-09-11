@@ -47,6 +47,7 @@ public class Main extends Application {
     private static Boolean maximized;
 
     //  Proprietà statiche di stato:
+    public static Punteggio punteggio;
     private static Scene currentScene;
     public static Stage thisStage;
     public static User currentUser;

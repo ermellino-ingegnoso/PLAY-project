@@ -7,8 +7,15 @@ import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
+import unibo.javafxmvc.Main;
+import unibo.javafxmvc.model.User;
 
 import java.util.Optional;
 // I metodi di questa classe sono costruiti col presupposto di essere utilizzati in maniera sequenziale e soprattutto sullo stesso thread
@@ -114,5 +121,38 @@ public class AuxiliaryController {  //TODO: separare le resonsabilità per ambit
 
         Optional<ButtonType> result = alert.showAndWait();  //  prassi nella gestione del risultato modale
         return result.isPresent() && (result.get() == buttonTypeYes);
+    }
+    /**Costruisce un avatar circolare con un bordo colorato ed una label con il nome dell'utente anch'essa colorata in base al colore selezionato dallo <code>User</code>; <br> posiziona questo avatar in un <code>GridPane</code> alla colonna 0 con indice di riga 1
+     * @param utente l'utente di cui si vuole costruire l'avatar
+     * @param avatar il controllo <code>ImageView</code> che rappresenta l'avatar
+     * @param circleAvatar il controllo <code>Circle</code> che rappresenta il bordo dell'avatar
+     * @param label la label che rappresenta lo username
+     * @param gridPane il <code>GridPane</code> che contiene tutti i controlli
+     * */
+    public static void setAvatar(User utente, ImageView avatar, Circle circleAvatar, Label label, GridPane gridPane){
+        avatar.setImage(utente.getAvatar());
+
+        Circle circle = new Circle(avatar.getFitWidth() / 2, avatar.getFitHeight() / 2, Math.min(avatar.getFitWidth(), avatar.getFitHeight()) / 2);
+        circle.setStroke(Color.web(utente.getColor()));
+        circle.setStrokeWidth(0);
+        avatar.setClip(circle);
+        drawBorders(Color.web(utente.getColor()), circleAvatar, label, gridPane);
+        label.setText(utente.getUsername());
+
+        Rotate rotate = new Rotate();
+        rotate.setPivotX(avatar.getFitWidth() / 2);
+        rotate.setPivotY(avatar.getFitHeight() / 2);
+        avatar.getTransforms().add(rotate);
+    }
+    private static void drawBorders(Color borderColor,Circle circleAvatar, Label label, GridPane gridPane){
+        circleAvatar.setStroke(borderColor);
+        label.setTextFill(borderColor);
+        Line line = new Line(0, 0, gridPane.getWidth(), 0);
+        line.setStroke(borderColor);
+        line.setStrokeWidth(2);
+        Pane linePane = new Pane();
+        linePane.getChildren().add(line);
+        linePane.setPrefSize(gridPane.getWidth(), line.getStrokeWidth());
+        gridPane.add(linePane, 0, 1);
     }
 }

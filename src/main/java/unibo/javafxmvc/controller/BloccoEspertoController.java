@@ -12,8 +12,12 @@ import unibo.javafxmvc.DAO.BloccoEspertoDBM;
 import unibo.javafxmvc.Main;
 import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.BloccoEsperto;
+import unibo.javafxmvc.model.Grado;
+import unibo.javafxmvc.model.Punteggio;
 import unibo.javafxmvc.util.Compiler;
 import unibo.javafxmvc.util.SignatureFinder;
+
+import java.util.ArrayList;
 
 import static unibo.javafxmvc.util.CodeValidator.combineCode;
 
@@ -38,6 +42,7 @@ public class BloccoEspertoController{
     public void initialize() {    //  Logica di inizializzazione iterativa
         AuxiliaryController.addTooltipTo(lblFirma,  Duration.millis(500), "Reimposta la firma del metodo ed elimina il corpo");
         initFields();
+        tfClasse.setEditable(false);
     }
     @FXML
     void AnnullaOnKeyPressed(KeyEvent event) { if(AuxiliaryController.keyEnterPressed(event)) annulla();}
@@ -60,7 +65,10 @@ public class BloccoEspertoController{
             AuxiliaryController.alertWindow("Errore", "Errore di connessione", "EsercizioEsperto non inserito");
             Main.changeScene("View/ErroreDatabase.fxml");
         }
-        if(Main.bloccoIndex >= Main.esercizioCorrente.getNblocchiEsperto()-1) Main.changeScene("View/UserHome.fxml");
+        if(Main.bloccoIndex >= Main.esercizioCorrente.getNblocchiEsperto()-1){
+            Main.punteggio = Main.esercizioCorrente.getPunteggi();
+            Main.changeScene("View/PunteggiEsercizio.fxml");
+        }
         else Main.bloccoIndex++;
         initFields();
         btnProsegui.setDisable(false);
@@ -97,7 +105,7 @@ public class BloccoEspertoController{
             System.out.println("Correct Output: " + correctOutput);
             return userOutput.equals(correctOutput);
         } catch (Exception e) {
-            System.err.println("Errore durante la compilazione o l'esecuzione del Blocco Esperto: " + e.getMessage());
+            System.err.println("Errore per la compilazione o esecuzione durante la verifica del Blocco Esperto: " + e.getMessage());
             e.printStackTrace();
             return false;
         }

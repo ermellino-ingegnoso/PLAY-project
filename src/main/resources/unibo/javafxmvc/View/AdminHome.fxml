@@ -41,6 +41,8 @@
               </HBox>
          </children>
       </AnchorPane>
+      <ListView fx:id="lvEsercizi" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="196.0" prefWidth="994.0" style="-fx-background-color: LightGray;" GridPane.columnSpan="4" GridPane.rowIndex="3" GridPane.rowSpan="2" />
+      <Button mnemonicParsing="false" onMouseClicked="#btnSchermataAccessoOnMouseClicked" prefHeight="55.0" prefWidth="136.0" text="Torna alla schermata di accesso" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="3" />
       <StackPane prefHeight="76.0" prefWidth="250.0">
          <children>
             <ImageView fx:id="userAvatar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="avatar" StackPane.alignment="CENTER_LEFT">
@@ -49,13 +51,15 @@
                </image>
             </ImageView>
             <Circle fx:id="circleAvatar" blendMode="MULTIPLY" fill="WHITE" radius="25.0" stroke="BLACK" strokeLineJoin="ROUND" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
-            <Label fx:id="lblUsername" prefHeight="18.0" prefWidth="160.0" text="Username" textAlignment="CENTER" StackPane.alignment="CENTER_RIGHT" />
+            <Label fx:id="lblUsername" prefHeight="18.0" prefWidth="160.0" text="Username" textAlignment="CENTER" StackPane.alignment="CENTER_LEFT">
+               <padding>
+                  <Insets left="60.0" />
+               </padding>
+            </Label>
          </children>
          <padding>
             <Insets left="30.0" />
          </padding>
       </StackPane>
-      <ListView fx:id="lvEsercizi" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="196.0" prefWidth="994.0" style="-fx-background-color: LightGray;" GridPane.columnSpan="4" GridPane.rowIndex="3" GridPane.rowSpan="2" />
-      <Button mnemonicParsing="false" onMouseClicked="#btnSchermataAccessoOnMouseClicked" prefHeight="55.0" prefWidth="136.0" text="Torna alla schermata di accesso" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="3" />
     </children>
 </GridPane>
