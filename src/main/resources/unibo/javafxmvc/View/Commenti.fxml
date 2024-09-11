@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -16,25 +17,22 @@
 
 <GridPane fx:id="gpGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="487.0" prefWidth="719.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.CommentiController">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="220.0" minHeight="10.0" prefHeight="134.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="243.0" minHeight="10.0" prefHeight="204.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="115.0" minHeight="0.0" prefHeight="54.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <ImageView fx:id="ivFoto" fitHeight="63.0" fitWidth="238.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <RadioButton fx:id="rbOpzione1" mnemonicParsing="false" text="Opzione 1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-            <toggleGroup>
-                <ToggleGroup fx:id="tgOpzioni" />
-            </toggleGroup>
-        </RadioButton>
-        <RadioButton fx:id="rbOpzione2" mnemonicParsing="false" text="Opzione 2" toggleGroup="$tgOpzioni" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-        <RadioButton fx:id="rbOpzione3" mnemonicParsing="false" text="Opzione 3" toggleGroup="$tgOpzioni" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+         <children>
+              <ImageView fx:id="ivFoto" fitHeight="141.0" fitWidth="566.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" />
+         </children>
+      </AnchorPane>
         <Label fx:id="lbTitolo" text="COMMENTI" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
             <font>
                 <Font size="20.0" />
@@ -64,5 +62,14 @@
             </children>
         </StackPane>
       <Label fx:id="lbPunti" text="Corretto hai ottenuto +1pts!" textFill="#00ff04" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <RadioButton fx:id="rbOpzione1" mnemonicParsing="false" text="Opzione 1" wrapText="true" GridPane.rowIndex="2">
+         <toggleGroup>
+            <ToggleGroup fx:id="Opzioni" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="rbOpzione2" mnemonicParsing="false" text="Opzione 2" toggleGroup="$Opzioni" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <RadioButton fx:id="rbOpzione3" mnemonicParsing="false" text="Opzione 3" toggleGroup="$Opzioni" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <Label fx:id="lbPunti" alignment="CENTER" text="Corretto!" textFill="#00ff1a" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+      <Label fx:id="lbPunti2" text="Sbagliato!" textFill="RED" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
     </children>
 </GridPane>

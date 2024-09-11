@@ -37,6 +37,9 @@ public class CommentiController implements Initializable {
     private Label lbPunti;
 
     @FXML
+    private Label lbPunti2;
+
+    @FXML
     private Circle cCircle;
 
     @FXML
@@ -110,6 +113,7 @@ public class CommentiController implements Initializable {
             dueSecondi();
         } else {
             System.out.println("Errore!");
+            treSecondi();
         }
         CaricaEsercizio();
     }
@@ -150,6 +154,13 @@ public class CommentiController implements Initializable {
         lbPunti.setVisible(true);
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
         pause.setOnFinished(event -> lbPunti.setVisible(false));
+        pause.play();
+    }
+
+    private void treSecondi() {
+        lbPunti2.setVisible(true);
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(event -> lbPunti2.setVisible(false));
         pause.play();
     }
 

@@ -118,7 +118,7 @@ public class DatabaseManager {
     }
     public static void createBloccoGenericoIfNotExists() throws SQLException{
         try (PreparedStatement prstmt = connection.prepareStatement(
-        "create table if not exists BLOCCO_GENERICO(ID INTEGER auto_increment, ESERCIZIO_GENERICO_ESPERTO_ID INTEGER not null,CONSEGNA CHARACTER VARYING not null, CODICE CHARACTER VARYING not null, constraint BLOCCO_PK primary key (ID), constraint ESERCIZIO_GENERICO_ESPERTO_FK foreign key (ESERCIZIO_GENERICO_ESPERTO_ID) references ESERCIZIO_GENERICO on update cascade on delete cascade );"
+                "create table if not exists BLOCCO_GENERICO(ID INTEGER auto_increment, ESERCIZIO_GENERICO_ESPERTO_ID INTEGER not null, CONSEGNA CHARACTER VARYING not null, CODICE CHARACTER VARYING not null, BLOCCO_CORRETTO CHARACTER VARYING, constraint BLOCCO_PK primary key (ID), constraint ESERCIZIO_GENERICO_ESPERTO_FK foreign key (ESERCIZIO_GENERICO_ESPERTO_ID) references ESERCIZIO_GENERICO on update cascade on delete cascade);"
         )){prstmt.execute();}
     }
     public static void createEsercizioEspertoIfNotExists() throws SQLException{
