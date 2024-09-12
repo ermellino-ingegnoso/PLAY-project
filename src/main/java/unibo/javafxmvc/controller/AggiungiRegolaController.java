@@ -51,7 +51,7 @@ public class AggiungiRegolaController {
     @FXML
     private void save(Event event){
         if(checkFields()) {
-            Regola regola = new Regola(tfTitolo.getText().trim(), tfDomanda.getText().trim(), tfDidascalia.getText().trim());
+            Regola regola = new Regola(tfTitolo.getText().trim(), tfDomanda.getText().trim(), tfDidascalia.getText().trim(), Main.gradoAttuale);
             EsercizioGenerico esercizioGenerico = new EsercizioGenerico(null, Main.currentUser, regola, new ArrayList<BloccoGenerico>());    // id = null potrebbe dare problemi
             Main.ultimoEsercizioGenerico = esercizioGenerico;
             try{

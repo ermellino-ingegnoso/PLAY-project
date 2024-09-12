@@ -72,7 +72,7 @@
                 </Label>
             </right>
             <top>
-                <Label onMouseClicked="#AvanzatoOnMouseClicked" text="Leggi il codice" BorderPane.alignment="CENTER">
+                <Label onMouseClicked="#AvanzatoOnMouseClicked" text="Trova l'errore" BorderPane.alignment="CENTER">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -81,7 +81,7 @@
         </BorderPane>
         <BorderPane prefHeight="159.0" prefWidth="269.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
             <top>
-                <Label onMouseClicked="#EspertoOnMouseClicked" text="Trova l'errore" BorderPane.alignment="CENTER">
+                <Label onMouseClicked="#EspertoOnMouseClicked" text="Completa il blocco mancante" BorderPane.alignment="CENTER">
                     <font>
                         <Font size="18.0" />
                     </font>

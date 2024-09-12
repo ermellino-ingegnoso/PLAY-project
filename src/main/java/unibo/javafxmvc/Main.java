@@ -47,6 +47,8 @@ public class Main extends Application {
     private static Boolean maximized;
 
     //  Proprietà statiche di stato:
+        /** Utilizzaata per la gestione delle regole */
+        public static Grado gradoAttuale;
     public static Punteggio punteggio;
     private static Scene currentScene;
     public static Stage thisStage;
@@ -123,7 +125,7 @@ public class Main extends Application {
         try{
             User admin = new User("admin", "admin", "admin", User.getSHA256Hash("admin"), new Image(Objects.requireNonNull(Main.class.getResourceAsStream("/unibo/javafxmvc/Images/avatar.png"))), "0xffffffff");
             if(!UserDBM.userExists("admin", true)) UserDBM.insertUser(admin, true);
-            Regola r = new Regola("Completa il blocco mancante", "quale codice è necessario per completare il blocco e compilare il codice?", "Ti verranno presentate delle classi che implementano un metodo. Il compito è quello di completare il blocco mancante nel metodo chiamato in modo da poter eseguire il programma");
+            Regola r = new Regola("Completa il blocco mancante", "quale codice è necessario per completare il blocco e compilare il codice?", "Ti verranno presentate delle classi che implementano un metodo. Il compito è quello di completare il blocco mancante nel metodo chiamato in modo da poter eseguire il programma", Grado.ESPERTO);
             if(!regolaExists(r.getTitolo())){
                 insertRegola(r);
                 String codice = readFileFromResources("/unibo/javafxmvc/Text/User.txt");

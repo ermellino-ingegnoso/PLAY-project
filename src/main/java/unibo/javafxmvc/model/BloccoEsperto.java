@@ -6,6 +6,8 @@ public class BloccoEsperto {
     private boolean superato;
     private String codiceUtente;
 
+    /**Costruttore parziale: <br>
+     * Imposta <b>codiceUtente</b> come <code>String</code> vuota*/
     public BloccoEsperto(BloccoGenerico bloccoGenerico, boolean superato) {
         this.bloccoGenerico = bloccoGenerico;
         this.superato = superato;

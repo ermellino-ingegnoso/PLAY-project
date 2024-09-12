@@ -11,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
+import unibo.javafxmvc.model.Grado;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,14 +33,27 @@ public class AdminHomeController implements Initializable {
         AuxiliaryController.initAvatar(Main.currentUser, userAvatar, circleAvatar, lblUsername, mainGridPane);
     }
     @FXML
-    protected void AggiungiEsercizioBtnOnKeyPressed(KeyEvent event) {
-        if(AuxiliaryController.keyEnterPressed(event)) AggiungiEsercizio();
+    void BloccoMancanteBtnOnKeyPressed(KeyEvent event) {
+        if(AuxiliaryController.keyEnterPressed(event)) AggiungiEsercizioBloccoMancante();
     }
     @FXML
-    protected void AggiungiEsercizioBtnOnMouseClicked(MouseEvent event) {
-        AggiungiEsercizio();
+    void BloccoMancanteBtnOnMouseClicked(MouseEvent event) {
+        AggiungiEsercizioBloccoMancante();
     }
-    private void AggiungiEsercizio() {
+    @FXML
+    void TrovaErroreOnKeyPressed(KeyEvent event) {
+        if(AuxiliaryController.keyEnterPressed(event)) AggiungiEsercizioTrovaErrore();
+    }
+    @FXML
+    void TrovaErroreOnMouseClicked(MouseEvent event) {
+        AggiungiEsercizioTrovaErrore();
+    }
+    private void AggiungiEsercizioTrovaErrore() {
+        Main.gradoAttuale = Grado.AVANZATO;
+        Main.changeScene("View/AggiungiRegola.fxml");
+    }
+    private void AggiungiEsercizioBloccoMancante() {
+        Main.gradoAttuale = Grado.ESPERTO;
         Main.changeScene("View/AggiungiRegola.fxml");
     }
     @FXML

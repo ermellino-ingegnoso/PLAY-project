@@ -9,33 +9,6 @@ import java.util.regex.Pattern;
    Queste classi di utilità sono zeppe di commenti allo scopo di dare una spiegazione dettagliata di codici poco intuitivi e scarsamente usati.
  */
 public class CodeValidator {    // I criteri di separazione logica non sono rispettati in quanto si fa largo uso dell'AuxialiaryController
-    /*
-    public static Boolean checkCodice(String codiceClasse, String codiceMetodo) {
-        if (!containsPattern(codiceClasse, "public class (\\w+)", "Classe mancante", "Il codice deve contenere una classe.")) return false;
-        //                                              Pattern per trovare il metodo main
-        Matcher mainMatcher = getMatcher(codiceClasse, "public static void main\\(String\\[] args\\)\\s*\\{([^}]*)\\}");
-        if (mainMatcher == null) {
-            AuxiliaryController.alertWindow("Errore", "Metodo main mancante", "Il codice deve contenere un metodo main.");
-            return false;
-        }
-        // methodSignaturesEmpty indica i metodi senza corpo o con corpo interamente commentato ovvero metodi non implementati
-        ArrayList<String> methodSignaturesEmpty = new ArrayList<>(SignatureFinder.findEmptyMethodSignatures(codiceClasse));
-        if (methodSignaturesEmpty.isEmpty()) {  // Se non ci sono metodi non implementati
-            AuxiliaryController.alertWindow("Errore", "Nessun metodo non implementanto", "Deve essere presente un metodo non implementato. Ricorda che la firma del metodo può contenere solamente caratteri alfanumerici e _");
-            return false;
-        }   // Se c'è sono più di un metodo non implementato
-        if (methodSignaturesEmpty.size() > 1) {
-            AuxiliaryController.alertWindow("Errore", "Troppi metodi non implementati", "Il metodo non implementato deve essere uno solo.");
-            return false;
-        }   // Se il metodo non implementato è già implementato:
-            // methodSignature è la firma del metodo non implementato
-        String methodSignature = methodSignaturesEmpty.get(0);
-        String dynamicRegex = SignatureFinder.getDynamicMethodRegex(methodSignature);
-        //  ⬇️  verifica che la firma del metodo (codiceMetodo) corrisponda alla firma del metodo non implementato (methodSignature) trovata nella classe:
-        if (!containsPattern(codiceMetodo, dynamicRegex, "Metodo non implementato correttamente", "Il metodo implementato non è corretto.")) return false;
-
-        return true;    // Se tutti i controlli passano (il codice è completamente validato)
-    }*/ // Questo codice è stato riscritto per essere più chiaro e leggibile
     /**
      * Verifica se il codice della classe e il codice del metodo sono validi.
      * Controlli eseguiti internamente:
@@ -66,6 +39,21 @@ public class CodeValidator {    // I criteri di separazione logica non sono risp
         if (!containsPattern(mainMatcher.group(1), SignatureFinder.extractMethodName(methodSignature) + "\\s*\\(", "Firma del metodo non richiamata", "Il metodo main deve richiamare la firma del metodo.")) return false;
         return true;    // Se tutti i controlli passano (il codice è completamente validato)
     }
+    public static Boolean checkCodiceAvanzato(String codiceClasse, String codiceMetodo) {
+        Matcher mainMatcher = CodeValidator.getMatcher(codiceClasse, "public static void main\\(String\\[] args\\)\\s*\\{([^}]*)\\}");
+        if (mainMatcher == null) {
+            AuxiliaryController.alertWindow("Errore", "Metodo main mancante", "Il codice deve contenere un metodo main");
+            return false;
+        }
+        String methodSignature = SignatureFinder.extractSignature(codiceMetodo);
+        if (methodSignature == null) {
+            AuxiliaryController.alertWindow("Errore", "Firma del metodo mancante", "Il codice del metodo deve contenere una firma valida.");
+            return false;
+        }
+        String dynamicRegex = SignatureFinder.getDynamicMethodRegex(methodSignature);
+        if (!CodeValidator.containsPattern(codiceClasse, dynamicRegex, "Metodo non trovato", "Il codice della classe non contiene un metodo con la stessa firma del metodo specificato.")) return false;
+        return true;
+    }
     private static boolean containsPattern(String text, String pattern, String errorTitle, String errorMessage) {
         if (!Pattern.compile(pattern).matcher(text).find()) {
             AuxiliaryController.alertWindow("Errore", errorTitle, errorMessage);
@@ -77,15 +65,6 @@ public class CodeValidator {    // I criteri di separazione logica non sono risp
         Matcher matcher = Pattern.compile(pattern).matcher(text);
         return matcher.find() ? matcher : null;
     }
-    /**Aggrega il codice interno alla firma di <b>methodCode</b> all'interno del metodo della classe <b>classCode</b> con la stessa firma
-     * @param classCode il codice della classe
-     * @param methodCode il codice del metodo da inserire nella classe
-     * @return <ul><li>In caso di firma corrispondente: il codice della classe con il metodo inserito o</li><li>In caso di firma non corrispondente: il codice originale della classe <code>classCode</code></li></ul>
-     *
-    public static String combineCode(String classCode, String methodCode) {// Crea un pattern dinamico per la firma del metodo <- Trova la firma del metodo in methodCode
-        Matcher matcher = Pattern.compile(SignatureFinder.getDynamicMethodRegex(methodCode)).matcher(classCode);  //                  Trova la stessa firma all'interno di classCode usando il pattern dinamico
-        return matcher.find() ? classCode.substring(0, matcher.start()) + methodCode + classCode.substring(matcher.end()) : classCode; //   Se la firma del metodo è trovata, sostituisci il codice della firma nella classe con methodCode
-    }*/
     /** Aggrega il codice interno alla firma di <b>methodCode</b> all'interno della classe <b>classCode</b>. L'unico controllo effettuato è la presenza del blocco <code>main</code>
      * @param classCode il codice della classe
      * @param methodCode il codice del metodo da inserire nella classe (firma e corpo)
@@ -99,4 +78,30 @@ public class CodeValidator {    // I criteri di separazione logica non sono risp
         int mainStartIndex = mainMatcher.start();
         return classCode.substring(0, mainStartIndex) + methodCode + "\n" + classCode.substring(mainStartIndex);
     }
+    /*
+    public static Boolean checkCodice(String codiceClasse, String codiceMetodo) {
+        if (!containsPattern(codiceClasse, "public class (\\w+)", "Classe mancante", "Il codice deve contenere una classe.")) return false;
+        //                                              Pattern per trovare il metodo main
+        Matcher mainMatcher = getMatcher(codiceClasse, "public static void main\\(String\\[] args\\)\\s*\\{([^}]*)\\}");
+        if (mainMatcher == null) {
+            AuxiliaryController.alertWindow("Errore", "Metodo main mancante", "Il codice deve contenere un metodo main.");
+            return false;
+        }
+        // methodSignaturesEmpty indica i metodi senza corpo o con corpo interamente commentato ovvero metodi non implementati
+        ArrayList<String> methodSignaturesEmpty = new ArrayList<>(SignatureFinder.findEmptyMethodSignatures(codiceClasse));
+        if (methodSignaturesEmpty.isEmpty()) {  // Se non ci sono metodi non implementati
+            AuxiliaryController.alertWindow("Errore", "Nessun metodo non implementanto", "Deve essere presente un metodo non implementato. Ricorda che la firma del metodo può contenere solamente caratteri alfanumerici e _");
+            return false;
+        }   // Se c'è sono più di un metodo non implementato
+        if (methodSignaturesEmpty.size() > 1) {
+            AuxiliaryController.alertWindow("Errore", "Troppi metodi non implementati", "Il metodo non implementato deve essere uno solo.");
+            return false;
+        }   // Se il metodo non implementato è già implementato:
+            // methodSignature è la firma del metodo non implementato
+        String methodSignature = methodSignaturesEmpty.get(0);
+        String dynamicRegex = SignatureFinder.getDynamicMethodRegex(methodSignature);
+        //  ⬇  verifica che la firma del metodo (codiceMetodo) corrisponda alla firma del metodo non implementato (methodSignature) trovata nella classe:
+        if (!containsPattern(codiceMetodo, dynamicRegex, "Metodo non implementato correttamente", "Il metodo implementato non è corretto.")) return false;
+        return true;    // Se tutti i controlli passano (il codice è completamente validato)
+        * */
 }

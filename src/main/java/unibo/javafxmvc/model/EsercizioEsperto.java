@@ -27,9 +27,11 @@ public class EsercizioEsperto extends EsercizioGenerico{
         }
         return count;
     }
+    /**@return l'ID dell'esercizio esperto*/
     public Integer getId() {
         return id;
     }
+    /**@param id l'ID dell'esercizio esperto*/
     public void setId(Integer id) {
         this.id = id;
     }

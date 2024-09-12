@@ -1,8 +1,5 @@
 package unibo.javafxmvc.model.esercizio;
 
-import unibo.javafxmvc.util.Compiler;
-import unibo.javafxmvc.util.PropertiesUtil;
-
 import java.util.ArrayList;
 
 public class User {

@@ -17,6 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.EsercizioEsperto;
+import unibo.javafxmvc.model.Grado;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -43,7 +44,7 @@ public class UserHomeController implements Initializable {
     @FXML
     void EspertoOnMouseClicked(MouseEvent event) {
         try{
-            EsercizioEsperto ee = EsercizioEspertoDBM.getOrCreateEsercizioEspertoForUser(Main.currentUser);
+            EsercizioEsperto ee = EsercizioEspertoDBM.getOrCreateEsercizioEspertoForUser(Main.currentUser, Grado.ESPERTO);
             if(ee == null){ //  in caso di fallimento nella ricerca di esercizi esperti incompleti
                 AuxiliaryController.alertWindow("Errore", "Non è stato possibile creare un nuovo esercizio esperto", "Riprova più tardi");
             } else{

@@ -51,19 +51,26 @@ public class EsercizioEspertoDBM extends DatabaseManager{
         }
     }
     /** Restituisce un esercizio esperto incompleto per l'utente se esiste, altrimenti ne crea uno nuovo. Gestione interna degli errori SQL
-     * @return - <b>EsercizioEsperto</b> attualmente incompleto, <br> - nuovo <b>EsercizioEsperto</b> se non ne esiste uno incompleto per  l'utente, <br> - <b>null</b> se non è possibile creare un nuovo EsercizioEsperto per l'utente
+     * @param user - <b>User</b> per il quale cercare un esercizio esperto incompleto
+     * @param grado - <b>Grado</b> della <b>Regola</b> associata all'esercizio da cercare
+     * @return - <b>EsercizioEsperto</b> attualmente incompleto,
+     * <br> - nuovo <b>EsercizioEsperto</b> se non ne esiste uno incompleto per  l'utente,
+     * <br> - <b>null</b> se non è possibile creare un nuovo EsercizioEsperto per l'utente
      * */
-    public static EsercizioEsperto getOrCreateEsercizioEspertoForUser(User user) throws ConnectionException {
+    public static EsercizioEsperto getOrCreateEsercizioEspertoForUser(User user, Grado grado) throws ConnectionException {
         if (connection != null) {
             try {
                 Integer userID = UserDBM.getUserID(user.getUsername(), false);
                 if (userID == null) return null;
                 try (PreparedStatement ps = connection.prepareStatement(
-                    "SELECT ee.ID FROM ESERCIZIO_ESPERTO ee " +
-                        "JOIN BLOCCO_ESPERTO be ON ee.ID = be.ESERCIZIO_ESPERTO_ID " +
-                        "WHERE ee.UTENTE_ID = ? AND be.SUPERATO = FALSE"
+                "SELECT ee.ID FROM ESERCIZIO_ESPERTO ee " +
+                    "JOIN BLOCCO_ESPERTO be ON ee.ID = be.ESERCIZIO_ESPERTO_ID " +
+                    "JOIN ESERCIZIO_GENERICO eg ON ee.ESERCIZIO_GENERICO_ID = eg.ID " +
+                    "JOIN REGOLA_GENERICA r ON eg.REGOLA_ID = r.ID " +
+                    "WHERE ee.UTENTE_ID = ? AND be.SUPERATO = FALSE AND r.GRADO = ?"
                 )) {
                     ps.setInt(1, userID);
+                    ps.setString(2, grado.toString());
                     try (ResultSet rs = ps.executeQuery()) {
                         if (rs.next()) {
                             int esercizioEspertoId = rs.getInt("ID");
@@ -71,7 +78,7 @@ public class EsercizioEspertoDBM extends DatabaseManager{
                         }
                     }
                 }
-                EsercizioGenerico eg = trovaNuovoEsercizioGenerico(userID);
+                EsercizioGenerico eg = trovaNuovoEsercizioGenerico(userID, grado);
                 if (eg == null) return null;
                 EsercizioEsperto newEE = new EsercizioEsperto(null, eg, user);  // I blocchiEsperto vengono inseriti autonomamente
                 newEE.setId(insertEsercizioEsperto(newEE));  //inserisce il nuovo esercizio esperto nel database
@@ -85,14 +92,16 @@ public class EsercizioEspertoDBM extends DatabaseManager{
         }
         return null;
     }
-    private static EsercizioGenerico trovaNuovoEsercizioGenerico(Integer userID) throws ConnectionException {
-        if (connection != null) {;
+    private static EsercizioGenerico trovaNuovoEsercizioGenerico(Integer userID, Grado grado) throws ConnectionException {
+        if (connection != null) {
             try (PreparedStatement ps = connection.prepareStatement(
-                "SELECT eg.ID FROM ESERCIZIO_GENERICO eg " +
-                    "LEFT JOIN ESERCIZIO_ESPERTO ee ON eg.ID = ee.ESERCIZIO_GENERICO_ID " +
-                    "WHERE ee.UTENTE_ID IS NULL OR ee.UTENTE_ID != ?"
+            "SELECT eg.ID FROM ESERCIZIO_GENERICO eg " +
+                "LEFT JOIN ESERCIZIO_ESPERTO ee ON eg.ID = ee.ESERCIZIO_GENERICO_ID " +
+                "JOIN REGOLA_GENERICA rg ON eg.REGOLA_ID = rg.ID " +
+                "WHERE (ee.UTENTE_ID IS NULL OR ee.UTENTE_ID != ?) AND rg.GRADO = ?"
             )) {
                 ps.setInt(1, userID);
+                ps.setString(2, grado.name());
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         return EsercizioGenericoDBM.getEsercizioGenericoById(rs.getInt("ID"));

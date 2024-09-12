@@ -21,9 +21,11 @@ public class EsercizioGenerico {
         this.regola = eg.getRegola();
         this.blocchi = eg.getBlocchi();
     }
+    /**@return l'ID dell'esercizio generico*/
     public Integer getId() {
         return id;
     }
+    /**@param id l'ID dell'esercizio generico*/
     public void setId(int id) {
         this.id = id;
     }
