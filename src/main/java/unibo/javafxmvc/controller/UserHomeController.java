@@ -39,7 +39,18 @@ public class UserHomeController implements Initializable {
     }
     @FXML
     void AvanzatoOnMouseClicked(MouseEvent event) {
-        AuxiliaryController.alertWindow("Errore", "Funzionalità non disponibile", "Questa funzionalità non è ancora stata implementata");
+        try{
+            EsercizioEsperto ee = EsercizioEspertoDBM.getOrCreateEsercizioEspertoForUser(Main.currentUser, Grado.AVANZATO);
+            if(ee == null){ //  in caso di fallimento nella ricerca di esercizi esperti incompleti
+                AuxiliaryController.alertWindow("Errore", "Non è stato possibile creare un nuovo esercizio esperto", "Riprova più tardi");
+            } else{
+                Main.esercizioCorrente = ee;
+                Main.gradoAttuale = Grado.AVANZATO;
+                Main.changeScene("View/Regola.fxml");
+            }
+        } catch (ConnectionException ce){
+            Main.changeScene("View/ErroreDatabase.fxml");
+        }
     }
     @FXML
     void EspertoOnMouseClicked(MouseEvent event) {
@@ -48,6 +59,7 @@ public class UserHomeController implements Initializable {
             if(ee == null){ //  in caso di fallimento nella ricerca di esercizi esperti incompleti
                 AuxiliaryController.alertWindow("Errore", "Non è stato possibile creare un nuovo esercizio esperto", "Riprova più tardi");
             } else{
+                Main.gradoAttuale = Grado.ESPERTO;
                 Main.esercizioCorrente = ee;
                 Main.changeScene("View/Regola.fxml");
             }
@@ -55,7 +67,6 @@ public class UserHomeController implements Initializable {
             Main.changeScene("View/ErroreDatabase.fxml");
         }
     }
-
     @FXML
     private void OrdinaPassiOnMousePressed(MouseEvent event) {
         Main.changeScene("View/Commenti.fxml");

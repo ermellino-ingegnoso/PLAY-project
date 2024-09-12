@@ -54,12 +54,12 @@ public class EsercizioEsperto extends EsercizioGenerico{
         this.utente = utente;
     }
     public Punteggio getPunteggi(){
-        return new Punteggio(Grado.ESPERTO, utente, getRegola().getTitolo(), getPunti());
+        return new Punteggio(getRegola().getGrado(), utente, getRegola().getTitolo(), getPunti());
     }
     public ArrayList<Integer> getPunti(){
         ArrayList<Integer> punti = new ArrayList<>();
         for(Integer i = 0; i < blocchiEsperto.size(); i++){
-            punti.add((4 + i) * (blocchiEsperto.get(i).isSuperato() ? 1 : 0));
+            punti.add(blocchiEsperto.get(i).isSuperato() ? (i+1) : 0);
         }
         return punti;
     }

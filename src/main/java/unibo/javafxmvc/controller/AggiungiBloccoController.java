@@ -14,6 +14,7 @@ import unibo.javafxmvc.model.BloccoGenerico;
 import unibo.javafxmvc.model.Grado;
 import unibo.javafxmvc.util.CodeValidator;
 import unibo.javafxmvc.util.Compiler;
+import unibo.javafxmvc.util.SignatureFinder;
 
 import java.io.IOException;
 import java.net.URL;
@@ -87,6 +88,7 @@ public class AggiungiBloccoController implements Initializable {
        if (checkFields()) {
            try{// differenziazione per Grado
                String result = Compiler.compileAndRunCode((Main.gradoAttuale == Grado.ESPERTO) ? CodeValidator.combineCode(tfCodice.getText().trim(), tfCodiceMetodo.getText().trim()) : tfCodice.getText().trim());
+               if(Main.gradoAttuale != Grado.ESPERTO) AuxiliaryController.alertWindow("Codice della classe visualizzato all'utente", "Il codice non dovrebbe contenere il metodo con la stessa firma del metodo sbagliato", SignatureFinder.removeMethodFromClass(tfCodice.getText().trim(), tfCodiceMetodo.getText().trim()));
                AuxiliaryController.showResultModal("Risultato Esecuzione", !result.isEmpty() ? result : "Compilazione ed esecuzione completate con successo.");
                if (AuxiliaryController.confirmSave("Conferma", "Conferma l'inserimento dei campi", "Vuoi confermare l'inserimento dei campi?")) {
                    BloccoGenerico blocco = new BloccoGenerico(tfConsegna.getText().trim(), tfCodice.getText().trim(), tfCodiceMetodo.getText().trim());

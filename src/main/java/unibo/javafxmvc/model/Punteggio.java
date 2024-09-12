@@ -30,12 +30,12 @@ public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento de
     /**
      * @return il totale dei punti per l'esercizio relativo
      * */
-    public Integer getPunteggio() {
-        Integer punti = 0;
+    public Float getPunteggio() {
+        Float punti = 0.0f;
         for (Integer p : punteggi) {
-            if (p != null) punti += (grado.ordinal() + 1) / 2;
+            if (p != null) punti += Float.valueOf(p)+((Float.valueOf(p)!=0)?getPeso():0.0f);
         }
-        return (punti == 0) ? null : punti;
+        return punti;
     }
     public User getUser() {
         return user;
@@ -66,5 +66,8 @@ public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento de
     }
     public Integer getPunto(int index){
         return punteggi.get(index);
+    }
+    public Float getPeso(){
+        return (float)grado.ordinal(); // (((float)grado.ordinal()+1.0f)/2.0f);
     }
 }

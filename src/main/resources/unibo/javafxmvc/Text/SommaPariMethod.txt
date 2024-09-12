@@ -1,0 +1,9 @@
+public static int calcolaSommaPari(int[] numeri) {
+        int somma = 0;
+        for (int n : numeri) {
+            if (n % 2 != 0) {
+                somma += n;
+            }
+        }
+        return somma;
+}

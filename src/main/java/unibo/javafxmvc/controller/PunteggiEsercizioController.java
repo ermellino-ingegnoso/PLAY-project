@@ -33,16 +33,18 @@ public class PunteggiEsercizioController implements Initializable {
     private TableView<List<Integer>> tbView;
     @FXML
     private Label lblInfo;
+    @FXML
+    private Label lblInfoPeso;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         AuxiliaryController.initAvatar(Main.currentUser, userAvatar, circleAvatar, lblUsername, mainGridPane);
-
         lblInfo.setText("Nell' esercizio "+ Main.punteggio.getTitolo() +" di difficoltà "+ Main.punteggio.getGrado().toString().toLowerCase() +" hai ottenuto un totale di: "+ Main.punteggio.getPunteggio() +" punti");
+        lblInfoPeso.setText("Il peso specifico per la modalità " + Main.gradoAttuale.toString().toLowerCase() +" è di "+ Main.punteggio.getPeso());
 
         for (int i = 0; i < Main.punteggio.getPunteggi().size(); i++) {
             final int colIndex = i;
-            TableColumn<List<Integer>, Integer> column = new TableColumn<>("Esercizio " + i);
+            TableColumn<List<Integer>, Integer> column = new TableColumn<>("Esercizio " + (i+1));
             column.setCellValueFactory(cellData ->new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().get(colIndex)));
             tbView.getColumns().add(column);
         }

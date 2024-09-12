@@ -25,7 +25,7 @@ public class BloccoGenericoDBM extends DatabaseManager {
                 pstmt.setInt(1, esercizioID);
                 pstmt.setString(2, blocco.getConsegna());
                 pstmt.setString(3, blocco.getCodice());
-                pstmt.setString(4, blocco.getMetodoCorretto());
+                pstmt.setString(4, blocco.getMetodo());
                 if (pstmt.executeUpdate() > 0) {
                     try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
                         if (generatedKeys.next()) {

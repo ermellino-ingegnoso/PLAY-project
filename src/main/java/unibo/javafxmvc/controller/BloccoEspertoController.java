@@ -79,8 +79,9 @@ public class BloccoEspertoController{
     @FXML
     void lblReimpostaFirmaOnMouseClicked(MouseEvent event) {reimpostaFirma();}
 
-    private void reimpostaFirma(){tfMetodo.setText(SignatureFinder.extractSignature(be.getBloccoGenerico().getMetodoCorretto())+"{\n\n}");}
-
+    private void reimpostaFirma(){
+        tfMetodo.setText((Main.gradoAttuale == Grado.ESPERTO) ? SignatureFinder.extractSignature(be.getBloccoGenerico().getMetodo())+"{\n\n}" : be.getBloccoGenerico().getMetodo());
+    }
     private void initFields(){
         be = Main.esercizioCorrente.getBloccoEsperto(Main.bloccoIndex);
         if(be.isSuperato()){    // se il blocco è già stato superato non viene mostrato
@@ -94,20 +95,45 @@ public class BloccoEspertoController{
         lblTitolo.setText(Main.esercizioCorrente.getRegola().getTitolo());
         lblIndice.setText("Blocco " + (Main.bloccoIndex + 1) + " di " + Main.esercizioCorrente.getNblocchiEsperto());
         tfClasse.setText(SignatureFinder.extractClassWithoutMain((be.getBloccoGenerico().getCodice())));
+        if(Main.gradoAttuale == Grado.AVANZATO){
+            tfClasse.setDisable(true);
+            tfClasse.setVisible(false);
+        }
+        /*
+        try{
+            tfClasse.setText((Main.gradoAttuale == Grado.ESPERTO) ? SignatureFinder.extractClassWithoutMain((be.getBloccoGenerico().getCodice())) : SignatureFinder.removeMethodFromClass(be.getBloccoGenerico().getCodice(), be.getBloccoGenerico().getMetodo()));
+        } catch (IllegalArgumentException iae){System.err.println("Errore in BloccoEspertoController#initFields: " + iae.getMessage());}
+         */
         reimpostaFirma();
     }
     private Boolean checkCode() {
-        try {
-            String userOutput = Compiler.compileAndRunCode(combineCode(be.getBloccoGenerico().getCodice(), be.getCodiceUtente()));
-            String correctOutput = Compiler.compileAndRunCode(combineCode(be.getBloccoGenerico().getCodice(), be.getBloccoGenerico().getMetodoCorretto())); // Classe intera corretta);
-            // Debug: stampa gli output
-            System.out.println("User Output: " + userOutput);
-            System.out.println("Correct Output: " + correctOutput);
-            return userOutput.equals(correctOutput);
-        } catch (Exception e) {
-            System.err.println("Errore per la compilazione o esecuzione durante la verifica del Blocco Esperto: " + e.getMessage());
-            e.printStackTrace();
-            return false;
+        if(Main.gradoAttuale == Grado.ESPERTO){
+            try {
+                String userOutput = Compiler.compileAndRunCode(combineCode(be.getBloccoGenerico().getCodice(), be.getCodiceUtente()));
+                String correctOutput = Compiler.compileAndRunCode(combineCode(be.getBloccoGenerico().getCodice(), be.getBloccoGenerico().getMetodo())); // Classe intera corretta);
+                // Debug: stampa gli output
+                System.out.println("User Output: " + userOutput);
+                System.out.println("Correct Output: " + correctOutput);
+                return userOutput.equals(correctOutput);
+            } catch (Exception e) {
+                System.err.println("Errore per la compilazione o esecuzione durante la verifica del Blocco Esperto: " + e.getMessage());
+                e.printStackTrace();
+                return false;
+            }
+        } else{
+            try {
+                String userOutput = Compiler.compileAndRunCode(combineCode(SignatureFinder.removeMethodFromClass(be.getBloccoGenerico().getCodice(), be.getBloccoGenerico().getMetodo()), be.getCodiceUtente()));
+                String correctOutput = Compiler.compileAndRunCode(be.getBloccoGenerico().getCodice());
+                // Debug: stampa gli output
+                System.out.println("User Output: " + userOutput);
+                System.out.println("Correct Output: " + correctOutput);
+                System.out.println("Risultato di verifica: " + userOutput.equals(correctOutput));
+                return userOutput.equals(correctOutput);
+            } catch (Exception e) {
+                System.err.println("Errore per la compilazione o esecuzione durante la verifica del Blocco Esperto: " + e.getMessage());
+                e.printStackTrace();
+                return false;
+            }
         }
     }
 }
