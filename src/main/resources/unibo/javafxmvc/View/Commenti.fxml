@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.ProgressBar?>
-<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
@@ -48,6 +47,6 @@
       <RadioButton fx:id="rbOpzione3" mnemonicParsing="false" text="Opzione 3" toggleGroup="$Opzioni" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <Label fx:id="lbPunti" alignment="CENTER" text="Corretto!" textFill="#00ff1a" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
       <Label fx:id="lbPunti2" text="Sbagliato!" textFill="RED" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-      <ProgressBar fx:id="pbBarra" maxHeight="7.0" maxWidth="1.7976931348623157E308" prefWidth="200.0" progress="0.0" />
+      <ProgressBar fx:id="pbBarra" maxHeight="7.0" maxWidth="1.7976931348623157E308" prefWidth="200.0" progress="0.51" />
     </children>
 </GridPane>

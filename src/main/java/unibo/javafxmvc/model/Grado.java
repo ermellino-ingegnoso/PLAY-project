@@ -4,5 +4,14 @@ public enum Grado {
     PRINCIPIANTE,
     INTERMEDIO,
     AVANZATO,
-    ESPERTO
+    ESPERTO;
+
+    public static Grado getGradoByOrdinal(int ordinal) {
+        for (Grado grado : Grado.values()) {
+            if (grado.ordinal() == ordinal) {
+                return grado;
+            }
+        }
+        return null;
+    }
 }

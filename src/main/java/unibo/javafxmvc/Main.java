@@ -28,6 +28,7 @@ import static unibo.javafxmvc.util.CodeValidator.checkCodice;
 import static unibo.javafxmvc.util.CodeValidator.checkCodiceAvanzato;
 import static unibo.javafxmvc.util.FileUtils.readFileFromResources;
 
+import unibo.javafxmvc.DAO.PunteggioDBM;
 import unibo.javafxmvc.DAO.UserDBM;
 import unibo.javafxmvc.controller.AuxiliaryController;
 import unibo.javafxmvc.exception.ConnectionException;
@@ -239,5 +240,6 @@ public class Main extends Application {
     }
     public static void main(String[] args) {
         launch(args);
+
     }
 }
