@@ -28,11 +28,11 @@ public class User {
     public void setAnni(String anni) {
         this.anni = anni;
     }
-     public static void main(String[] args) {
-            ArrayList<User> users = new ArrayList<User>();
-            users.add(new User("Mario", "Rossi", "25"));
-            users.add(new User("Luca", "Bianchi", "30"));
-            users.add(new User("Mario", "Rossi", "20"));
-            System.out.println(userConMenoAnni(users) == users.get(2));
-     }
+    public static void main(String[] args) {
+        ArrayList<User> users = new ArrayList<User>();
+        users.add(new User("Mario", "Rossi", "25"));
+        users.add(new User("Luca", "Bianchi", "30"));
+        users.add(new User("Mario", "Rossi", "20"));
+        System.out.println(userConMenoAnni(users) == users.get(2));
+    }
 }

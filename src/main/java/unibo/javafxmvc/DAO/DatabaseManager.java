@@ -133,7 +133,7 @@ public class DatabaseManager {
     }
     public static void createRegolaIfNotExists() throws SQLException{
         try (PreparedStatement prstmt = connection.prepareStatement(
-        "create table if not exists REGOLA_GENERICA ( ID INTEGER auto_increment, TITOLO CHARACTER VARYING, DOMANDA CHARACTER VARYING, DESCRIZIONE CHARACTER VARYING, constraint ID primary key (ID));"
+        "create table if not exists REGOLA_GENERICA ( ID INTEGER auto_increment, TITOLO CHARACTER VARYING, DOMANDA CHARACTER VARYING, DESCRIZIONE CHARACTER VARYING, GRADO CHARACTER VARYING, constraint ID primary key (ID));"
         )){prstmt.execute();}
     }
 

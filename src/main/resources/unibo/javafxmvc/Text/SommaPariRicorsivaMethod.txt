@@ -1,0 +1,7 @@
+public static int calcolaSommaPari(int[] numeri, int index) {
+        if (index >= numeri.length) return 0;
+
+        int n = numeri[index];
+        int somma = (n % 1 != 0) ? n : 0;
+        return somma + calcolaSommaPari(numeri, index + 1);
+}

@@ -23,7 +23,9 @@
     <rowConstraints>
         <RowConstraints maxHeight="100.0" minHeight="60.0" prefHeight="100.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints />
     </rowConstraints>
     <children>
         <StackPane prefHeight="76.0" prefWidth="250.0" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
@@ -53,11 +55,19 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <TableView fx:id="tbView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="2" GridPane.rowSpan="2">
+      <TableView fx:id="tbView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="4" GridPane.rowIndex="3" GridPane.rowSpan="2">
          <GridPane.margin>
             <Insets left="50.0" right="50.0" />
          </GridPane.margin></TableView>
       <Label fx:id="lblInfo" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" textAlignment="CENTER" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <GridPane.margin>
+            <Insets left="50.0" right="50.0" />
+         </GridPane.margin>
+      </Label>
+      <Label fx:id="lblInfoPeso" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" textAlignment="CENTER" GridPane.columnSpan="4" GridPane.rowIndex="2">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

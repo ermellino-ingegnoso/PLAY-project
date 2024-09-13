@@ -37,7 +37,7 @@ public class BloccoGenerico {
     public void setCodice(String codice) {
         this.codice = codice;
     }
-    public String getMetodoCorretto() {
+    public String getMetodo() {
         return bloccoCorretto;
     }
     public void setMetodoCorretto(String bloccoCorretto) {

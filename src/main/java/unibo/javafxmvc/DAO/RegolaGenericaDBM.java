@@ -1,6 +1,7 @@
 package unibo.javafxmvc.DAO;
 
 import unibo.javafxmvc.exception.ConnectionException;
+import unibo.javafxmvc.model.Grado;
 import unibo.javafxmvc.model.Regola;
 
 import java.sql.PreparedStatement;
@@ -10,15 +11,15 @@ import java.sql.SQLException;
 public class RegolaGenericaDBM extends DatabaseManager{
     /**@return true se la regola è stata inserita correttamente; <br>false se il titolo della regola è già presente nel database
      * */
-    public static Boolean   insertRegola(Regola regola) throws ConnectionException {
+    public static Boolean insertRegola(Regola regola) throws ConnectionException {
         if(connection != null){
             if(getRegolaGenericaId(regola.getTitolo()) > 0) return false;   //  verifica che non ci siano regole con lo stesso Titolo
-            int affectedRows = 0;
             try(PreparedStatement pstmt = connection.prepareStatement(
-                    "INSERT INTO REGOLA_GENERICA (TITOLO, DOMANDA, DESCRIZIONE) VALUES (?, ?, ?)")){
+                    "INSERT INTO REGOLA_GENERICA (TITOLO, DOMANDA, DESCRIZIONE, GRADO) VALUES (?, ?, ?, ?)")){
                 pstmt.setString(1, regola.getTitolo());
                 pstmt.setString(2, regola.getDomanda());
                 pstmt.setString(3, regola.getDescrizione());
+                pstmt.setString(4, regola.getGradoName());
                 return pstmt.executeUpdate() > 0;
             } catch (SQLException e) {
                 System.out.println("Errore nell'inserimento della regola");
@@ -58,7 +59,7 @@ public class RegolaGenericaDBM extends DatabaseManager{
      * */
     public static Regola getRegolaGenericaByID(Integer regolaID) throws ConnectionException {
         if (connection != null) {
-            String sql = "SELECT TITOLO, DOMANDA, DESCRIZIONE FROM REGOLA_GENERICA WHERE ID = ?";
+            String sql = "SELECT TITOLO, DOMANDA, DESCRIZIONE, GRADO FROM REGOLA_GENERICA WHERE ID = ?";
             try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
                 pstmt.setInt(1, regolaID);
                 ResultSet rs = pstmt.executeQuery();
@@ -66,7 +67,8 @@ public class RegolaGenericaDBM extends DatabaseManager{
                     return new Regola(
                             rs.getString("TITOLO"),
                             rs.getString("DOMANDA"),
-                            rs.getString("DESCRIZIONE")
+                            rs.getString("DESCRIZIONE"),
+                            Grado.valueOf(rs.getString("GRADO"))
                     );
                 } else {
                     return null;

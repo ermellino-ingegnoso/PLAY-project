@@ -41,6 +41,9 @@ public class AuxiliaryController {  //TODO: separare le resonsabilità per ambit
         tooltip.setShowDelay(d);
         Tooltip.install(node, tooltip);
     }
+    /**@param event l'evento da controllare
+     * @return <b>true</b> se il tasto premuto è il tasto "Invio", <br> <b>false</b> altrimenti
+     * */
     public static Boolean keyEnterPressed(KeyEvent event) {
         return (event.getCode() == KeyCode.ENTER);
     }

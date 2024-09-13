@@ -25,6 +25,7 @@ import static unibo.javafxmvc.DAO.EsercizioGenericoDBM.insertEsercizioGenerico;
 import static unibo.javafxmvc.DAO.RegolaGenericaDBM.insertRegola;
 import static unibo.javafxmvc.DAO.RegolaGenericaDBM.regolaExists;
 import static unibo.javafxmvc.util.CodeValidator.checkCodice;
+import static unibo.javafxmvc.util.CodeValidator.checkCodiceAvanzato;
 import static unibo.javafxmvc.util.FileUtils.readFileFromResources;
 
 import unibo.javafxmvc.DAO.UserDBM;
@@ -47,6 +48,8 @@ public class Main extends Application {
     private static Boolean maximized;
 
     //  Proprietà statiche di stato:
+        /** Utilizzaata per la gestione delle regole */
+        public static Grado gradoAttuale;
     public static Punteggio punteggio;
     private static Scene currentScene;
     public static Stage thisStage;
@@ -120,35 +123,66 @@ public class Main extends Application {
     }
     /**Configurazione iniziale di tutte le proprietà utilizzate in runtime*/
     public static void initConfig(){
+        System.out.println("Main.initConfig: Inizializzazione delle proprietà dell'applicazione avviata");
         try{
             User admin = new User("admin", "admin", "admin", User.getSHA256Hash("admin"), new Image(Objects.requireNonNull(Main.class.getResourceAsStream("/unibo/javafxmvc/Images/avatar.png"))), "0xffffffff");
             if(!UserDBM.userExists("admin", true)) UserDBM.insertUser(admin, true);
-            Regola r = new Regola("Completa il blocco mancante", "quale codice è necessario per completare il blocco e compilare il codice?", "Ti verranno presentate delle classi che implementano un metodo. Il compito è quello di completare il blocco mancante nel metodo chiamato in modo da poter eseguire il programma");
+            Regola r = new Regola("Completa il blocco mancante", "quale codice è necessario per completare il blocco e compilare il codice?", "Ti verranno presentate delle classi che implementano un metodo. Il compito è quello di completare il blocco mancante nel metodo chiamato in modo da poter eseguire il programma", Grado.ESPERTO);
             if(!regolaExists(r.getTitolo())){
                 insertRegola(r);
                 String codice = readFileFromResources("/unibo/javafxmvc/Text/User.txt");
                 String metodo = readFileFromResources("/unibo/javafxmvc/Text/UserMethod.txt");
                 if(checkCodice(codice, metodo)){
-                    AuxiliaryController.alertWindow("Validazione", "Validazione del codice compleatata", "Il codice di user è stato validato correttamente");
+                    System.out.println("Main.initConfig: Codice di User validato correttamente");
                     BloccoGenerico bgUser = new BloccoGenerico("Implementa il metodo userConMenoAnni() che prende in input una lista di User e ritorna lo User con meno anni.\n" +
                             "Avrai raggiunto lo scopo se il tuo metodo funzionerà correttamente", codice, metodo);
 
                     codice = readFileFromResources("/unibo/javafxmvc/Text/Prodotto.txt");
                     metodo = readFileFromResources("/unibo/javafxmvc/Text/ProdottoMethod.txt");
                     if(checkCodice(codice, metodo)){
-                        AuxiliaryController.alertWindow("Validazione", "Validazione del codice compleatata", "Il codice di Prodotto è stato validato correttamente");
+                        System.out.println("Main.initConfig: Codice di Prodotto validato correttamente");
                         BloccoGenerico bgProdotto = new BloccoGenerico("Inserisci il codice nel metodo prodottoPiuCaro tale da rintracciare il prodotto più caro presente nella lista e ritornarlo come output del metodo.", codice, metodo);
                         EsercizioGenerico eg = new EsercizioGenerico(null, admin, r, new ArrayList<BloccoGenerico>(){{add(bgUser); add(bgProdotto);}});
                         try{
                             eg.setId(Objects.requireNonNull(insertEsercizioGenerico(eg), "ID Esercizio Generico non recuperato"));
                             bgUser.setId(Objects.requireNonNull(insertBloccoGenerico(bgUser, eg), "ID Blocco Generico User non recuperato"));     // Objects.requireNonNull lancia NullPointerException se il valore è null
                             bgProdotto.setId(Objects.requireNonNull(insertBloccoGenerico(bgProdotto, eg), "ID Blocco Generico Prodotto non recuperato"));
-                        } catch(NullPointerException npe){
-                            System.err.println("Main.initConfig: Errore durante il recupero degli ID dal database: " + npe.getMessage());
-                        }
-                        AuxiliaryController.alertWindow("Inizializzazione", "Inizializzazione completata", "L'inizializzazione dell'applicazione è stata completata con successo");
-                    } else AuxiliaryController.alertWindow("Errore", "Errore di validazione del codice", "Il codice di Prodotto non è stato validato correttamente");
-                } else AuxiliaryController.alertWindow("Errore", "Errore di validazione del codice", "Il codice di user non è stato validato correttamente");
+                        } catch(NullPointerException npe){System.err.println("Main.initConfig: Errore durante il recupero degli ID dal database: " + npe.getMessage());}
+                        System.out.println("Main.initConfig: Inizializzazione Esercizio Esperto completata");
+                    } else System.err.println("Main.initConfig: Errore di validazione del codice di Prodotto");
+                } else System.err.println("Main.initConfig: Errore di validazione del codice di User");
+            }
+            Regola r2 = new Regola("Trova l'errore", "Quale riga di codice va modificata per assicurare il risultato?", "Ti verrà presentata una serie di classi con il codice della classe affiancato al codice del metodo sbagliato che dovrai correggere. La consegna dell' esercizio ti illustrerà il risultato che dovrai raggiungere", Grado.AVANZATO);
+            if(!regolaExists(r2.getTitolo())){
+                insertRegola(r2);
+                String codice = readFileFromResources("/unibo/javafxmvc/Text/Somma.txt");
+                String metodo = readFileFromResources("/unibo/javafxmvc/Text/SommaMethod.txt");
+                if(checkCodiceAvanzato(codice, metodo)){
+                    System.out.println("Main.initConfig: Codice di Somma validato correttamente");
+                    BloccoGenerico bgSomma = new BloccoGenerico("Modifica il metodo in modo da ritornare la somma tra x ed y", codice, metodo);
+
+                    codice = readFileFromResources("/unibo/javafxmvc/Text/SommaPari.txt");
+                    metodo = readFileFromResources("/unibo/javafxmvc/Text/SommaPariMethod.txt");
+                    if(checkCodiceAvanzato(codice, metodo)){
+                        System.out.println("Main.initConfig: Codice di SommaPari validato correttamente");
+                        BloccoGenerico bgSommaPari = new BloccoGenerico("Il metodo calcolaSommaPari dovrebbe restituire la somma di tutti e solamente i numeri pari dell' array numeri", codice, metodo);
+                        codice = readFileFromResources("/unibo/javafxmvc/Text/SommaPariRicorsiva.txt");
+                        metodo = readFileFromResources("/unibo/javafxmvc/Text/SommaPariRicorsivaMethod.txt");
+                        if(checkCodiceAvanzato(codice, metodo)) {
+                            System.out.println("Main.initConfig: Codice di SommaPariRicorsiva validato correttamente");
+                            BloccoGenerico bgSommaPariRicorsiva = new BloccoGenerico("Il metodo calcolaSommaPari dovrebbe restituire la somma dei numeri pari nell' array numeri calcolata in maniera ricorsiva", codice, metodo);
+
+                            EsercizioGenerico eg = new EsercizioGenerico(null, admin, r2, new ArrayList<BloccoGenerico>(){{add(bgSomma); add(bgSommaPari);}});
+                            try{
+                                eg.setId(Objects.requireNonNull(insertEsercizioGenerico(eg), "ID Esercizio Generico Trova errore non recuperato"));
+                                bgSomma.setId(Objects.requireNonNull(insertBloccoGenerico(bgSomma, eg), "ID Blocco Generico Somma non recuperato"));     // Objects.requireNonNull lancia NullPointerException se il valore è null
+                                bgSommaPari.setId(Objects.requireNonNull(insertBloccoGenerico(bgSommaPari, eg), "ID Blocco Generico SommaPari non recuperato"));
+                                bgSommaPariRicorsiva.setId(Objects.requireNonNull(insertBloccoGenerico(bgSommaPariRicorsiva, eg), "ID Blocco Generico SommaPariRicorsiva non recuperato"));
+                            } catch(NullPointerException npe){System.err.println("Main.initConfig: Errore durante il recupero degli ID dal database: " + npe.getMessage());}
+                            AuxiliaryController.alertWindow("Inizializzazione", "Inizializzazione completata", "L'inizializzazione dell'applicazione è stata completata con successo");
+                        } else System.err.println("Main.initConfig: Errore di validazione del codice di SommaPariRicorsiva");
+                    } else System.err.println("Main.initConfig: Errore di validazione del codice di SommaPari");
+                } else System.err.println("Main.initConfig: Errore di validazione del codice di Somma");
             }
         } catch(ConnectionException ce){
               Main.changeScene("View/ErroreDatabase.fxml");
@@ -156,6 +190,7 @@ public class Main extends Application {
         } catch (SQLException e){ AuxiliaryController.alertWindow("Errore", "Errore nel caricamento degli utenti amministratori", "Chiudere e riavviare l'applicazione");
         } catch(IOException ioe){ AuxiliaryController.alertWindow("Errore", "Errore di I/O", "Errore durante la lettura del file di testo: " + ioe.getMessage());
         }
+        System.out.println("Main.initConfig: Inizializzazione terminata");
     }
     /** Inizializza la connessione al database */
     public static void initializeDB() {
@@ -184,6 +219,7 @@ public class Main extends Application {
     }
     @Override
     public void init() throws Exception {
+        initializeDB();
         initConfig();
     }
     @Override
@@ -201,7 +237,6 @@ public class Main extends Application {
         changeScene(fxmlPath);
     }
     public static void main(String[] args) {
-        initializeDB();   // Fondamentale per l'inizializzazione di tutte le componenti dell'applicazione
         launch(args);
     }
 }

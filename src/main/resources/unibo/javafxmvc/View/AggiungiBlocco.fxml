@@ -26,7 +26,7 @@
     <RowConstraints maxHeight="70.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Aggiungi Esercizio Blocco Mancante" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Label fx:id="lblTitle" text="Aggiungi Esercizio Blocco Mancante" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
             <Font name="Georgia" size="18.0" />
          </font>
@@ -49,7 +49,7 @@
         <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TextArea fx:id="tfCodice" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="319.0" prefWidth="615.0" promptText="Codice del blocco" wrapText="true" AnchorPane.bottomAnchor="-1.7777777777777715" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TextArea fx:id="tfCodice" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="319.0" prefWidth="615.0" promptText="Codice Classe del blocco" wrapText="true" AnchorPane.bottomAnchor="-1.7777777777777715" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font name="Consolas" size="13.0" />
                      </font>

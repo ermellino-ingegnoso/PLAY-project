@@ -105,6 +105,21 @@ public class SignatureFinder {
      * @see #extractSignature(String)
      */
     public static String getDynamicMethodRegex(String method) {
-        return SignatureFinder.extractSignature(method).replace(" ", "\\s*").replace("(", "\\(").replace(")", "\\)").replace("{", "\\{").replace("}", "\\}");
+        return SignatureFinder.extractSignature(method).replace(" ", "\\s*").replace("(", "\\(").replace(")", "\\)").replace("{", "\\{").replace("}", "\\}").replace("[", "\\[").replace("]", "\\]");
+    }
+    /**Rimuove il metodo dalla classe fornita che ha la stessa firma del metodo specificato.
+     * @param codiceClasse Il contenuto della classe da cui rimuovere il metodo.
+     * @param codiceMetodo Il contenuto del metodo la cui firma deve essere utilizzata per trovare e rimuovere il metodo dalla classe.
+     * @return Il contenuto della classe senza il metodo specificato.
+     * @throws IllegalArgumentException Se la firma del metodo in codiceMetodo non è valida o se il metodo con la stessa firma non è trovato in codiceClasse.
+     */
+    public static String removeMethodFromClass(String codiceClasse, String codiceMetodo) throws IllegalArgumentException {
+        String methodSignature = SignatureFinder.extractSignature(codiceMetodo);
+        if (methodSignature == null) throw new IllegalArgumentException("Invalid method signature in codiceMetodo");
+        String methodRegex = SignatureFinder.getDynamicMethodRegex(methodSignature)+ "\\s*\\{";
+        Pattern pattern = Pattern.compile(methodRegex);
+        Matcher matcher = pattern.matcher(codiceClasse);
+        if (matcher.find()) return codiceClasse.substring(0, matcher.start()) + codiceClasse.substring(SignatureFinder.findMethodEnd(codiceClasse, matcher.end()));
+        else throw new IllegalArgumentException("Il codice della classe non presenta una firma di metodo coerente");
     }
 }

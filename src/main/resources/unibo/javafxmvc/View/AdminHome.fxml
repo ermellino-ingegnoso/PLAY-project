@@ -36,7 +36,7 @@
                   <Insets />
                </opaqueInsets>
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#AggiungiEsercizioBtnOnKeyPressed" onMouseClicked="#AggiungiEsercizioBtnOnMouseClicked" prefHeight="61.0" prefWidth="127.0" text="Aggiungi esercizioGenerico Scrivi il blocco mancante" textAlignment="CENTER" wrapText="true" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#BloccoMancanteBtnOnKeyPressed" onMouseClicked="#BloccoMancanteBtnOnMouseClicked" prefHeight="61.0" prefWidth="127.0" text="Blocco Mancante" textAlignment="CENTER" wrapText="true" />
                </children>
               </HBox>
          </children>
@@ -61,5 +61,6 @@
             <Insets left="30.0" />
          </padding>
       </StackPane>
+      <Button mnemonicParsing="false" onKeyPressed="#TrovaErroreOnKeyPressed" onMouseClicked="#TrovaErroreOnMouseClicked" prefHeight="72.0" prefWidth="156.0" text="Trova l'errore" GridPane.columnIndex="1" GridPane.rowIndex="1" />
     </children>
 </GridPane>
