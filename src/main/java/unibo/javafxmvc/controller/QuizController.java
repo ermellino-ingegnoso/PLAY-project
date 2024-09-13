@@ -1,101 +1,144 @@
 package unibo.javafxmvc.controller;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
+import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 import unibo.javafxmvc.Main;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class QuizController implements Initializable {
+public class QuizController {
 
     @FXML
-    private RadioButton rbA;
-
-    @FXML
-    private RadioButton rbB;
-
-    @FXML
-    private RadioButton rbC;
-
-    @FXML
-    private RadioButton rbD;
-
-    @FXML
-    private Circle lbCircle;
-
-    @FXML
-    private Label lbDomanda;
+    private ToggleGroup Opzioni;
 
     @FXML
     private ImageView ivFoto;
 
     @FXML
+    private Label lbCorretto;
+
+    @FXML
+    private Button lbIndietro;
+
+    @FXML
+    private Button lbInvia;
+
+    @FXML
+    private Label lbIstruzione;
+
+    @FXML
+    private Label lbSbagliato;
+
+    @FXML
     private Label lbTitolo;
-
-    @FXML
-    private Label lbUsername;
-
-    @FXML
-    private TextArea taOpzioni;
-
-    @FXML
-    private Label lbCorretta;
 
     @FXML
     private GridPane mainGridPane;
 
+    @FXML
+    private RadioButton rbOpzione1;
+
+    @FXML
+    private RadioButton rbOpzione2;
+
+    @FXML
+    private RadioButton rbOpzione3;
+
+    @FXML
+    private RadioButton rbOpzione4;
+
+    @FXML
+    private TextField tfText;
+
+    @FXML
+    private HBox hbHbox;
+    private int i = 0;
+
 
     @FXML
     private void IndietroOnMousePressed(MouseEvent event) {
-        Main.changeScene("View/Home.fxml");
+        Main.changeScene("View/UserHome.fxml");
     }
+
     @FXML
-    private void ControllaRispostaOnMousePressed(MouseEvent event) {
-        String a = "C";
-        if (rbC.isSelected()) {
-            lbCorretta.setVisible(true);
-        } else {
-            lbCorretta.setVisible(false);
+    public void initialize() {
+        System.out.println("CommentiController.initialize");
+        Image image = new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Ordina/Prova10.png"));
+        ivFoto.setImage(image);
+
+    }
+
+    @FXML
+    public void InviaOnMouseClicked() {
+        switch (i) {
+            case 0:
+                if (tfText.getText().equals("10")) {
+                    dueSecondi();
+                    SecondaScena();
+                } else {
+                    treSecondi();
+                    SecondaScena();
+                }
+                i++;
+                break;
+            case 1:
+                if (rbOpzione2.isSelected()) {
+                    System.out.println("ciao");
+                    dueSecondi();
+                    TerzaScena();
+                } else {
+                    treSecondi();
+                    TerzaScena();
+                }
+                i++;
+                break;
+            case 2:
+                if (rbOpzione3.isSelected()) {
+                    dueSecondi();
+                } else {
+                    treSecondi();
+                }
+                break;
         }
-    }
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        ivFoto.setImage(Main.currentUser.getAvatar());
-        /*
-        lbCircle = new Circle(ivFoto.getFitWidth() / 2, ivFoto.getFitHeight() / 2, Math.min(ivFoto.getFitWidth(), ivFoto.getFitHeight()) / 2);
-        lbCircle.setStroke(Color.web(Main.currentUser.getColor()));
-        lbCircle.setStrokeWidth(0);
-        ivFoto.setClip(lbCircle);
-        drawBorders(Color.web(Main.currentUser.getColor()));
-        lbUsername.setText(Main.currentUser.getUsername());
 
-         */
-    }
-    private void drawBorders(Color borderColor){
-        lbCircle.setStroke(borderColor);
-        lbUsername.setTextFill(borderColor);
-        Line line = new Line(0, 0, mainGridPane.getWidth(), 0);
-        line.setStroke(borderColor);
-        line.setStrokeWidth(2);
-
-        Pane linePane = new Pane();
-        linePane.getChildren().add(line);
-        linePane.setPrefSize(mainGridPane.getWidth(), line.getStrokeWidth());
-        mainGridPane.add(linePane, 0, 1);
     }
 
+    @FXML
+    public void SecondaScena() {
+        tfText.setVisible(false);
+        hbHbox.setVisible(true);
+        Image image = new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Ordina/Prova11.png"));
+        ivFoto.setImage(image);
+    }
+
+    @FXML
+    public void TerzaScena() {
+        Image image = new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Ordina/Prova9.png"));
+        ivFoto.setImage(image);
+    }
+
+
+    private void dueSecondi() {
+        lbCorretto.setVisible(true);
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(event -> lbCorretto.setVisible(false));
+        pause.play();
+    }
+
+    private void treSecondi() {
+        lbSbagliato.setVisible(true);
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(event -> lbSbagliato.setVisible(false));
+        pause.play();
+    }
 
 
 }

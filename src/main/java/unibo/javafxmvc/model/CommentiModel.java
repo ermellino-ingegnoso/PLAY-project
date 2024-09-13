@@ -6,24 +6,23 @@ import java.util.ArrayList;
 public class CommentiModel {
     private String foto;
     private ArrayList<String> opzioni;
-    private String soluzione;
+    private int soluzione;
 
-    public CommentiModel(String foto, ArrayList<String> opzioni, String soluzione) {
+    public CommentiModel(String foto, ArrayList<String> opzioni, int soluzioneIndex) {
         this.foto = foto;
         this.opzioni = opzioni;
-        this.soluzione = soluzione;
+        soluzione = soluzioneIndex;
     }
-
-
     public String getPercorsoFoto() {
         return foto;
     }
-
     public ArrayList<String> getOpzioni() {
         return opzioni;
     }
-
-    public String getSoluzione(){
+    public int getSoluzione() {
         return soluzione;
+    }
+    public Boolean check(String soluzioneProposta){
+        return (soluzioneProposta.equals(opzioni.get(soluzione)));
     }
 }

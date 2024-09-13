@@ -39,6 +39,7 @@ public class PunteggiEsercizioController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         AuxiliaryController.initAvatar(Main.currentUser, userAvatar, circleAvatar, lblUsername, mainGridPane);
+
         lblInfo.setText("Nell' esercizio "+ Main.punteggio.getTitolo() +" di difficoltà "+ Main.punteggio.getGrado().toString().toLowerCase() +" hai ottenuto un totale di: "+ Main.punteggio.getPunteggio() +" punti");
         lblInfoPeso.setText("Il peso specifico per la modalità " + Main.gradoAttuale.toString().toLowerCase() +" è di "+ Main.punteggio.getPeso());
 

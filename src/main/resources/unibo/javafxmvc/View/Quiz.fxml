@@ -1,57 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="mainGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="702.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.QuizController">
+<GridPane fx:id="mainGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="523.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.QuizController">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.39996337890625" minWidth="10.0" prefWidth="121.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" prefWidth="176.2" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.0" minWidth="10.0" prefWidth="184.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.39996337890625" minWidth="10.0" percentWidth="30.0" prefWidth="121.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="242.0" minWidth="10.0" percentWidth="40.0" prefWidth="176.2" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="100.4" minHeight="10.0" prefHeight="37.200022125244146" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="170.00000228881837" minHeight="10.0" prefHeight="163.59997787475587" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="145.0" minHeight="10.0" percentHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="323.0" minHeight="0.0" percentHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="377.0" minHeight="10.0" percentHeight="65.0" prefHeight="367.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="102.0" minHeight="10.0" percentHeight="15.0" prefHeight="102.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <Label fx:id="lbDomanda" alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="32.0" prefWidth="371.0" text="QUALI DI QUESTE VARIABILI E' DI TIPO STRING?" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
-            <GridPane.margin>
-                <Insets />
-            </GridPane.margin>
-            <font>
-                <Font size="16.0" />
-            </font>
-        </Label>
-        <Label fx:id="lbTitolo" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="QUIZ" GridPane.columnIndex="1" GridPane.columnSpan="2">
+        <Label fx:id="lbTitolo" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="QUIZ" GridPane.columnIndex="1">
             <font>
                 <Font size="30.0" />
             </font>
         </Label>
-        <StackPane prefHeight="150.0" prefWidth="200.0">
-            <children>
-                <ImageView fx:id="ivFoto" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="avatar" StackPane.alignment="CENTER_LEFT">
-                    <image>
-                        <Image url="@../Images/avatar.png" />
-                    </image>
-                </ImageView>
-                <Circle fx:id="lbCircle" fill="DODGERBLUE" radius="25.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
-                <Label fx:id="lbUsername" text="Username" StackPane.alignment="CENTER_RIGHT" />
-            </children>
-        </StackPane>
-        <Button mnemonicParsing="false" onMouseClicked="#IndietroOnMousePressed" text="Indietro" GridPane.columnIndex="3" />
-        <Label fx:id="lbCorretta" text="Risposta corretta" textFill="#06fa4f" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Button fx:id="lbIndietro" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#IndietroOnMousePressed" text="Indietro" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+      <Button fx:id="lbInvia" mnemonicParsing="false" onMouseClicked="#InviaOnMouseClicked" text="Invia" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+      <Label fx:id="lbCorretto" text="Corretto!" textFill="LIME" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+      <Label fx:id="lbSbagliato" text="Sbagliato!" textFill="RED" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+      <HBox fx:id="hbHbox" alignment="CENTER" prefHeight="20.0" prefWidth="450.0" visible="false" GridPane.columnSpan="2" GridPane.rowIndex="3">
+         <children>
+            <RadioButton fx:id="rbOpzione1" mnemonicParsing="false" text="RadioButton">
+               <toggleGroup>
+                  <ToggleGroup fx:id="Opzioni" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="rbOpzione2" mnemonicParsing="false" text="RadioButton" toggleGroup="$Opzioni" />
+            <RadioButton fx:id="rbOpzione3" mnemonicParsing="false" text="RadioButton" toggleGroup="$Opzioni" />
+            <RadioButton fx:id="rbOpzione4" mnemonicParsing="false" text="RadioButton" toggleGroup="$Opzioni" />
+         </children>
+      </HBox>
+      <Label fx:id="lbIstruzione" text="Indicare in che riga è presente l'errore" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+      <TextField fx:id="tfText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <ImageView fx:id="ivFoto" fitHeight="307.0" fitWidth="581.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
     </children>
 </GridPane>
