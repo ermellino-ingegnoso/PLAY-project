@@ -52,6 +52,9 @@ public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento de
     public ArrayList<Integer> getPunteggi() {
         return punteggi;
     }
+    public void addPunto(Integer punto){
+        punteggi.add(punto);
+    }
     public void setPunteggi(ArrayList<Integer> punteggi) {
         this.punteggi = punteggi;
     }

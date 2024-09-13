@@ -129,7 +129,7 @@ public class AuxiliaryController {  //TODO: separare le resonsabilità per ambit
      * @param label la label che rappresenta lo username
      * @param gridPane il <code>GridPane</code> che contiene tutti i controlli
      * */
-    public static void setAvatar(User utente, ImageView avatar, Circle circleAvatar, Label label, GridPane gridPane){
+    public static void initAvatar(User utente, ImageView avatar, Circle circleAvatar, Label label, GridPane gridPane){
         avatar.setImage(utente.getAvatar());
 
         Circle circle = new Circle(avatar.getFitWidth() / 2, avatar.getFitHeight() / 2, Math.min(avatar.getFitWidth(), avatar.getFitHeight()) / 2);

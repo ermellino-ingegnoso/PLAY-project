@@ -34,7 +34,7 @@ public class UserHomeController implements Initializable {
     private Circle circle;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        AuxiliaryController.setAvatar(Main.currentUser, userAvatar, circleAvatar, lblUsername, mainGridPane);
+        AuxiliaryController.initAvatar(Main.currentUser, userAvatar, circleAvatar, lblUsername, mainGridPane);
     }
     @FXML
     void AvanzatoOnMouseClicked(MouseEvent event) {
