@@ -97,6 +97,7 @@ public class Main extends Application {
             thisStage.setScene(currentScene);
         } catch (Exception e) {
             e.printStackTrace();
+            AuxiliaryController.alertWindow("Errore", "Errore durante il caricamento della scena", "Errore critico durante il caricamento della scena: " + e.getMessage());
         }
     }
     /**<code>removeImageTags</code> è stato pensato con lo scopo di rimuovere i tag <code>Image</code> dai file FXML, nel caso in cui potessero presentare problemi di caricamento

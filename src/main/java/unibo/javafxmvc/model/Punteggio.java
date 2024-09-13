@@ -33,6 +33,8 @@ public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento de
     public Float getPunteggio() {
         Float punti = 0.0f;
         for (Integer p : punteggi) {
+            System.out.println("Grado: "+grado.ordinal());
+            System.out.println("Peso: "+getPeso());
             if (p != null) punti += Float.valueOf(p)+((Float.valueOf(p)!=0)?getPeso():0.0f);
         }
         return punti;
@@ -68,6 +70,6 @@ public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento de
         return punteggi.get(index);
     }
     public Float getPeso(){
-        return (float)grado.ordinal(); // (((float)grado.ordinal()+1.0f)/2.0f);
+        return ((float)grado.ordinal()+1.0f)/2.0f; // (((float)grado.ordinal()+1.0f)/2.0f);
     }
 }
