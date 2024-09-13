@@ -134,16 +134,41 @@ public class EsercizioEspertoDBM extends DatabaseManager{
                         return new EsercizioEsperto(id, eg, blocchiEsperto, UserDBM.getUserByID(rs.getInt("UTENTE_ID"), false));
                     }
                 }
-                return null;
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));
-            } catch (NullPointerException npe){
-                return null;
-            }
-        } else {
-            throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));
-        }
+            } catch (SQLException e) { e.printStackTrace();
+            } catch (NullPointerException npe){ npe.printStackTrace();}
+        } else {throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));}
+        return null;
+    }
+    /**
+     * @param grado Il <b>Grado</b> dell'<b>EsercizioEsperto</b> da recuperare.
+     * @param user lo <b>User</b> associato all'<b>EsercizioEsperto</b>.
+     * @return - L'oggetto <b>EsercizioEsperto</b> associato allo <b>User</b> specificato con l'ID più alto e il <b>Grado</b> specificato, o <br>
+     * -<code>null</code> se non esiste alcun <b>EsercizioEsperto</b> che rispetta le condizioni.
+     * @throws ConnectionException Se si verifica un errore di connessione al database.
+     */
+    public static EsercizioEsperto getEsercizioEspertoWithMaxIdByGradoAndUser(Grado grado, User user) throws ConnectionException {
+        if (connection != null) {
+            String query = "SELECT ee.* FROM ESERCIZIO_ESPERTO ee " +
+                    "JOIN ESERCIZIO_GENERICO eg ON ee.ESERCIZIO_GENERICO_ID = eg.ID " +
+                    "JOIN REGOLA_GENERICA rg ON eg.REGOLA_ID = rg.ID " +
+                    "WHERE rg.GRADO = ? AND ee.UTENTE_ID = ? ORDER BY ee.ID DESC LIMIT 1";
+            try (PreparedStatement ps = connection.prepareStatement(query)) {
+                ps.setString(1, grado.toString());
+                ps.setInt(2, UserDBM.getUserID(user.getUsername(), false));
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        int id = rs.getInt("ID");
+                        EsercizioGenerico eg = EsercizioGenericoDBM.getEsercizioGenericoById(rs.getInt("ESERCIZIO_GENERICO_ID"));
+                        ArrayList<BloccoEsperto> blocchiEsperto = new ArrayList<>();
+                        for (BloccoGenerico bg : eg.getBlocchi()) {
+                            blocchiEsperto.add(BloccoEspertoDBM.getBloccoEspertoByBloccoGenericoAndEsercizioEsperto(bg.getId(), id));
+                        }
+                        return new EsercizioEsperto(id, eg, blocchiEsperto, user);
+                    }
+                }
+            } catch (SQLException e) {e.printStackTrace();}
+        } else throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));
+        return null;
     }
     private static List<BloccoEsperto> getBlocchiEspertoByEsercizioEspertoId(Integer esercizioEspertoId) throws ConnectionException {
         List<BloccoEsperto> blocchiEsperto = new ArrayList<>();
