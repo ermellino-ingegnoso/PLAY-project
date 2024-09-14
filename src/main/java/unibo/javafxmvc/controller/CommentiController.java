@@ -115,14 +115,18 @@ public class CommentiController implements Initializable {
     }
     private void dueSecondi() {
         lbPunti.setVisible(true);
+        lbPunti.setText("Corretto!");
+        lbPunti.setStyle("-fx-text-fill: green;");
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
         pause.setOnFinished(event -> lbPunti.setVisible(false));
         pause.play();
     }
     private void treSecondi() {
-        lbPunti2.setVisible(true);
+        lbPunti.setText("Sbagliato!");
+        lbPunti.setStyle("-fx-text-fill: red;");
+        lbPunti.setVisible(true);
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
-        pause.setOnFinished(event -> lbPunti2.setVisible(false));
+        pause.setOnFinished(event -> lbPunti.setVisible(false));
         pause.play();
     }
     public void aspetta() {

@@ -45,8 +45,7 @@
       </RadioButton>
       <RadioButton fx:id="rbOpzione2" mnemonicParsing="false" text="Opzione 2" toggleGroup="$Opzioni" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <RadioButton fx:id="rbOpzione3" mnemonicParsing="false" text="Opzione 3" toggleGroup="$Opzioni" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <Label fx:id="lbPunti" alignment="CENTER" text="Corretto!" textFill="#00ff1a" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-      <Label fx:id="lbPunti2" text="Sbagliato!" textFill="RED" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+      <Label fx:id="lbPunti" alignment="CENTER" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
       <Label text="Selezionare il commento corretto da associare alla foto del codice" wrapText="true">
          <font>
             <Font name="Calibri Bold" size="16.0" />

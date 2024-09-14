@@ -36,14 +36,14 @@
       <Label fx:id="lbSbagliato" text="Sbagliato!" textFill="RED" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
       <HBox fx:id="hbHbox" alignment="CENTER" prefHeight="20.0" prefWidth="450.0" visible="false" GridPane.columnSpan="2" GridPane.rowIndex="3">
          <children>
-            <RadioButton fx:id="rbOpzione1" mnemonicParsing="false" text="RadioButton">
+            <RadioButton fx:id="rbOpzione1" mnemonicParsing="false" text="Riga: 4">
                <toggleGroup>
                   <ToggleGroup fx:id="Opzioni" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="rbOpzione2" mnemonicParsing="false" text="RadioButton" toggleGroup="$Opzioni" />
-            <RadioButton fx:id="rbOpzione3" mnemonicParsing="false" text="RadioButton" toggleGroup="$Opzioni" />
-            <RadioButton fx:id="rbOpzione4" mnemonicParsing="false" text="RadioButton" toggleGroup="$Opzioni" />
+            <RadioButton fx:id="rbOpzione2" mnemonicParsing="false" text="Riga: 7" toggleGroup="$Opzioni" />
+            <RadioButton fx:id="rbOpzione3" mnemonicParsing="false" text="Riga: 11" toggleGroup="$Opzioni" />
+            <RadioButton fx:id="rbOpzione4" mnemonicParsing="false" text="Riga: 16" toggleGroup="$Opzioni" />
          </children>
       </HBox>
       <Label fx:id="lbIstruzione" text="Indicare in che riga è presente l'errore" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />

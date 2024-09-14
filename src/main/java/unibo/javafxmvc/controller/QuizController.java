@@ -133,6 +133,7 @@ public class QuizController {
 
     @FXML
     public void SecondaScena() {
+        lbIstruzione.setText("Individuare per quali valori è importante fare il test");
         tfText.setVisible(false);
         hbHbox.setVisible(true);
         Image image = new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Ordina/Prova11.png"));
@@ -164,6 +165,5 @@ public class QuizController {
         pause.setOnFinished(event -> lbSbagliato.setVisible(false));
         pause.play();
     }
-
 
 }
