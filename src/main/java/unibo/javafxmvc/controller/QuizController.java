@@ -110,27 +110,9 @@ public class QuizController {
                 i++;
                 break;
             case 2:
-                if (rbOpzione3.isSelected()) {
-                    punteggio.addPunteggio(3);
-                    dueSecondi();
-                    aspetta();
-                } else {
-                    punteggio.addPunteggio(0);
-                    treSecondi();
-                    aspetta();
-                }
                 i++;
-                if (i > 2) {
-                    aspetta();
-                    Main.punteggio = punteggio;
-                    try {
-                        PunteggioDBM.insertPunteggio(punteggio);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    Main.gradoAttuale = punteggio.getGrado();
-                }
                 break;
+
 
         }
 
@@ -148,8 +130,10 @@ public class QuizController {
 
     @FXML
     public void TerzaScena() {
-        Image image = new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Ordina/Prova9.png"));
-        ivFoto.setImage(image);
+        Main.punteggio = punteggio;
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(event -> Main.changeScene("View/Quiz2.fxml"));
+        pause.play();
     }
 
     public void aspetta() {
@@ -157,8 +141,9 @@ public class QuizController {
         pause.setOnFinished(event -> Main.changeScene("View/PunteggiEsercizio.fxml"));
         pause.play();
     }
-
     private void dueSecondi() {
+        lbCorretto.setText("Corretto!");
+        lbCorretto.setStyle("-fx-text-fill: green");
         lbCorretto.setVisible(true);
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
         pause.setOnFinished(event -> lbCorretto.setVisible(false));
@@ -166,9 +151,11 @@ public class QuizController {
     }
 
     private void treSecondi() {
-        lbSbagliato.setVisible(true);
+        lbCorretto.setText("Sbagliato!");
+        lbCorretto.setStyle("-fx-text-fill: red");
+        lbCorretto.setVisible(true);
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
-        pause.setOnFinished(event -> lbSbagliato.setVisible(false));
+        pause.setOnFinished(event -> lbCorretto.setVisible(false));
         pause.play();
     }
 
