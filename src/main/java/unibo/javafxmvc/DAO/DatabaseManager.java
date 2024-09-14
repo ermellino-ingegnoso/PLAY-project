@@ -38,11 +38,8 @@ public class DatabaseManager {
      * */
     public static void inizialize(String dbURL) throws ConnectionException {
         DatabaseManager.dbURL = dbURL;
-        try {
-            connection = DriverManager.getConnection(dbURL);
-        } catch (Exception e) {
-            throw new ConnectionException("Errore di connessione al database: " + e.getMessage(), e);
-        }
+        try { connection = DriverManager.getConnection(dbURL);
+        } catch (Exception e) { throw new ConnectionException("Errore di connessione al database: " + e.getMessage(), e);}
         informStatus(Status.STABILITA);
         createAllTablesIfNotExists();
     }
