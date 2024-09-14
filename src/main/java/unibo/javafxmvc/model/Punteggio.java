@@ -1,5 +1,8 @@
 package unibo.javafxmvc.model;
 
+import unibo.javafxmvc.DAO.EsercizioEspertoDBM;
+import unibo.javafxmvc.exception.ConnectionException;
+
 import java.util.ArrayList;
 
 public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento degli esercizi ad essa
@@ -47,8 +50,6 @@ public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento de
     public Float getPunteggio() {
         Float punti = 0.0f;
         for (Integer p : punteggi) {
-            System.out.println("Grado: "+grado.ordinal());
-            System.out.println("Peso: "+getPeso());
             if (p != null) punti += Float.valueOf(p)+((Float.valueOf(p)!=0)?getPeso():0.0f);
         }
         return punti;
@@ -85,5 +86,35 @@ public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento de
     }
     public Float getPeso(){
         return ((float)grado.ordinal()+1.0f)/2.0f; // (((float)grado.ordinal()+1.0f)/2.0f);
+    }
+    /**Restituisce il <code>Punteggio</code> con il valore di punteggio più alto dalla lista di <code>Punteggio</code> fornita.
+     * @param punteggi una lista di oggetti <code>Punteggio</code> da cui trovare il punteggio massimo
+     * @return l'oggetto <code>Punteggio</code> con il valore di punteggio più alto, o <code>null</code> se la lista è vuota o nulla
+     */
+    public static Punteggio getMaxPunteggio(ArrayList<Punteggio> punteggi) {
+        if (punteggi == null || punteggi.isEmpty()) return null;
+        Punteggio maxPunteggio = null;
+        float maxPunti = Float.MIN_VALUE;
+        for (Punteggio p : punteggi) {
+            float punti = p.getPunteggio();
+            if (punti > maxPunti) {
+                maxPunti = punti;
+                maxPunteggio = p;
+            }
+        }
+        return maxPunteggio;
+    }
+    /**Restituisce l'oggetto Punteggio con il valore di punteggio più alto per un dato utente e grado.
+     * @param user l'utente per cui trovare il punteggio massimo
+     * @param grado il grado per cui trovare il punteggio massimo
+     * @return l'oggetto Punteggio con il valore di punteggio più alto, o null se non ci sono punteggi
+     */
+    public static Punteggio getMaxPunteggioByUserAndGrado(User user, Grado grado) throws ConnectionException {
+        ArrayList<EsercizioEsperto> eserciziEsperto = EsercizioEspertoDBM.getEserciziEspertoByUserAndGrado(user, grado);
+        ArrayList<Punteggio> punteggi = new ArrayList<>();
+        for (EsercizioEsperto esercizio : eserciziEsperto) {
+            punteggi.add(esercizio.getPunteggi());
+        }
+        return getMaxPunteggio(punteggi);
     }
 }

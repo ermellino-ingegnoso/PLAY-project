@@ -55,6 +55,8 @@ public class DatabaseManager {
             createBloccoGenericoIfNotExists();
             createEsercizioEspertoIfNotExists();
             createBloccoEspertoIfNotExists();
+            createPunteggioIfNotExists();
+            createPuntoIfNotExists();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -136,7 +138,16 @@ public class DatabaseManager {
         "create table if not exists REGOLA_GENERICA ( ID INTEGER auto_increment, TITOLO CHARACTER VARYING, DOMANDA CHARACTER VARYING, DESCRIZIONE CHARACTER VARYING, GRADO CHARACTER VARYING, constraint ID primary key (ID));"
         )){prstmt.execute();}
     }
-
+    public static void createPunteggioIfNotExists() throws SQLException{
+        try (PreparedStatement prstmt = connection.prepareStatement(
+                "create table if not exists PUNTEGGIO (ID INTEGER auto_increment, UTENTE INTEGER, GRADO  INTEGER, TITOLO CHARACTER VARYING constraint TITOLO unique, constraint PUNTEGGIO_PK primary key (ID), constraint UTENTE_ID foreign key (UTENTE) references \"User\" on update cascade on delete cascade);"
+        )){prstmt.execute();}
+    }
+    public static void createPuntoIfNotExists() throws SQLException{
+        try (PreparedStatement prstmt = connection.prepareStatement(
+                "create table if not exists PUNTO ( ID INTEGER auto_increment, VALORE       INTEGER, PUNTEGGIO_FK INTEGER, constraint PUNTO_PK primary key (ID), constraint PUNTEGGIO_ID foreign key (PUNTEGGIO_FK) references PUNTEGGIO on update cascade on delete cascade);"
+        )){prstmt.execute();}
+    }
     /**@return byte[] che rappresenta l'immagine o <br> null se si verifica un errore durante la conversione
      * @param img Immagine da convertire in byte[]
     */

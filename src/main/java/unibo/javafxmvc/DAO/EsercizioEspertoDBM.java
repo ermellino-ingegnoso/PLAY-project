@@ -193,4 +193,40 @@ public class EsercizioEspertoDBM extends DatabaseManager{
         }
         return blocchiEsperto;
     }
+    /**Recupera una lista di <b>EsercizioEsperto</b> associati all'utente e al grado specificati.
+     * @param user l'oggetto <b>User</b> associato agli esercizi da recuperare
+     * @param grado il <b>Grado</b> degli esercizi da recuperare
+     * @return - una lista di oggetti <b>EsercizioEsperto</b> associati all'utente e al grado specificato o <br>
+     *         - una lista di <b>EsercizioEsperto</b> vuota se non trovati
+     * @throws ConnectionException se la connessione non è stata stabilita correttamente
+     */
+    public static ArrayList<EsercizioEsperto> getEserciziEspertoByUserAndGrado(User user, Grado grado) throws ConnectionException {
+        ArrayList<EsercizioEsperto> eserciziEsperto = new ArrayList<>();
+        if (connection != null) {
+            try {
+                Integer userID = UserDBM.getUserID(user.getUsername(), false);
+                if (userID == null) return eserciziEsperto;
+                String query = "SELECT ee.* FROM ESERCIZIO_ESPERTO ee " +
+                        "JOIN ESERCIZIO_GENERICO eg ON ee.ESERCIZIO_GENERICO_ID = eg.ID " +
+                        "JOIN REGOLA_GENERICA rg ON eg.REGOLA_ID = rg.ID " +
+                        "WHERE ee.UTENTE_ID = ? AND rg.GRADO = ?";
+                try (PreparedStatement ps = connection.prepareStatement(query)) {
+                    ps.setInt(1, userID);
+                    ps.setString(2, grado.toString());
+                    try (ResultSet rs = ps.executeQuery()) {
+                        while (rs.next()) {
+                            int id = rs.getInt("ID");
+                            EsercizioGenerico eg = EsercizioGenericoDBM.getEsercizioGenericoById(rs.getInt("ESERCIZIO_GENERICO_ID"));
+                            ArrayList<BloccoEsperto> blocchiEsperto = new ArrayList<>();
+                            for (BloccoGenerico bg : eg.getBlocchi()) {
+                                blocchiEsperto.add(BloccoEspertoDBM.getBloccoEspertoByBloccoGenericoAndEsercizioEsperto(bg.getId(), id));
+                            }
+                            eserciziEsperto.add(new EsercizioEsperto(id, eg, blocchiEsperto, user));
+                        }
+                    }
+                }
+            } catch (SQLException e) {e.printStackTrace();}
+        } else throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));
+        return eserciziEsperto;
+    }
 }

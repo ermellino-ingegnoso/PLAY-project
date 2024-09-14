@@ -6,6 +6,8 @@ import unibo.javafxmvc.model.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDBM extends DatabaseManager {
     /**@return true se la connessione è stata stabilita correttamente e l'inserimento è andato a termine; <br> false se l'inserimento non è andato a termine correttamente
@@ -156,5 +158,29 @@ public class UserDBM extends DatabaseManager {
         } else {
             throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));
         }
+    }
+    public static List<User> getAllUsersOrderedByUsername() {
+        List<User> users = new ArrayList<>();
+        String query = "SELECT * FROM \"User\" ORDER BY username";
+
+        try (PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                User user = new User(
+                        resultSet.getString("NOME"),
+                        resultSet.getString("COGNOME"),
+                        resultSet.getString("USERNAME"),
+                        resultSet.getString("PASSWORD"),
+                        convertByteArrayToImage(resultSet.getBytes("AVATAR")),
+                        resultSet.getString("COLOR")
+                );
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return users;
     }
 }

@@ -4,3 +4,7 @@
 .red{
     -fx-background-color: red;
 }
+.btnTipo1{
+    -fx-background-color: #ff0000;
+    -fx-text-fill: white;
+}

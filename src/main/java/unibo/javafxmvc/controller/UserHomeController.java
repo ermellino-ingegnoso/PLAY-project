@@ -1,19 +1,14 @@
 package unibo.javafxmvc.controller;
 
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import unibo.javafxmvc.DAO.EsercizioEspertoDBM;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.transform.Rotate;
 import unibo.javafxmvc.Main;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import unibo.javafxmvc.exception.ConnectionException;
@@ -99,4 +94,14 @@ public class UserHomeController implements Initializable {
             Main.changeScene("View/ErroreDatabase.fxml");
         }
     }
+    @FXML
+    private void ClassificaGeneraleOnKeyPressed(KeyEvent event) { if(AuxiliaryController.keyEnterPressed(event)) classificaGenerale();}
+    @FXML
+    private void ClassificaGeneraleOnMouseClicked(MouseEvent event) { classificaGenerale();}
+    @FXML
+    private void ClassificaUtenteOnKeyPressed(KeyEvent event) { if(AuxiliaryController.keyEnterPressed(event)) classificaUtente();}
+    @FXML
+    private void ClassificaUtenteOnMouseClicked(MouseEvent event) {classificaUtente();}
+    private void classificaGenerale(){  Main.changeScene("View/ClassificaGenerale.fxml");}
+    private void classificaUtente(){    Main.changeScene("View/ClassificaUtente.fxml");}
 }

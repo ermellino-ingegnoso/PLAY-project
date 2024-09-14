@@ -150,5 +150,7 @@
             </top>
         </BorderPane>
       <Button mnemonicParsing="false" onKeyPressed="#ScollegatiOnKeyPressed" onMouseClicked="#ScollegatiOnMouseClicked" prefHeight="37.0" prefWidth="77.0" text="Scollegati" GridPane.columnIndex="3" />
+      <Button mnemonicParsing="false" onKeyPressed="#ClassificaGeneraleOnKeyPressed" onMouseClicked="#ClassificaGeneraleOnMouseClicked" prefHeight="50.0" prefWidth="140.0" text="Classifica Generale" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+      <Button mnemonicParsing="false" onKeyPressed="#ClassificaUtenteOnKeyPressed" onMouseClicked="#ClassificaUtenteOnMouseClicked" prefHeight="50.0" prefWidth="140.0" text="Classifica Utente" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
     </children>
 </GridPane>
