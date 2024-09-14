@@ -13,16 +13,16 @@
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="1014.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.Quiz2Controller">
   <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="341.0" minWidth="10.0" prefWidth="188.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="380.0" minWidth="10.0" prefWidth="240.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="380.0" minWidth="10.0" prefWidth="323.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="329.0" minHeight="10.0" prefHeight="214.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="338.0" minHeight="10.0" prefHeight="247.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="164.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <Label fx:id="lbTitolo" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Quiz" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
@@ -33,20 +33,20 @@
             <Insets />
          </GridPane.margin>
       </Label>
-      <ImageView fx:id="iv1" fitHeight="170.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <ImageView fx:id="iv2" fitHeight="170.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <ImageView fx:id="iv3" fitHeight="170.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <ImageView fx:id="iv4" fitHeight="170.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <ImageView fx:id="iv1" fitHeight="170.0" fitWidth="255.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+      <ImageView fx:id="iv2" fitHeight="260.0" fitWidth="485.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <ImageView fx:id="iv3" fitHeight="295.0" fitWidth="510.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
+      <ImageView fx:id="iv4" fitHeight="293.0" fitWidth="487.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <Button fx:id="bInvia" mnemonicParsing="false" onMouseClicked="#InviaOnMOusePressed" text="Invia" GridPane.columnIndex="2" GridPane.rowIndex="3" />
       <Button fx:id="bIndietro" mnemonicParsing="false" onMouseClicked="#IndietroOnMousePressed" text="Indietro" GridPane.columnIndex="3" />
       <Label fx:id="lbIstruzione" text="Seleziona il codice corretto" />
       <Label fx:id="lbCorretto" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-      <RadioButton fx:id="rb1" blendMode="SRC_ATOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <RadioButton fx:id="rb1" blendMode="SRC_ATOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" GridPane.columnSpan="2" GridPane.rowIndex="2">
          <toggleGroup>
             <ToggleGroup fx:id="Opzioni" />
          </toggleGroup></RadioButton>
-      <RadioButton fx:id="rb2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" toggleGroup="$Opzioni" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <RadioButton fx:id="rb3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" rotate="180.0" toggleGroup="$Opzioni" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <RadioButton fx:id="rb4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" rotate="180.0" toggleGroup="$Opzioni" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <RadioButton fx:id="rb2" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="241.0" prefWidth="323.0" toggleGroup="$Opzioni" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+      <RadioButton fx:id="rb3" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" rotate="180.0" toggleGroup="$Opzioni" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+      <RadioButton fx:id="rb4" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" rotate="180.0" toggleGroup="$Opzioni" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" />
    </children>
 </GridPane>
