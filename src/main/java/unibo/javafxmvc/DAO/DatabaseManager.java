@@ -38,11 +38,8 @@ public class DatabaseManager {
      * */
     public static void inizialize(String dbURL) throws ConnectionException {
         DatabaseManager.dbURL = dbURL;
-        try {
-            connection = DriverManager.getConnection(dbURL);
-        } catch (Exception e) {
-            throw new ConnectionException("Errore di connessione al database: " + e.getMessage(), e);
-        }
+        try { connection = DriverManager.getConnection(dbURL);
+        } catch (Exception e) { throw new ConnectionException("Errore di connessione al database: " + e.getMessage(), e);}
         informStatus(Status.STABILITA);
         createAllTablesIfNotExists();
     }
@@ -140,7 +137,7 @@ public class DatabaseManager {
     }
     public static void createPunteggioIfNotExists() throws SQLException{
         try (PreparedStatement prstmt = connection.prepareStatement(
-                "create table PUNTEGGIO ( ID INTEGER auto_increment, UTENTE INTEGER, GRADO  INTEGER, TITOLO CHARACTER VARYING, constraint PUNTEGGIO_PK primary key (ID), constraint UTENTE_ID foreign key (UTENTE) references \"User\" on update cascade on delete cascade);"
+                "create table if not exists PUNTEGGIO ( ID INTEGER auto_increment, UTENTE INTEGER, GRADO  INTEGER, TITOLO CHARACTER VARYING, constraint PUNTEGGIO_PK primary key (ID), constraint UTENTE_ID foreign key (UTENTE) references \"User\" on update cascade on delete cascade);"
         )){prstmt.execute();}
     }
     public static void createPuntoIfNotExists() throws SQLException{

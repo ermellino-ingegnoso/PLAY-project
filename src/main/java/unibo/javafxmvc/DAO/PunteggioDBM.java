@@ -14,10 +14,9 @@ import unibo.javafxmvc.model.User;
 
 public class PunteggioDBM extends DatabaseManager{
     /**Inserisce un nuovo <b>Punteggio</b> ed i punti ad esso asccociati nel database.
-     * <p>Il vincolo unique legato al <b>titolo</b> è gestito internamente</p>
+     * <p>Inserimento interno dei <code>Punto</code></p>
      * @param p l'oggetto <b>Punteggio</b> da inserire
-     * @return - l'ID del <b>Punteggio</b> inserito o <br> -<code>null</code> se l'inserimento fallisce a causa della violazione del vincolo unique sul <b>titolo</b>
-     * @throws SQLException se si verifica un errore SQL non legato alla violazione di un vincolo unique
+     * @return - l'ID del <b>Punteggio</b> inserito o <br> -<code>null</code> se l'inserimento fallisce
      * @throws ConnectionException se la connessione non è stata stabilita correttamente
      */
     public static Integer insertPunteggio(Punteggio p) throws ConnectionException {
@@ -30,7 +29,11 @@ public class PunteggioDBM extends DatabaseManager{
                 insertStmt.setString(3, p.getTitolo());
                 if (insertStmt.executeUpdate() > 0) {
                     try (ResultSet generatedKeys = insertStmt.getGeneratedKeys()) {
-                        if (generatedKeys.next()) return generatedKeys.getInt(1);
+                        if (generatedKeys.next()) {
+                            int id = generatedKeys.getInt(1);
+                            for(Integer value : p.getPunteggi()) {PuntoDBM.insertPunto(id, value);}
+                            return id;
+                        }
                     }
                 }
             } catch (SQLException e) {e.printStackTrace();}
