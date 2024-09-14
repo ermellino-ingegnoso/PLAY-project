@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
+import unibo.javafxmvc.DAO.PunteggioDBM;
 import unibo.javafxmvc.Main;
 import unibo.javafxmvc.model.Grado;
 import unibo.javafxmvc.model.Punteggio;
@@ -122,6 +123,11 @@ public class QuizController {
                 if (i > 2) {
                     aspetta();
                     Main.punteggio = punteggio;
+                    try {
+                        PunteggioDBM.insertPunteggio(punteggio);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     Main.gradoAttuale = punteggio.getGrado();
                 }
                 break;
