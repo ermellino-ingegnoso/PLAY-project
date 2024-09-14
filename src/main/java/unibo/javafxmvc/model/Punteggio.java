@@ -4,12 +4,20 @@ import java.util.ArrayList;
 
 public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento degli esercizi ad essa
     // associati
+    protected Integer id;
     protected Grado grado;
     protected User user;
     protected String titolo;
     protected ArrayList<Integer> punteggi;
 
     public Punteggio(Grado grado, User user, String titolo, ArrayList<Integer> punteggi) {
+        this.grado = grado;
+        this.user = user;
+        this.punteggi = punteggi;
+        this.titolo = titolo;
+    }
+    public Punteggio(Integer id, Grado grado, User user, String titolo, ArrayList<Integer> punteggi) {
+        this.id = id;
         this.grado = grado;
         this.user = user;
         this.punteggi = punteggi;
@@ -23,6 +31,12 @@ public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento de
         this.user = user;
         this.titolo = titolo;
         this.punteggi = new ArrayList<>();
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    public Integer getId() {
+        return id;
     }
     public void addPunteggio(Integer p) {
         punteggi.add(p);

@@ -25,11 +25,11 @@
         <RowConstraints maxHeight="115.0" minHeight="0.0" prefHeight="54.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
-         <children>
-              <ImageView fx:id="ivFoto" fitHeight="141.0" fitWidth="566.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" />
-         </children>
-      </AnchorPane>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+            <children>
+                <ImageView fx:id="ivFoto" fitHeight="141.0" fitWidth="566.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" />
+            </children>
+        </AnchorPane>
         <Label fx:id="lbTitolo" text="COMMENTI" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
             <font>
                 <Font size="20.0" />
@@ -37,19 +37,19 @@
         </Label>
         <Button fx:id="lbInvia" mnemonicParsing="false" onKeyPressed="#InviaPressed" onMouseClicked="#InviaPressed" text="INVIA" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
         <Button fx:id="lbIndietro" mnemonicParsing="false" onMouseClicked="#IndietroOnMouseClicked" text="INDIETRO" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-      <Label fx:id="lbPunti" text="Corretto hai ottenuto +1pts!" textFill="#00ff04" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <RadioButton fx:id="rbOpzione1" mnemonicParsing="false" text="Opzione 1" wrapText="true" GridPane.rowIndex="2">
-         <toggleGroup>
-            <ToggleGroup fx:id="Opzioni" />
-         </toggleGroup>
-      </RadioButton>
-      <RadioButton fx:id="rbOpzione2" mnemonicParsing="false" text="Opzione 2" toggleGroup="$Opzioni" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <RadioButton fx:id="rbOpzione3" mnemonicParsing="false" text="Opzione 3" toggleGroup="$Opzioni" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <Label fx:id="lbPunti" alignment="CENTER" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-      <Label text="Selezionare il commento corretto da associare alla foto del codice" wrapText="true">
-         <font>
-            <Font name="Calibri Bold" size="16.0" />
-         </font>
-      </Label>
+        <RadioButton fx:id="rbOpzione1" mnemonicParsing="false" text="Opzione 1" wrapText="true" GridPane.rowIndex="2">
+            <toggleGroup>
+                <ToggleGroup fx:id="Opzioni" />
+            </toggleGroup>
+        </RadioButton>
+        <RadioButton fx:id="rbOpzione2" mnemonicParsing="false" text="Opzione 2" toggleGroup="$Opzioni" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <RadioButton fx:id="rbOpzione3" mnemonicParsing="false" text="Opzione 3" toggleGroup="$Opzioni" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+        <Label fx:id="lbPunti" alignment="CENTER" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Label text="Selezionare il commento corretto da associare alla foto del codice" wrapText="true">
+            <font>
+                <Font name="Calibri Bold" size="16.0" />
+            </font>
+        </Label>
+
     </children>
 </GridPane>

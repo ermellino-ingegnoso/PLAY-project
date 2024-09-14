@@ -28,6 +28,7 @@ import static unibo.javafxmvc.util.CodeValidator.checkCodice;
 import static unibo.javafxmvc.util.CodeValidator.checkCodiceAvanzato;
 import static unibo.javafxmvc.util.FileUtils.readFileFromResources;
 
+import unibo.javafxmvc.DAO.PunteggioDBM;
 import unibo.javafxmvc.DAO.UserDBM;
 import unibo.javafxmvc.controller.AuxiliaryController;
 import unibo.javafxmvc.exception.ConnectionException;
@@ -97,6 +98,7 @@ public class Main extends Application {
             thisStage.setScene(currentScene);
         } catch (Exception e) {
             e.printStackTrace();
+            AuxiliaryController.alertWindow("Errore", "Errore durante il caricamento della scena", "Errore critico durante il caricamento della scena: " + e.getMessage());
         }
     }
     /**<code>removeImageTags</code> è stato pensato con lo scopo di rimuovere i tag <code>Image</code> dai file FXML, nel caso in cui potessero presentare problemi di caricamento
@@ -238,5 +240,6 @@ public class Main extends Application {
     }
     public static void main(String[] args) {
         launch(args);
+
     }
 }

@@ -7,12 +7,13 @@ public class EsercizioEsperto extends EsercizioGenerico{
     private User utente;
     private ArrayList<BloccoEsperto> blocchiEsperto;
 
+    /**Costruttore più completo e sicuro*/
     public EsercizioEsperto(Integer id, EsercizioGenerico eg, ArrayList<BloccoEsperto> blocchiEsperto, User utente) {
         super(eg);
         this.blocchiEsperto = blocchiEsperto;
         this.utente = utente;
     }
-    /**
+    /**Costruttore meno completo e parzialmente sicuro
      * @param id ID dell'esercizio,<br> in caso di <b>null</b> è essenziale che l'ID venga inserito successivamente
      * */
     public EsercizioEsperto(Integer id, EsercizioGenerico eg , User utente) {
@@ -55,6 +56,13 @@ public class EsercizioEsperto extends EsercizioGenerico{
     }
     public Punteggio getPunteggi(){
         return new Punteggio(getRegola().getGrado(), utente, getRegola().getTitolo(), getPunti());
+    }
+    public int getTotalePunti(){
+        int totale = 0;
+        for(Integer i = 0; i < blocchiEsperto.size(); i++){
+            totale += blocchiEsperto.get(i).isSuperato() ? (i+1) : 0;
+        }
+        return totale;
     }
     public ArrayList<Integer> getPunti(){
         ArrayList<Integer> punti = new ArrayList<>();
