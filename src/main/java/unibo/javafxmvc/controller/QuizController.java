@@ -109,15 +109,10 @@ public class QuizController {
                 }
                 i++;
                 break;
-            case 2:
-                i++;
-                break;
-
 
         }
 
     }
-
 
     @FXML
     public void SecondaScena() {
@@ -136,11 +131,6 @@ public class QuizController {
         pause.play();
     }
 
-    public void aspetta() {
-        PauseTransition pause = new PauseTransition(Duration.seconds(3));
-        pause.setOnFinished(event -> Main.changeScene("View/PunteggiEsercizio.fxml"));
-        pause.play();
-    }
     private void dueSecondi() {
         lbCorretto.setText("Corretto!");
         lbCorretto.setStyle("-fx-text-fill: green");
