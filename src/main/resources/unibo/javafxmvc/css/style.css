@@ -1,0 +1,16 @@
+.avatar {
+    -fx-background-color: white;
+    -fx-background-radius: 50;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    -fx-border-radius: 50;
+    -fx-background-size: 100;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+}
+    image-view {
+    -fx-background-color: white;
+    }
+.red{
+    -fx-background-color: red;
+}

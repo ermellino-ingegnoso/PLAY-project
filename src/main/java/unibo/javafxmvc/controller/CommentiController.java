@@ -5,16 +5,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import unibo.javafxmvc.Main;
 import unibo.javafxmvc.model.CommentiFactory;
@@ -52,8 +47,6 @@ public class CommentiController implements Initializable {
     private RadioButton rbOpzione3;
     @FXML
     private GridPane gpGridPane;
-    @FXML
-    private ProgressBar pbBarra;
 
     private CommentiModel esercizio;
     private int prossimoEsercizio = 0;
@@ -69,27 +62,20 @@ public class CommentiController implements Initializable {
        // AuxiliaryController.initAvatar(Main.currentUser, ivAvatar, cCircle, lbUsername, gpGridPane);
     }
 
-    public void updateProgressBar() {
-        pbBarra.setProgress(0.25F);
-    }
     @FXML
     void InviaPressed() {
         if (rbOpzione1.isSelected() && esercizio.check(rbOpzione1.getText())) {
             punteggio.addPunteggio(1);
             dueSecondi();
-            updateProgressBar();
         } else if (rbOpzione2.isSelected() && esercizio.check(rbOpzione2.getText())) {
-            punteggio.addPunteggio(2);
-            dueSecondi();
-            updateProgressBar();
-        } else if (rbOpzione3.isSelected() && esercizio.check(rbOpzione3.getText())) {
             punteggio.addPunteggio(3);
             dueSecondi();
-            updateProgressBar();
+        } else if (rbOpzione3.isSelected() && esercizio.check(rbOpzione3.getText())) {
+            punteggio.addPunteggio(2);
+            dueSecondi();
         } else {
             punteggio.addPunteggio(0);
             treSecondi();
-            updateProgressBar();
         }
         CaricaEsercizio();
     }
@@ -113,8 +99,10 @@ public class CommentiController implements Initializable {
         this.esercizio = factory1.getCommentiModel(prossimoEsercizio);
         prossimoEsercizio += 1;
         if (esercizio == null) {
+            aspetta();
             Main.punteggio = punteggio;
-            Main.changeScene("View/PunteggiEsercizio.fxml");
+            Main.gradoAttuale = punteggio.getGrado();
+            //Main.changeScene("View/PunteggiEsercizio.fxml");
             return;
         }
         System.out.println(esercizio.getOpzioni().get(0));
@@ -127,18 +115,24 @@ public class CommentiController implements Initializable {
     }
     private void dueSecondi() {
         lbPunti.setVisible(true);
+        lbPunti.setText("Corretto!");
+        lbPunti.setStyle("-fx-text-fill: green;");
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
         pause.setOnFinished(event -> lbPunti.setVisible(false));
         pause.play();
     }
     private void treSecondi() {
-        lbPunti2.setVisible(true);
+        lbPunti.setText("Sbagliato!");
+        lbPunti.setStyle("-fx-text-fill: red;");
+        lbPunti.setVisible(true);
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
-        pause.setOnFinished(event -> lbPunti2.setVisible(false));
+        pause.setOnFinished(event -> lbPunti.setVisible(false));
         pause.play();
     }
-    /*
-    Problema funzione 2 secondi non viene visualizzato nell'ultimo esercizio
-    altro passo importante gestire i punti
-    */
+    public void aspetta() {
+        PauseTransition pause = new PauseTransition(Duration.seconds(3));
+        pause.setOnFinished(event -> Main.changeScene("View/PunteggiEsercizio.fxml"));
+        pause.play();
+    }
+
 }

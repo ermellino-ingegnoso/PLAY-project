@@ -93,7 +93,7 @@ public class Main extends Application {
     public static void changeScene(String fxmlPath) {
         try {
             currentScene = new Scene((new FXMLLoader(Main.class.getResource(fxmlPath))).load());    // removeImageTags(fxmlStream)
-            currentScene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("/unibo/javafxmvc/css/stylesheet.css")).toExternalForm());
+            currentScene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("/unibo/javafxmvc/css/style.css")).toExternalForm());
             thisStage.setMaximized(maximized);
             thisStage.setScene(currentScene);
         } catch (Exception e) {
