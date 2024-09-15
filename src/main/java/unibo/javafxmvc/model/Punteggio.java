@@ -13,12 +13,14 @@ public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento de
     protected String titolo;
     protected ArrayList<Integer> punteggi;
 
+    /**Costruttore parziale <p>Non recupera l'<b> id</b></p>*/
     public Punteggio(Grado grado, User user, String titolo, ArrayList<Integer> punteggi) {
         this.grado = grado;
         this.user = user;
         this.punteggi = punteggi;
         this.titolo = titolo;
     }
+    /**Costruttore più completo*/
     public Punteggio(Integer id, Grado grado, User user, String titolo, ArrayList<Integer> punteggi) {
         this.id = id;
         this.grado = grado;
@@ -26,9 +28,7 @@ public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento de
         this.punteggi = punteggi;
         this.titolo = titolo;
     }
-    /**
-     * Crea automaticamente una <code>ArrayList</code> di punteggi vuota
-     */
+    /** Crea automaticamente una <code>ArrayList</code> di punteggi vuota <p>Costruttore incompleto</p>*/
     public Punteggio(Grado grado, User user, String titolo) {
         this.grado = grado;
         this.user = user;
@@ -44,15 +44,16 @@ public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento de
     public void addPunteggio(Integer p) {
         punteggi.add(p);
     }
-    /**
-     * @return il totale dei punti per l'esercizio relativo
-     * */
+    /**@return il totale dei punti per l'esercizio relativo*/
     public Float getPunteggio() {
         Float punti = 0.0f;
         for (Integer p : punteggi) {
             if (p != null) punti += Float.valueOf(p)+((Float.valueOf(p)!=0)?getPeso():0.0f);
         }
         return punti;
+    }
+    public Float getPuntoPonderato(int index) {
+        return Float.valueOf(Float.valueOf(punteggi.get(index))+((Float.valueOf(punteggi.get(index))!=0)?getPeso():0.0f));
     }
     public User getUser() {
         return user;
@@ -66,9 +67,8 @@ public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento de
     public void setGrado(Grado grado) {
         this.grado = grado;
     }
-    public ArrayList<Integer> getPunteggi() {
-        return punteggi;
-    }
+    public ArrayList<Integer> getPunteggi() {return punteggi;}
+    public int getNPunti() {return punteggi.size();}
     public void addPunto(Integer punto){
         punteggi.add(punto);
     }
@@ -104,10 +104,17 @@ public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento de
         }
         return maxPunteggio;
     }
+    public ArrayList<Float> getPuntiPonderati(){
+        ArrayList<Float> puntiPonderati = new ArrayList<>();
+        for (Integer p : punteggi) {
+            puntiPonderati.add(Float.valueOf(p)+((Float.valueOf(p)!=0)?getPeso():0.0f));
+        }
+        return puntiPonderati;
+    }
     /**Restituisce l'oggetto Punteggio con il valore di punteggio più alto per un dato utente e grado.
      * @param user l'utente per cui trovare il punteggio massimo
      * @param grado il grado per cui trovare il punteggio massimo
-     * @return l'oggetto Punteggio con il valore di punteggio più alto, o null se non ci sono punteggi
+     * @return - l'oggetto Punteggio con il valore di punteggio più alto, o <br> -<code>null</code> se non ci sono punteggi
      */
     public static Punteggio getMaxPunteggioByUserAndGrado(User user, Grado grado) throws ConnectionException {
         ArrayList<EsercizioEsperto> eserciziEsperto = EsercizioEspertoDBM.getEserciziEspertoByUserAndGrado(user, grado);
@@ -116,5 +123,13 @@ public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento de
             punteggi.add(esercizio.getPunteggi());
         }
         return getMaxPunteggio(punteggi);
+    }
+    public static Float getSafePunteggio(ArrayList<Punteggio> punteggi){
+        Punteggio maxPunteggio = Punteggio.getMaxPunteggio(punteggi);
+        return maxPunteggio != null ? maxPunteggio.getPunteggio() : 0.0f;
+    }
+    public static Float getMaxPunteggio(User user, Grado grado) throws ConnectionException {
+        Punteggio punteggio = Punteggio.getMaxPunteggioByUserAndGrado(user, grado);
+        return (punteggio != null) ? punteggio.getPunteggio() : 0.0f;
     }
 }
