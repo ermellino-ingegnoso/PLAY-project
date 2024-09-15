@@ -11,7 +11,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
+import unibo.javafxmvc.DAO.PunteggioDBM;
 import unibo.javafxmvc.Main;
+import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.CommentiFactory;
 import unibo.javafxmvc.model.CommentiModel;
 import unibo.javafxmvc.model.Grado;
@@ -102,7 +104,11 @@ public class CommentiController implements Initializable {
             aspetta();
             Main.punteggio = punteggio;
             Main.gradoAttuale = punteggio.getGrado();
-            //Main.changeScene("View/PunteggiEsercizio.fxml");
+            try {
+                PunteggioDBM.insertPunteggio(punteggio);
+            } catch (ConnectionException e) {
+                Main.changeScene("View/ErroreDatabase.fxml");
+            }
             return;
         }
         System.out.println(esercizio.getOpzioni().get(0));
