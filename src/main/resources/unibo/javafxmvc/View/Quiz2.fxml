@@ -11,36 +11,37 @@
 <?import javafx.scene.text.Font?>
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1094.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.Quiz2Controller">
-  <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="380.0" minWidth="10.0" percentWidth="50.0" prefWidth="240.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="380.0" minWidth="10.0" percentWidth="50.0" prefWidth="323.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints maxHeight="40.0" minHeight="10.0" percentHeight="7.0" prefHeight="40.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="329.0" minHeight="10.0" prefHeight="297.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="338.0" minHeight="10.0" percentHeight="43.0" prefHeight="300.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="164.0" minHeight="0.0" percentHeight="7.0" prefHeight="40.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <Label fx:id="lbTitolo" alignment="CENTER" text="Quiz" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
-         <font>
-            <Font size="30.0" />
-         </font>
-         <GridPane.margin>
-            <Insets />
-         </GridPane.margin>
-      </Label>
-      <ImageView fx:id="iv1" fitHeight="329.0" fitWidth="547.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
-      <ImageView fx:id="iv3" fitHeight="331.0" fitWidth="547.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
-      <ImageView fx:id="iv4" fitHeight="331.0" fitWidth="547.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Button fx:id="bInvia" mnemonicParsing="false" onMouseClicked="#InviaOnMOusePressed" text="Invia" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Button fx:id="bIndietro" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#IndietroOnMousePressed" text="Indietro" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
-      <Label fx:id="lbIstruzione" text="Seleziona il codice corretto" />
-      <Label fx:id="lbCorretto" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-      <StackPane fx:id="spStack" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <children>
-            <ImageView fx:id="iv2" fitHeight="310.0" fitWidth="520.0" pickOnBounds="true" preserveRatio="true" />
-         </children>
-      </StackPane>
-   </children>
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="380.0" minWidth="10.0" percentWidth="50.0" prefWidth="240.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="380.0" minWidth="10.0" percentWidth="50.0" prefWidth="323.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="40.0" minHeight="10.0" percentHeight="7.0" prefHeight="40.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="329.0" minHeight="10.0" prefHeight="297.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="338.0" minHeight="10.0" percentHeight="43.0" prefHeight="300.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="164.0" minHeight="0.0" percentHeight="7.0" prefHeight="40.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <Label fx:id="lbTitolo" alignment="CENTER" text="Quiz" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+            <font>
+                <Font size="30.0" />
+            </font>
+            <GridPane.margin>
+                <Insets />
+            </GridPane.margin>
+        </Label>
+        <ImageView fx:id="iv1" fitHeight="329.0" fitWidth="547.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+        <ImageView fx:id="iv3" fitHeight="331.0" fitWidth="547.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2" />
+        <ImageView fx:id="iv4" fitHeight="331.0" fitWidth="547.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Button fx:id="bInvia" mnemonicParsing="false" onMouseClicked="#InviaOnMOusePressed" text="Invia" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Button fx:id="bIndietro" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#IndietroOnMousePressed" text="Indietro" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+        <Label fx:id="lbIstruzione" text="Seleziona il codice corretto" />
+        <Label fx:id="lbCorretto" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <children>
+                <ImageView fx:id="iv2" fitHeight="310.0" fitWidth="520.0" pickOnBounds="true" preserveRatio="true" />
+            </children>
+        </StackPane>
+    </children>
 </GridPane>
+

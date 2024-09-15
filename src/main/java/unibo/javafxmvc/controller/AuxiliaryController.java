@@ -2,13 +2,16 @@ package unibo.javafxmvc.controller;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -139,7 +142,7 @@ public class AuxiliaryController {  //TODO: separare le resonsabilità per ambit
         circle.setStroke(Color.web(utente.getColor()));
         circle.setStrokeWidth(0);
         avatar.setClip(circle);
-        drawBorders(Color.web(utente.getColor()), circleAvatar, label, gridPane);
+        drawBordersInGrid(Color.web(utente.getColor()), circleAvatar, label, gridPane);
         label.setText(utente.getUsername());
 
         Rotate rotate = new Rotate();
@@ -147,7 +150,36 @@ public class AuxiliaryController {  //TODO: separare le resonsabilità per ambit
         rotate.setPivotY(avatar.getFitHeight() / 2);
         avatar.getTransforms().add(rotate);
     }
-    private static void drawBorders(Color borderColor,Circle circleAvatar, Label label, GridPane gridPane){
+    /**Costruisce un avatar circolare con un bordo colorato ed una label con il nome dell'utente anch'essa colorata in base al colore selezionato dallo <code>User</code>; <br> posiziona questo avatar in un <code>Pane</code>
+     * @param utente l'utente di cui si vuole costruire l'avatar
+     * @param pane il <code>Pane</code> che contiene tutti i controlli
+     * @param dimensione la dimensione dell'avatar
+     * */
+    public static void initAvatar(User utente, Pane pane, int dimensione) {
+        ImageView avatar = new ImageView();
+        avatar.setImage(utente.getAvatar());
+        avatar.setFitHeight(dimensione); // Altezza avatar
+        avatar.setFitWidth(dimensione);  // Larghezza avatar
+
+        Circle circleAvatar = new Circle(avatar.getFitWidth() / 2, avatar.getFitHeight() / 2, (Math.min(avatar.getFitWidth(), avatar.getFitHeight()) / 2) - (double)(dimensione/10));
+        circleAvatar.setStroke(Color.web(utente.getColor()));
+        circleAvatar.setStrokeWidth(2);
+        avatar.setClip(circleAvatar);
+
+        Label label = new Label(utente.getUsername());
+        label.setTextFill(Color.web(utente.getColor()));
+
+        // Creare un nuovo HBox per contenere i nuovi nodi
+        HBox hbox = new HBox(5);
+        hbox.getChildren().addAll(avatar, label);
+        hbox.setAlignment(Pos.CENTER);
+        HBox.setHgrow(hbox, Priority.ALWAYS);
+        pane.getChildren().setAll(hbox);
+    }
+    private static void drawBorders(){
+
+    }
+    private static void drawBordersInGrid(Color borderColor,Circle circleAvatar, Label label, GridPane gridPane){
         circleAvatar.setStroke(borderColor);
         label.setTextFill(borderColor);
         Line line = new Line(0, 0, gridPane.getWidth(), 0);

@@ -14,3 +14,10 @@
 .red{
     -fx-background-color: red;
 }
+
+.table-cell {
+    -fx-alignment: CENTER;
+}
+.table-cell-right {
+    -fx-alignment: CENTER-RIGHT;
+}
