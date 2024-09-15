@@ -69,10 +69,10 @@ public class Quiz2Controller {
         iv2.setOnMouseClicked(this::handleImageClick);
         iv3.setOnMouseClicked(this::handleImageClick);
         iv4.setOnMouseClicked(this::handleImageClick);
-        Image image = new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Ordina/Prova5.png"));
-        Image imgae2 = new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Ordina/Prova6.png"));
-        Image image3 = new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Ordina/Prova7.png"));
-        Image image4 = new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Ordina/Prova8.png"));
+        Image image = new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Ordina/Prova15.png"));
+        Image imgae2 = new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Ordina/Prova16.png"));
+        Image image3 = new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Ordina/Prova17.png"));
+        Image image4 = new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Ordina/Prova18.png"));
         iv1.setImage(image);
         iv2.setImage(imgae2);
         iv3.setImage(image3);
