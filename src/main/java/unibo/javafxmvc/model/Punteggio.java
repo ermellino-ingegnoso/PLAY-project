@@ -1,6 +1,7 @@
 package unibo.javafxmvc.model;
 
 import unibo.javafxmvc.DAO.EsercizioEspertoDBM;
+import unibo.javafxmvc.DAO.PunteggioDBM;
 import unibo.javafxmvc.exception.ConnectionException;
 
 import java.util.ArrayList;
@@ -117,12 +118,15 @@ public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento de
      * @return - l'oggetto Punteggio con il valore di punteggio più alto, o <br> -<code>null</code> se non ci sono punteggi
      */
     public static Punteggio getMaxPunteggioByUserAndGrado(User user, Grado grado) throws ConnectionException {
-        ArrayList<EsercizioEsperto> eserciziEsperto = EsercizioEspertoDBM.getEserciziEspertoByUserAndGrado(user, grado);
-        ArrayList<Punteggio> punteggi = new ArrayList<>();
-        for (EsercizioEsperto esercizio : eserciziEsperto) {
-            punteggi.add(esercizio.getPunteggi());
+        if(grado.ordinal()<2) return getMaxPunteggio(PunteggioDBM.getPunteggiByUserGrado(user, grado));
+        else {
+            ArrayList<EsercizioEsperto> eserciziEsperto = EsercizioEspertoDBM.getEserciziEspertoByUserAndGrado(user, grado);
+            ArrayList<Punteggio> punteggi = new ArrayList<>();
+            for (EsercizioEsperto esercizio : eserciziEsperto) {
+                punteggi.add(esercizio.getPunteggi());
+            }
+            return getMaxPunteggio(punteggi);
         }
-        return getMaxPunteggio(punteggi);
     }
     public static Float getSafePunteggio(ArrayList<Punteggio> punteggi){
         Punteggio maxPunteggio = Punteggio.getMaxPunteggio(punteggi);
