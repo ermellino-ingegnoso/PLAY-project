@@ -1,5 +1,6 @@
 package unibo.javafxmvc.controller;
 
+import javafx.scene.control.ProgressBar;
 import javafx.scene.input.KeyEvent;
 import unibo.javafxmvc.DAO.EsercizioEspertoDBM;
 import javafx.scene.input.MouseEvent;
@@ -14,36 +15,68 @@ import javafx.scene.shape.Circle;
 import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.EsercizioEsperto;
 import unibo.javafxmvc.model.Grado;
+import unibo.javafxmvc.model.Punteggio;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
-public class UserHomeController implements Initializable {
+public class UserHomeController {
     @FXML
     private Circle circleAvatar;
+    @FXML
+    private Label lblEsercizioAvanzato;
+    @FXML
+    private Label lblEsercizioEsperto;
     @FXML
     private Label lblUsername;
     @FXML
     private GridPane mainGridPane;
     @FXML
+    private ProgressBar pbAvanzato;
+    @FXML
+    private ProgressBar pbPrincipiante;
+    @FXML
+    private ProgressBar pbIntermedio;
+    @FXML
+    private ProgressBar pbEsperto;
+    @FXML
     private ImageView userAvatar;
-    @FXML
-    private Circle circle;
-    @FXML
-    private Label lblEsercizioAvanzato;
-    @FXML
-    private Label lblEsercizioEsperto;
     private EsercizioEsperto esEsperto;
     private EsercizioEsperto esAvanzato;
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    private Punteggio punteggioPrincipiante;
+    private Punteggio punteggioIntermedio;
+    private Punteggio punteggioAvanzato;
+    private Punteggio punteggioEsperto;
+    @FXML
+    public void initialize() {
         AuxiliaryController.initAvatar(Main.currentUser, userAvatar, circleAvatar, lblUsername, mainGridPane);
-
         caricaEsercizi();
-        if(esEsperto != null) lblEsercizioEsperto.setText(esEsperto.getRegola().getTitolo());
-        else System.err.println("esEsperto è null");
-        if(esAvanzato != null) lblEsercizioAvanzato.setText(esAvanzato.getRegola().getTitolo());
-        else System.err.println("esAvanzato è null");
+        recuperaPunteggi();
+        pbPrincipiante.setProgress((punteggioPrincipiante != null)? (punteggioPrincipiante.getPunteggio()/punteggioPrincipiante.getPunteggioTotale()) : 0.0f);
+        pbIntermedio.setProgress((punteggioIntermedio != null)? (punteggioIntermedio.getPunteggio()/punteggioIntermedio.getPunteggioTotale()) : 0.0f);
+        if(esEsperto != null){
+            lblEsercizioEsperto.setText(esEsperto.getRegola().getTitolo());
+            pbEsperto.setProgress((punteggioEsperto.getPunteggio()/punteggioEsperto.getPunteggioTotale()));
+        }
+        else pbEsperto.setProgress(0);
+        if(esAvanzato != null){
+            lblEsercizioAvanzato.setText(esAvanzato.getRegola().getTitolo());
+            pbAvanzato.setProgress((punteggioAvanzato.getPunteggio()/punteggioAvanzato.getPunteggioTotale()));
+        }
+        else pbAvanzato.setProgress(0);
+    }
+    private void recuperaPunteggi(){
+        try{
+            punteggioPrincipiante = Punteggio.getMaxPunteggioByUserAndGrado(Main.currentUser, Grado.PRINCIPIANTE);
+            punteggioIntermedio = Punteggio.getMaxPunteggioByUserAndGrado(Main.currentUser, Grado.INTERMEDIO);
+            // punteggioAvanzato = Punteggio.getMaxPunteggioByUserAndGrado(Main.currentUser, Grado.AVANZATO);
+            // punteggioEsperto = Punteggio.getMaxPunteggioByUserAndGrado(Main.currentUser, Grado.ESPERTO);
+            punteggioEsperto = esEsperto.getPunteggi();
+            punteggioAvanzato = esAvanzato.getPunteggi();
+        } catch(ConnectionException ce){Main.changeScene("View/ErroreDatabase");
+        } catch (NullPointerException npe){System.err.println("Recupero punteggi fallito");}
     }
     @FXML
     void AvanzatoOnMouseClicked(MouseEvent event) {

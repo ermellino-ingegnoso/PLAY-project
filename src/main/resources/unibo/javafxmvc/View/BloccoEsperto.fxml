@@ -51,14 +51,14 @@
             <Insets left="50.0" />
          </GridPane.margin>
       </Label>
-      <SplitPane dividerPositions="0.34678794769755544" prefHeight="160.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.rowSpan="2">
+      <SplitPane fx:id="splitPaneBlocco" dividerPositions="0.6064525298465037" prefHeight="160.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.rowSpan="2">
         <items>
             <TextArea fx:id="tfMetodo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" promptText="Codice del blocco" wrapText="true">
                <font>
                   <Font name="Consolas" size="13.0" />
                </font>
             </TextArea>
-            <TextArea fx:id="tfClasse" prefHeight="230.0" prefWidth="401.0" promptText="Codice Classe senza Main" text="Codice Classe senza MainCodice Classe senza MainCodice Classe senza MainCodice Classe senza MainCodice Classe senza MainCodice Classe senza MainCodice Classe senza MainCodice Classe senza MainCodice Classe senza MainCodice Classe senza MainCodice Classe senza Main" wrapText="true" />
+            <TextArea fx:id="tfClasse" prefHeight="230.0" prefWidth="401.0" wrapText="true" />
         </items>
          <GridPane.margin>
             <Insets left="50.0" right="50.0" top="10.0" />

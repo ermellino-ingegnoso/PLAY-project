@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 /** Ricorda di impostare main.punteggio di chiamare la vista associata a questo controller */
-public class PunteggiEsercizioController implements Initializable {
+public class PunteggiEsercizioController{
     @FXML
     private Circle circleAvatar;
     @FXML
@@ -36,8 +36,8 @@ public class PunteggiEsercizioController implements Initializable {
     @FXML
     private Label lblInfoPeso;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @FXML
+    public void initialize() {
         AuxiliaryController.initAvatar(Main.currentUser, userAvatar, circleAvatar, lblUsername, mainGridPane);
 
         lblInfo.setText("Nell' esercizio "+ Main.punteggio.getTitolo() +" di difficoltà "+ Main.punteggio.getGrado().toString().toLowerCase() +" hai ottenuto un totale di: "+ Main.punteggio.getPunteggio() +" punti");

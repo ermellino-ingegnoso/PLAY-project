@@ -24,7 +24,7 @@ import java.io.File;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class RegistrazioneAdminController implements Initializable {
+public class RegistrazioneAdminController{
     @FXML
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     @FXML
@@ -64,8 +64,8 @@ public class RegistrazioneAdminController implements Initializable {
     private FileChooser fileChooser;
     private Boolean check;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @FXML
+    public void initialize() {
         Platform.runLater(() -> tfNome.requestFocus()); //  imposta il focus del cursore su tfNome
         ivAvatar.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/unibo/javafxmvc/Images/avatar.png"))));
         try{

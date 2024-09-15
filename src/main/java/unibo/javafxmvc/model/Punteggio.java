@@ -5,6 +5,7 @@ import unibo.javafxmvc.DAO.PunteggioDBM;
 import unibo.javafxmvc.exception.ConnectionException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento degli esercizi ad essa
     // associati
@@ -52,6 +53,14 @@ public class Punteggio { // Il grado di svolgimento è dato dallo svolgimento de
             if (p != null) punti += Float.valueOf(p)+((Float.valueOf(p)!=0)?getPeso():0.0f);
         }
         return punti;
+    }
+    /** @return il totale dei punti per l'esercizio relativo, considerando il peso del grado di svolgimento */
+    public Float getPunteggioTotale() {
+        Float puntiTot = 0.0f;
+        for(int i=1 ; i<=punteggi.size(); i++){
+            puntiTot += Float.valueOf(i+getPeso());
+        }
+        return puntiTot;
     }
     public Float getPuntoPonderato(int index) {
         return Float.valueOf(Float.valueOf(punteggi.get(index))+((Float.valueOf(punteggi.get(index))!=0)?getPeso():0.0f));

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-public class OrdinaPassiController implements Initializable {
+public class OrdinaPassiController{
     private OrdinaPassiModel esercizioCorrente;
 
     @FXML
@@ -64,8 +64,8 @@ public class OrdinaPassiController implements Initializable {
     @FXML
     private Label lbPunti;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @FXML
+    public void initialize() {
         OrdinaPassiFactory factory1 = new OrdinaPassiFactory();
         OrdinaPassiModel esercizio = factory1.getOrdinaPassiModel();
 
