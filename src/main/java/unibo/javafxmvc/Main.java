@@ -52,7 +52,7 @@ public class Main extends Application {
         /** Utilizzaata per la gestione delle regole */
         public static Grado gradoAttuale;
     public static Punteggio punteggio;
-    private static Scene currentScene;
+    public static Scene currentScene;
     public static Stage thisStage;
     public static User currentUser;
     public static EsercizioGenerico ultimoEsercizioGenerico;
@@ -93,7 +93,7 @@ public class Main extends Application {
     public static void changeScene(String fxmlPath) {
         try {
             currentScene = new Scene((new FXMLLoader(Main.class.getResource(fxmlPath))).load());    // removeImageTags(fxmlStream)
-            currentScene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("/unibo/javafxmvc/css/style.css")).toExternalForm());
+            currentScene.getStylesheets().setAll(Objects.requireNonNull(Main.class.getResource("/unibo/javafxmvc/css/style.css")).toExternalForm());
             thisStage.setMaximized(maximized);
             thisStage.setScene(currentScene);
         } catch (Exception e) {

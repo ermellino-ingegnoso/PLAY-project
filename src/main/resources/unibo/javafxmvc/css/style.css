@@ -21,3 +21,110 @@
 .table-cell-right {
     -fx-alignment: CENTER-RIGHT;
 }
+.progress-bar {
+    -fx-accent: linear-gradient(to right, #69bff8, #9a9ae1); /* Colore del riempimento della barra */
+    -fx-control-inner-background: transparent; /* Sfondo trasparente per visualizzare solo il riempimento */
+    -fx-background-color: transparent; /* Colore di sfondo trasparente */
+    -fx-border-radius: 15px; /* Arrotondamento dei bordi */
+    -fx-background-radius: 15px; /* Arrotondamento del contenitore della barra */
+}
+.transparent-progress-bar {
+    -fx-background-color: transparent; /* Sfondo trasparente */
+    -fx-accent: rgba(170, 143, 216, 0.8); /* Riempimento traslucido */
+    -fx-border-color: transparent; /* Bordo trasparente */
+}
+.progress-bar .track {
+    -fx-background-color: #ececec; /* Colore della traccia (parte vuota) */
+    -fx-background-radius: 15px; /* Arrotondamento della traccia */
+}
+.progress-bar .bar {
+    -fx-background-radius: 15px; /* Arrotondamento della barra riempita */
+}
+.border-pane {
+    -fx-border-radius: 30px; /* Arrotonda gli angoli del BorderPane */
+    -fx-background-radius: 30px ; /* Arrotonda anche lo sfondo del BorderPane */
+    -fx-text-fill: white;
+}
+.general-text{
+    -fx-text-fill: white;
+}
+.grid-grad {
+    -fx-background-color: radial-gradient(
+            focus-angle 90deg,
+            focus-distance 0%,
+            center 50% 50%,
+            radius 90%,
+            #c777b9 10%,
+            #ba83ca 20%,
+            #aa8fd8 30%,
+            #9a9ae1 50%, /* Aumentare la porzione del colore viola */
+            #8aa7ec 55%, /* Diminuire notevolmente la porzione del colore blu */
+            #79b3f4 60%,
+            #69bff8 65%
+    );
+    -fx-alignment: center;
+}
+.grid-container {
+    -fx-background-color: white; /* La griglia esterna rimane bianca */
+}
+
+.panel-top-left {
+    -fx-background-color: radial-gradient(
+            focus-angle 90deg,
+            focus-distance 0%,
+            center 25% 25%, /* Centro per il pannello in alto a sinistra */
+            radius 300%, /* Aumentato per coprire l'intera griglia */
+            #c777b9 10%,
+            #ba83ca 20%,
+            #aa8fd8 30%,
+            #9a9ae1 50%,
+            #8aa7ec 55%,
+            #79b3f4 60%,
+            #69bff8 65%
+    );
+}
+.panel-top-right {
+    -fx-background-color: radial-gradient(
+            focus-angle 90deg,
+            focus-distance 0%,
+            center 75% 25%, /* Centro per il pannello in alto a destra */
+            radius 300%,
+            #c777b9 10%,
+            #ba83ca 20%,
+            #aa8fd8 30%,
+            #9a9ae1 50%,
+            #8aa7ec 55%,
+            #79b3f4 60%,
+            #69bff8 65%
+    );
+}
+.panel-bottom-left {
+    -fx-background-color: radial-gradient(
+            focus-angle 90deg,
+            focus-distance 0%,
+            center 25% 75%, /* Centro per il pannello in basso a sinistra */
+            radius 300%,
+            #c777b9 10%,
+            #ba83ca 20%,
+            #aa8fd8 30%,
+            #9a9ae1 50%,
+            #8aa7ec 55%,
+            #79b3f4 60%,
+            #69bff8 65%
+    );
+}
+.panel-bottom-right {
+    -fx-background-color: radial-gradient(
+            focus-angle 90deg,
+            focus-distance 0%,
+            center 75% 75%, /* Centro per il pannello in basso a destra */
+            radius 300%,
+            #c777b9 10%,
+            #ba83ca 20%,
+            #aa8fd8 30%,
+            #9a9ae1 50%,
+            #8aa7ec 55%,
+            #79b3f4 60%,
+            #69bff8 65%
+    );
+}

@@ -78,9 +78,6 @@ public class BloccoEspertoController{
         tfMetodo.setText((Main.gradoAttuale == Grado.ESPERTO) ? SignatureFinder.extractSignature(be.getBloccoGenerico().getMetodo())+"{\n\n}" : be.getBloccoGenerico().getMetodo());
     }
     private void fillFields(){
-        Main.punteggio = Main.esercizioCorrente.getPunteggi();
-        Main.changeScene("View/PunteggiEsercizio.fxml");
-        /*
         try {
             be = Main.esercizioCorrente.getBloccoEsperto(Main.bloccoIndex);
             if (be.isSuperato()) {    // se il blocco è già stato superato non viene mostrato
@@ -103,15 +100,10 @@ public class BloccoEspertoController{
                 btnProsegui.setDisable(false);
             }
         } catch(Exception e) {viewPunteggio();}
-
-         */
     }
     private void viewPunteggio(){
         System.out.println("Fine esercizio esperto");
-        Main.bloccoIndex = 0;
-        Main.generalCounter = 0;
         Main.punteggio = Main.esercizioCorrente.getPunteggi();
-        Main.esercizioCorrente = null;
         Main.changeScene("View/PunteggiEsercizio.fxml");
     }
     private Boolean checkCode() {

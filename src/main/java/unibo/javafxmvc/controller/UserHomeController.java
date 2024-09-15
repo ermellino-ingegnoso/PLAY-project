@@ -2,6 +2,7 @@ package unibo.javafxmvc.controller;
 
 import javafx.scene.control.ProgressBar;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
 import unibo.javafxmvc.DAO.EsercizioEspertoDBM;
 import javafx.scene.input.MouseEvent;
 import unibo.javafxmvc.Main;
@@ -66,6 +67,13 @@ public class UserHomeController {
             pbAvanzato.setProgress((punteggioAvanzato.getPunteggio()/punteggioAvanzato.getPunteggioTotale()));
         }
         else pbAvanzato.setProgress(0);
+        /*
+        Main.currentScene.getRoot().lookupAll(".progress-bar").forEach(node -> {
+            if (node instanceof ProgressBar) {
+                ProgressBar progressBar = (ProgressBar) node;
+                progressBar.setBackground(Background.EMPTY);
+            }
+        });*/
     }
     private void recuperaPunteggi(){
         try{
