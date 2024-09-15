@@ -75,7 +75,7 @@ public class QuizController {
     @FXML
     public void initialize() {
         System.out.println("QuizController.initialize");
-        Image image = new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Ordina/Prova10.png"));
+        Image image = new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Ordina/Prova13.png"));
         ivFoto.setImage(image);
         punteggio = new Punteggio(Grado.PRINCIPIANTE, Main.currentUser, "Quiz");
 
@@ -85,7 +85,7 @@ public class QuizController {
     public void InviaOnMouseClicked() {
         switch (i) {
             case 0:
-                if (tfText.getText().equals("10")) {
+                if (tfText.getText().equals("9")) {
                     dueSecondi();
                     SecondaScena();
                     punteggio.addPunteggio(1);
@@ -97,9 +97,8 @@ public class QuizController {
                 i++;
                 break;
             case 1:
-                if (rbOpzione2.isSelected()) {
+                if (rbOpzione3.isSelected()) {
                     punteggio.addPunteggio(2);
-                    System.out.println("ciao");
                     dueSecondi();
                     TerzaScena();
                 } else {
@@ -119,7 +118,7 @@ public class QuizController {
         lbIstruzione.setText("Individuare per quali valori è importante fare il test");
         tfText.setVisible(false);
         hbHbox.setVisible(true);
-        Image image = new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Ordina/Prova11.png"));
+        Image image = new Image(getClass().getResourceAsStream("/unibo/javafxmvc/Images/Ordina/Prova14.png"));
         ivFoto.setImage(image);
     }
 
