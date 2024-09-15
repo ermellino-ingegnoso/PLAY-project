@@ -5,12 +5,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import unibo.javafxmvc.DAO.PunteggioDBM;
 import unibo.javafxmvc.DAO.UserDBM;
 import unibo.javafxmvc.Main;
@@ -53,6 +56,25 @@ public class ClassificaGeneraleController {
         AuxiliaryController.initAvatar(Main.currentUser, userAvatar, circleAvatar, lblUsername, mainGridPane);
 
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
+        usernameCol.setCellFactory(column -> new TableCell<UserScore, String>() {
+            private final HBox hbox = new HBox(5); // Spazio di 5 pixel tra avatar e username
+
+            @Override
+            protected void updateItem(String username, boolean empty) {
+                super.updateItem(username, empty);
+                if (empty || username == null) {
+                    setGraphic(null);
+                } else {
+                    UserScore userScore = getTableRow().getItem();
+                    if (userScore != null) {
+                        // Creare un nuovo HBox per evitare di riutilizzare nodi già utilizzati
+                        HBox newHbox = new HBox(5);
+                        AuxiliaryController.initAvatar(userScore.getUser(), newHbox, 40);
+                        setGraphic(newHbox);
+                    }
+                }
+            }
+        });
         principianteCol.setCellValueFactory(new PropertyValueFactory<>("principiante"));
         intermedioCol.setCellValueFactory(new PropertyValueFactory<>("intermedio"));
         avanzatoCol.setCellValueFactory(new PropertyValueFactory<>("avanzato"));
