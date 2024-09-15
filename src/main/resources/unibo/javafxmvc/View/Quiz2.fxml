@@ -37,7 +37,7 @@
         <Button fx:id="bIndietro" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#IndietroOnMousePressed" text="Indietro" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
         <Label fx:id="lbIstruzione" text="Seleziona il codice corretto" />
         <Label fx:id="lbCorretto" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <StackPane fx:id="spStack" prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <children>
                 <ImageView fx:id="iv2" fitHeight="310.0" fitWidth="520.0" pickOnBounds="true" preserveRatio="true" />
             </children>
