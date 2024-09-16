@@ -71,24 +71,9 @@
     -fx-padding: 5px;
 }
 .radio-button:selected .radio {
-    -fx-mark-color: yellow;
+    -fx-mark-color: #4accff;
 }
-.radio-button {
-    -fx-border-color: blue;
-    -fx-border-width: 2px;
-    -fx-border-radius: 5px;
-    -fx-padding: 5px;
-}
-.radio-button:hover {
-    -fx-text-fill: #2c3e50;
-}
-.radio-button .radio {
-    -fx-background-color: #ecf0f1;
-    -fx-border-color: #95a5a6;
-    -fx-border-width: 2px;
-    -fx-background-radius: 10px;
-    -fx-border-radius: 10px;
-}
+
 .progress-bar {
     -fx-accent: linear-gradient(to right, #69bff8, #9a9ae1); /* Colore del riempimento della barra */
     -fx-control-inner-background: transparent; /* Sfondo trasparente per visualizzare solo il riempimento */
