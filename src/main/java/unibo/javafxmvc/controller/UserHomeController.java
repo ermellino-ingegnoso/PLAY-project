@@ -1,5 +1,6 @@
 package unibo.javafxmvc.controller;
 
+import javafx.scene.control.ProgressBar;
 import javafx.scene.input.KeyEvent;
 import unibo.javafxmvc.DAO.EsercizioEspertoDBM;
 import javafx.scene.input.MouseEvent;
@@ -33,6 +34,7 @@ public class UserHomeController implements Initializable {
     private Label lblEsercizioAvanzato;
     @FXML
     private Label lblEsercizioEsperto;
+
     private EsercizioEsperto esEsperto;
     private EsercizioEsperto esAvanzato;
     @Override

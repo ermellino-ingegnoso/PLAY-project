@@ -55,7 +55,16 @@ public class Quiz2Controller {
     private RadioButton rb4;
 
     @FXML
-    private StackPane spStack;
+    private StackPane spStack1;
+
+    @FXML
+    private StackPane spStack2;
+
+    @FXML
+    private StackPane spStack3;
+
+    @FXML
+    private StackPane spStack4;
 
     @FXML
     private Label lbCorretto;
@@ -82,12 +91,16 @@ public class Quiz2Controller {
         ImageView clickedImage = (ImageView) event.getSource();
         if (selectedImage != null) {
             // Reset the previous selected image (e.g., remove border or reset opacity)
-            spStack.setStyle("");
+            spStack1.setStyle("");
+            spStack2.setStyle("");
+            spStack3.setStyle("");
+            spStack4.setStyle("");
         }
         // Set the new selected image
         selectedImage = clickedImage;
         // Change the visual state of the selected image (e.g., add border or change opacity)
-        spStack.setStyle("-fx-border-color: blue; -fx-border-width: 2;");
+        ((ImageView)event.getSource()).getParent().setStyle("-fx-border-color: blue; -fx-border-width: 2;");
+
 
     }
 
@@ -98,7 +111,7 @@ public class Quiz2Controller {
 
     @FXML
     private void InviaOnMOusePressed(MouseEvent event) {
-        if (iv2.equals(selectedImage)) {
+        if (iv3.equals(selectedImage)) {
             lbCorretto.setText("Corretto!");
             lbCorretto.setVisible(true);
             lbCorretto.setStyle("-fx-text-fill: green");
