@@ -11,6 +11,11 @@
     -fx-home-col-arancione:  #ffbf80;
     -fx-viola-scuro: #3a3a96;
 }
+.falling-digit {
+    -fx-font-size: 10px;
+    -fx-fill: violet; /* Change this to the desired color */
+    -fx-opacity: 1.0; /* Initial opacity */
+}
 .color-picker {
     -fx-background-color: white;
     -fx-border-color: #7676d6;
