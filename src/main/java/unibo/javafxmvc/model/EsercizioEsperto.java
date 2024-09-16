@@ -36,7 +36,7 @@ public class EsercizioEsperto extends EsercizioGenerico{
     public void setId(Integer id) {
         this.id = id;
     }
-    public BloccoEsperto getBloccoEsperto(int i){
+    public BloccoEsperto getBloccoEsperto(int i) throws IndexOutOfBoundsException{
         return blocchiEsperto.get(i);
     }
     public ArrayList<BloccoEsperto> getBlocchiEsperto() {

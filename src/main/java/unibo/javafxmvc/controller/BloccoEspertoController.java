@@ -1,9 +1,9 @@
 package unibo.javafxmvc.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -13,11 +13,8 @@ import unibo.javafxmvc.Main;
 import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.BloccoEsperto;
 import unibo.javafxmvc.model.Grado;
-import unibo.javafxmvc.model.Punteggio;
 import unibo.javafxmvc.util.Compiler;
 import unibo.javafxmvc.util.SignatureFinder;
-
-import java.util.ArrayList;
 
 import static unibo.javafxmvc.util.CodeValidator.combineCode;
 
@@ -37,18 +34,21 @@ public class BloccoEspertoController{
     private TextArea tfMetodo;
     @FXML
     private Button btnProsegui;
+    @FXML
+    private SplitPane splitPaneBlocco;
 
     @FXML
     public void initialize() {    //  Logica di inizializzazione iterativa
         AuxiliaryController.addTooltipTo(lblFirma,  Duration.millis(500), "Reimposta la firma del metodo ed elimina il corpo");
-        initFields();
+        Main.generalCounter = Main.esercizioCorrente.getNblocchiEsperto();
         tfClasse.setEditable(false);
+        fillFields();
     }
     @FXML
-    void AnnullaOnKeyPressed(KeyEvent event) { if(AuxiliaryController.keyEnterPressed(event)) annulla();}
+    void AnnullaOnKeyPressed(KeyEvent event) { if(AuxiliaryController.keyEnterPressed(event)) viewPunteggio();}
     @FXML
     void AnnullaOnMouseClicked(MouseEvent event) {
-        annulla();
+        viewPunteggio();
     }
     @FXML
     void SaveOnKeyPressed(KeyEvent event) { if(AuxiliaryController.keyEnterPressed(event)) save();}
@@ -65,46 +65,46 @@ public class BloccoEspertoController{
             AuxiliaryController.alertWindow("Errore", "Errore di connessione", "EsercizioEsperto non inserito");
             Main.changeScene("View/ErroreDatabase.fxml");
         }
-        if(Main.bloccoIndex >= Main.esercizioCorrente.getNblocchiEsperto()-1){
-            Main.punteggio = Main.esercizioCorrente.getPunteggi();
-            Main.changeScene("View/PunteggiEsercizio.fxml");
+        if(Main.bloccoIndex >= Main.esercizioCorrente.getNblocchiEsperto()-1) viewPunteggio();
+        else {
+            Main.bloccoIndex++;
+            fillFields();
         }
-        else Main.bloccoIndex++;
-        initFields();
-        btnProsegui.setDisable(false);
-    }
-    private void annulla(){
-        Main.changeScene("View/UserHome.fxml");
     }
     @FXML
-    void lblReimpostaFirmaOnMouseClicked(MouseEvent event) {reimpostaFirma();}
+    private void lblReimpostaFirmaOnMouseClicked(MouseEvent event) {reimpostaFirma();}
 
     private void reimpostaFirma(){
         tfMetodo.setText((Main.gradoAttuale == Grado.ESPERTO) ? SignatureFinder.extractSignature(be.getBloccoGenerico().getMetodo())+"{\n\n}" : be.getBloccoGenerico().getMetodo());
     }
-    private void initFields(){
-        be = Main.esercizioCorrente.getBloccoEsperto(Main.bloccoIndex);
-        if(be.isSuperato()){    // se il blocco è già stato superato non viene mostrato
-            if (Main.bloccoIndex >= Main.esercizioCorrente.getNblocchiEsperto() - 1) Main.changeScene("View/UserHome.fxml");
-            else{
-                Main.bloccoIndex++;
-                initFields();
+    private void fillFields(){
+        try {
+            be = Main.esercizioCorrente.getBloccoEsperto(Main.bloccoIndex);
+            if (be.isSuperato()) {    // se il blocco è già stato superato non viene mostrato
+                if (Main.bloccoIndex >= Main.generalCounter - 1) viewPunteggio();
+                else {
+                    Main.bloccoIndex++;
+                    fillFields();
+                }
+            } else {
+                lblConsegna.setText(be.getBloccoGenerico().getConsegna());
+                lblTitolo.setText(Main.esercizioCorrente.getRegola().getTitolo());
+                lblIndice.setText("Blocco " + (Main.bloccoIndex + 1) + " di " + Main.esercizioCorrente.getNblocchiEsperto());
+                tfClasse.setText(SignatureFinder.extractClassWithoutMain((be.getBloccoGenerico().getCodice())));
+                if (Main.gradoAttuale == Grado.AVANZATO) {
+                    tfClasse.setDisable(true);
+                    tfClasse.setVisible(false);
+                    splitPaneBlocco.setDividerPositions(100.0);
+                }
+                reimpostaFirma();
+                btnProsegui.setDisable(false);
             }
-        }
-        lblConsegna.setText(be.getBloccoGenerico().getConsegna());
-        lblTitolo.setText(Main.esercizioCorrente.getRegola().getTitolo());
-        lblIndice.setText("Blocco " + (Main.bloccoIndex + 1) + " di " + Main.esercizioCorrente.getNblocchiEsperto());
-        tfClasse.setText(SignatureFinder.extractClassWithoutMain((be.getBloccoGenerico().getCodice())));
-        if(Main.gradoAttuale == Grado.AVANZATO){
-            tfClasse.setDisable(true);
-            tfClasse.setVisible(false);
-        }
-        /*
-        try{
-            tfClasse.setText((Main.gradoAttuale == Grado.ESPERTO) ? SignatureFinder.extractClassWithoutMain((be.getBloccoGenerico().getCodice())) : SignatureFinder.removeMethodFromClass(be.getBloccoGenerico().getCodice(), be.getBloccoGenerico().getMetodo()));
-        } catch (IllegalArgumentException iae){System.err.println("Errore in BloccoEspertoController#initFields: " + iae.getMessage());}
-         */
-        reimpostaFirma();
+        } catch(Exception e) {viewPunteggio();}
+    }
+    private void viewPunteggio(){
+        System.out.println("Fine esercizio esperto");
+        Main.punteggio = Main.esercizioCorrente.getPunteggi();
+        Main.changeScene("View/PunteggiEsercizio.fxml");
     }
     private Boolean checkCode() {
         if(Main.gradoAttuale == Grado.ESPERTO){

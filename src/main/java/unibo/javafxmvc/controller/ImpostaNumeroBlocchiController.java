@@ -11,15 +11,15 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ImpostaNumeroBlocchiController implements Initializable {
+public class ImpostaNumeroBlocchiController{
     @FXML
     private Spinner<Integer> spinnerBlocchi;
     private Stage dialogStage;
     private boolean okClicked = false;
     private int number;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @FXML
+    public void initialize() {
         spinnerBlocchi.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 10, 1));
     }
     public void setDialogStage(Stage dialogStage) {
