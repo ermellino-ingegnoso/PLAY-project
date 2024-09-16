@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="mainGridPane" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.ModificaProfiloController">
+<GridPane fx:id="mainGridPane" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="906.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.ModificaProfiloController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="80.0" percentWidth="20.0" prefWidth="100.0" />
         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="800.0" minWidth="10.0" percentWidth="60.0" />
@@ -33,19 +33,6 @@
          <GridPane.margin>
             <Insets />
          </GridPane.margin></Label>
-        <Button fx:id="btnAddUser" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#btnAddUserOnKeyPressed" onMouseClicked="#btnAddUserOnMouseClicked" prefHeight="40.0" prefWidth="100.0" text="Modifica" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
-            <font>
-                <Font size="13.0" />
-            </font>
-        </Button>
-        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#IndietroOnMouseClicked" prefHeight="40.0" prefWidth="100.0" text="Indietro" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
-            <GridPane.margin>
-                <Insets />
-            </GridPane.margin>
-         <font>
-            <Font size="13.0" />
-         </font>
-        </Button>
         <Label fx:id="lblRegistrato" text="Utente già registrato" textFill="#bca000" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
       <GridPane alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="271.0" prefWidth="680.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
         <columnConstraints>
@@ -61,36 +48,36 @@
             <RowConstraints maxHeight="60.0" minHeight="30.0" prefHeight="40.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-              <Label fx:id="lblPropNome" onMouseClicked="#lblNomePropOnMouseClicked" text="Nome" GridPane.halignment="RIGHT">
+              <Label fx:id="lblPropNome" onMouseClicked="#lblNomePropOnMouseClicked" styleClass="anag-label" stylesheets="@../css/styleAnag.css" text="Nome" GridPane.halignment="RIGHT">
                   <GridPane.margin>
                       <Insets right="10.0" />
                   </GridPane.margin>
               </Label>
-              <Label fx:id="lblPropCognome" onMouseClicked="#lblCognomePropOnMouseClicked" text="Cognome" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+              <Label fx:id="lblPropCognome" onMouseClicked="#lblCognomePropOnMouseClicked" styleClass="anag-label" stylesheets="@../css/styleAnag.css" text="Cognome" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                   <GridPane.margin>
                       <Insets right="10.0" />
                   </GridPane.margin>
               </Label>
-              <Label fx:id="lblPropUsername" onMouseClicked="#lblUsernamePropOnMouseClicked" text="Username" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+              <Label fx:id="lblPropUsername" onMouseClicked="#lblUsernamePropOnMouseClicked" styleClass="anag-label" stylesheets="@../css/styleAnag.css" text="Username" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                   <GridPane.margin>
                       <Insets right="10.0" />
                   </GridPane.margin>
               </Label>
-              <Label fx:id="lblPropPassword" text="Password" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+              <Label fx:id="lblPropPassword" styleClass="anag-label" stylesheets="@../css/styleAnag.css" text="Password" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                   <GridPane.margin>
                       <Insets right="10.0" />
                   </GridPane.margin>
               </Label>
-              <Label text="Ripeti la password" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+              <Label styleClass="anag-label" stylesheets="@../css/styleAnag.css" text="Ripeti la password" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                   <GridPane.margin>
                       <Insets right="10.0" />
                   </GridPane.margin>
               </Label>
-              <TextField fx:id="tfNome" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfNomeOnKeyTyped" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.vgrow="ALWAYS" />
-              <TextField fx:id="tfCognome" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfCognomeOnKeyTyped" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
-              <TextField fx:id="tfUsername" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfUsernameOnKeyTyped" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
-              <PasswordField fx:id="tfPassword" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfPasswordOnKeyTyped" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
-              <PasswordField fx:id="tfRipetiPassword" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfRipetiPasswordOnKeyTyped" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+              <TextField fx:id="tfNome" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfNomeOnKeyTyped" stylesheets="@../css/styleAnag.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.vgrow="ALWAYS" />
+              <TextField fx:id="tfCognome" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfCognomeOnKeyTyped" stylesheets="@../css/styleAnag.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+              <TextField fx:id="tfUsername" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfUsernameOnKeyTyped" stylesheets="@../css/styleAnag.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+              <PasswordField fx:id="tfPassword" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfPasswordOnKeyTyped" stylesheets="@../css/styleAnag.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
+              <PasswordField fx:id="tfRipetiPassword" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfRipetiPasswordOnKeyTyped" stylesheets="@../css/styleAnag.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
               <Label fx:id="lblNome" text="Inserisci solo lettere" textAlignment="CENTER" textFill="#b00000" visible="false" GridPane.columnIndex="2">
                   <GridPane.margin>
                       <Insets left="10.0" />
@@ -130,7 +117,7 @@
           <RowConstraints minHeight="40.0" prefHeight="50.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fx:id="ivAvatar" fitHeight="100.0" fitWidth="100.0" onDragDropped="#ivAvatarOnDragDropped" onDragOver="#ivAvatarOnDragOver" onMouseClicked="#ivAvatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowSpan="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <ImageView fx:id="ivAvatar" fitHeight="100.0" fitWidth="100.0" onDragDropped="#ivAvatarOnDragDropped" onDragOver="#ivAvatarOnDragOver" onMouseClicked="#ivAvatarOnMouseClicked" pickOnBounds="true" preserveRatio="true" styleClass="avatar" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowSpan="3" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <image>
                   <Image url="@../Images/avatar.png" />
                </image>
@@ -149,6 +136,19 @@
             <Label fx:id="lblConnessione" text="ERRORE DI CONNESSIONE: scollegarsi dal database" textFill="#9a0000" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
+        <Button fx:id="btnAddUser" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#btnAddUserOnKeyPressed" onMouseClicked="#btnAddUserOnMouseClicked" prefHeight="40.0" prefWidth="100.0" text="Modifica" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Button>
+        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#IndietroOnMouseClicked" prefHeight="40.0" prefWidth="100.0" text="Indietro" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+            <GridPane.margin>
+                <Insets />
+            </GridPane.margin>
+         <font>
+            <Font size="13.0" />
+         </font>
+        </Button>
       <StackPane prefHeight="76.0" prefWidth="250.0">
          <children>
             <ImageView fx:id="userAvatar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="avatar" StackPane.alignment="TOP_LEFT">

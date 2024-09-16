@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
@@ -16,9 +17,9 @@
 
 <GridPane alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.RegistrazioneController">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="80.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="80.0" prefWidth="150.0" />
         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="800.0" minWidth="10.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="80.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="80.0" prefWidth="150.0" />
     </columnConstraints>
     <rowConstraints>
         <RowConstraints minHeight="100.0" prefHeight="150.0" vgrow="SOMETIMES" />
@@ -27,16 +28,22 @@
         <RowConstraints maxHeight="1.7976931348623157E308" minHeight="50.0" prefHeight="120.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <Label alignment="CENTER" text="Aggiungi un nuovo utente" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-        <Button fx:id="btnAddUser" mnemonicParsing="false" onKeyPressed="#btnAddUserOnKeyPressed" onMouseClicked="#btnAddUserOnMouseClicked" prefHeight="38.0" prefWidth="107.0" text="Registrati" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+        <Label alignment="CENTER" text="Registra un nuovo utente" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+        <Button fx:id="btnAddUser" mnemonicParsing="false" onKeyPressed="#btnAddUserOnKeyPressed" onMouseClicked="#btnAddUserOnMouseClicked" prefHeight="40.0" prefWidth="100.0" text="Registrati" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
             <font>
-                <Font size="13.0" />
+                <Font size="14.0" />
             </font>
         </Button>
-        <Button mnemonicParsing="false" onMouseClicked="#IndietroOnMouseClicked" prefHeight="32.0" prefWidth="65.0" text="Indietro" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+        <Button mnemonicParsing="false" onMouseClicked="#IndietroOnMouseClicked" prefHeight="40.0" prefWidth="100.0" text="Indietro" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
             <GridPane.margin>
                 <Insets />
             </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
         </Button>
         <Label fx:id="lblRegistrato" text="Utente già registrato" textFill="#bca000" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
       <GridPane alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="271.0" prefWidth="680.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
@@ -132,8 +139,8 @@
                   <Font size="11.0" />
                </font>
             </Label>
-            <Label fx:id="lblColorPicker" prefHeight="46.0" prefWidth="124.0" text="Seleziona il tuo colore (scuro)" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowSpan="2" GridPane.valignment="CENTER" />
-            <ColorPicker fx:id="cpUser" onAction="#handleColorChange" prefWidth="128.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+            <Label fx:id="lblColorPicker" text="Seleziona il tuo colore (scuro)" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+            <ColorPicker fx:id="cpUser" onAction="#handleColorChange" prefWidth="128.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <value>
                   <Color />
                </value>
@@ -142,4 +149,8 @@
          </children>
       </GridPane>
     </children>
+   <stylesheets>
+      <URL value="@../css/style.css" />
+      <URL value="@../css/styleAnag.css" />
+   </stylesheets>
 </GridPane>

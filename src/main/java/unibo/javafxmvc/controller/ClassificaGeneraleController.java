@@ -57,7 +57,6 @@ public class ClassificaGeneraleController {
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
         usernameCol.setCellFactory(column -> new TableCell<UserScore, String>() {
             private final HBox hbox = new HBox(5); // Spazio di 5 pixel tra avatar e username
-
             @Override
             protected void updateItem(String username, boolean empty) {
                 super.updateItem(username, empty);
