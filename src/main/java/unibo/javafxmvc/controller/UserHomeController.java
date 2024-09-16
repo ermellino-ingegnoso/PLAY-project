@@ -44,6 +44,9 @@ public class UserHomeController {
     private ProgressBar pbEsperto;
     @FXML
     private ImageView userAvatar;
+    @FXML
+    private Circle circle;
+
     private EsercizioEsperto esEsperto;
     private EsercizioEsperto esAvanzato;
     private Punteggio punteggioPrincipiante;
