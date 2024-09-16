@@ -8,19 +8,33 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
-    image-view {
-    -fx-background-color: white;
-    }
+.root{
+    -fx-user-color: #9a9ae1;
+}
 .red{
     -fx-background-color: red;
 }
-
+.general-btn{
+    -fx-background-color: -fx-user-color;
+    -fx-text-fill: white;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+}
 .table-cell {
     -fx-alignment: CENTER;
 }
 .table-cell-right {
     -fx-alignment: CENTER-RIGHT;
 }
+.yellow-label {
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-width: 1;
+    -fx-background-insets: 0;
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+}
+
 .progress-bar {
     -fx-accent: linear-gradient(to right, #69bff8, #9a9ae1); /* Colore del riempimento della barra */
     -fx-control-inner-background: transparent; /* Sfondo trasparente per visualizzare solo il riempimento */
@@ -67,7 +81,6 @@
 .grid-container {
     -fx-background-color: white; /* La griglia esterna rimane bianca */
 }
-
 .panel-top-left {
     -fx-background-color: radial-gradient(
             focus-angle 90deg,

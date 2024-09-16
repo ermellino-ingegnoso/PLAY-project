@@ -63,6 +63,7 @@ public class AccessoController implements Initializable {
                 if(usr.checkPassword(User.getSHA256Hash(tfPassword.getText()))){
                     lblPassword.setVisible(false);
                     Main.currentUser = usr;
+                    Main.admin = false;
                     Main.changeScene("View/UserHome.fxml");
                 } else{
                     lblPassword.setVisible(true);

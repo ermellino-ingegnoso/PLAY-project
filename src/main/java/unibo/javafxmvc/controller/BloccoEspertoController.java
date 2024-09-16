@@ -45,17 +45,16 @@ public class BloccoEspertoController{
         fillFields();
     }
     @FXML
-    void AnnullaOnKeyPressed(KeyEvent event) { if(AuxiliaryController.keyEnterPressed(event)) viewPunteggio();}
+    void AnnullaOnKeyPressed(KeyEvent event) { if(AuxiliaryController.keyEnterPressed(event)) annulla();}
     @FXML
-    void AnnullaOnMouseClicked(MouseEvent event) {
-        viewPunteggio();
+    void AnnullaOnMouseClicked(MouseEvent event) { annulla();}
+    public void annulla(){
+        if (AuxiliaryController.confirmSave("Conferma abbandono", "Sei sicuro di voler abbandonare l'esercizio?", "I tuoi progressi andranno persi.")) viewPunteggio();
     }
     @FXML
     void SaveOnKeyPressed(KeyEvent event) { if(AuxiliaryController.keyEnterPressed(event)) save();}
     @FXML
-    void SaveOnMouseClicked(MouseEvent event) {
-        save();
-    }
+    void SaveOnMouseClicked(MouseEvent event) {save();}
     private void save(){
         btnProsegui.setDisable(true);
         be.setCodiceUtente(tfMetodo.getText().trim());

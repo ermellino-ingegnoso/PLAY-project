@@ -75,6 +75,10 @@ public class UserHomeController {
             }
         });*/
     }
+    @FXML
+    void AvatarOnMousePressed(MouseEvent event) {
+        Main.changeScene("View/ModificaProfilo.fxml");
+    }
     private void recuperaPunteggi(){
         try{
             punteggioPrincipiante = Punteggio.getMaxPunteggioByUserAndGrado(Main.currentUser, Grado.PRINCIPIANTE);

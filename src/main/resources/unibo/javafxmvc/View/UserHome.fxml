@@ -7,15 +7,16 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="mainGridPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="654.0" prefWidth="995.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.UserHomeController">
+<GridPane fx:id="mainGridPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="1106.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.UserHomeController">
     <columnConstraints>
         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="250.0" minWidth="100.0" percentWidth="20.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
@@ -29,7 +30,7 @@
         <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-      <StackPane prefHeight="76.0" prefWidth="250.0">
+      <StackPane onMouseClicked="#AvatarOnMousePressed" prefHeight="76.0" prefWidth="250.0">
          <children>
             <ImageView fx:id="userAvatar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="avatar" StackPane.alignment="CENTER_LEFT">
                <image>
@@ -50,146 +51,100 @@
       <GridPane alignment="CENTER" hgap="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../css/style.css" vgap="20.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+            <ColumnConstraints percentWidth="50.0" />
         </columnConstraints>
          <children>
-              <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#AvanzatoOnMouseClicked" stylesheets="@../css/style.css" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                  <left>
-                      <Label alignment="CENTER" prefHeight="62.0" prefWidth="160.0" styleClass="general-text" text="Cosa stampa?" wrapText="true" BorderPane.alignment="TOP_RIGHT">
-                          <BorderPane.margin>
-                              <Insets left="10.0" />
-                          </BorderPane.margin>
-                      </Label>
-                  </left>
-                  <right>
-                      <Label styleClass="general-text" text="Avanzato" BorderPane.alignment="CENTER">
-                          <BorderPane.margin>
-                              <Insets right="10.0" />
-                          </BorderPane.margin>
-                      </Label>
-                  </right>
-                  <top>
-                      <Label fx:id="lblEsercizioAvanzato" onMouseClicked="#AvanzatoOnMouseClicked" styleClass="general-text" text="Trova l'errore" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" onMouseClicked="#AvanzatoOnMouseClicked" prefHeight="200.0" prefWidth="100.0" spacing="30.0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+               <children>
+                      <Label fx:id="lblEsercizioAvanzato" onMouseClicked="#AvanzatoOnMouseClicked" styleClass="general-text" text="Trova l'errore">
                           <font>
                               <Font size="18.0" />
                           </font>
                       </Label>
-                  </top>
-               <bottom>
-         </bottom>
-               <bottom>
-                  <ProgressBar fx:id="pbAvanzato" prefWidth="206.0" progress="0.58" styleClass="transparent-progress-bar" stylesheets="@../css/style.css" BorderPane.alignment="CENTER" />
-               </bottom>
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="50.0">
+                     <children>
+                            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="general-text" text="Cosa stampa?" wrapText="true" />
+                            <Label fx:id="lblEsercizioAvanzato" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="80.0" styleClass="yellow-label" text="Avanzato" textFill="WHITE" />
+                     </children>
+                  </HBox>
+                  <ProgressBar fx:id="pbAvanzato" prefWidth="206.0" progress="0.58" styleClass="transparent-progress-bar" stylesheets="@../css/style.css" />
+               </children>
                <styleClass>
                   <String fx:value="panel-top-left" />
                   <String fx:value="border-pane" />
                </styleClass>
-              </BorderPane>
-              <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#EspertoOnMouseClicked" stylesheets="@../css/style.css" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                  <top>
-                      <Label fx:id="lblEsercizioEsperto" onMouseClicked="#EspertoOnMouseClicked" styleClass="general-text" text="Completa il blocco mancante" BorderPane.alignment="CENTER">
+            </VBox>
+            <VBox alignment="CENTER" onMouseClicked="#OrdinaPassiOnMousePressed" prefHeight="200.0" prefWidth="100.0" spacing="30.0" GridPane.columnIndex="1">
+               <children>
+                      <Label styleClass="general-text" text="Commenti">
                           <font>
                               <Font size="18.0" />
                           </font>
                       </Label>
-                  </top>
-                  <left>
-                      <Label alignment="CENTER" prefHeight="62.0" prefWidth="160.0" styleClass="general-text" text="Il debug" wrapText="true" BorderPane.alignment="TOP_RIGHT">
-                          <BorderPane.margin>
-                              <Insets left="10.0" />
-                          </BorderPane.margin>
-                      </Label>
-                  </left>
-                  <right>
-                      <Label styleClass="general-text" text="Esperto" BorderPane.alignment="CENTER">
-                          <BorderPane.margin>
-                              <Insets right="10.0" />
-                          </BorderPane.margin>
-                      </Label>
-                  </right>
-               <bottom>
-         </bottom>
-               <bottom>
-                  <ProgressBar fx:id="pbEsperto" prefWidth="200.0" progress="0.29" styleClass="transparent-progress-bar" stylesheets="@../css/style.css" BorderPane.alignment="CENTER" />
-               </bottom>
-               <styleClass>
-                  <String fx:value="panel-bottom-left" />
-                  <String fx:value="border-pane" />
-               </styleClass>
-              </BorderPane>
-              <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#OrdinaPassiOnMousePressed" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                  <left>
-                      <Label alignment="CENTER" prefHeight="62.0" prefWidth="160.0" styleClass="general-text" text="Commenti" wrapText="true" BorderPane.alignment="TOP_RIGHT">
-                          <BorderPane.margin>
-                              <Insets left="10.0" />
-                          </BorderPane.margin>
-                      </Label>
-                  </left>
-                  <right>
-                      <Label styleClass="general-text" text="Intermedio" BorderPane.alignment="CENTER">
-                          <BorderPane.margin>
-                              <Insets right="10.0" />
-                          </BorderPane.margin>
-                      </Label>
-                  </right>
-                  <top>
-                      <Label styleClass="general-text" text="Commenti" BorderPane.alignment="CENTER">
-                          <font>
-                              <Font size="18.0" />
-                          </font>
-                      </Label>
-                  </top>
-               <bottom>
-         </bottom>
-               <bottom>
-                  <ProgressBar fx:id="pbIntermedio" prefWidth="200.0" progress="0.29" styleClass="transparent-progress-bar" stylesheets="@../css/style.css" BorderPane.alignment="CENTER" />
-               </bottom>
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="50.0">
+                     <children>
+                            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="general-text" text="Commenti" wrapText="true" />
+                            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="80.0" styleClass="yellow-label" text="Intermedio" />
+                     </children>
+                  </HBox>
+                  <ProgressBar fx:id="pbIntermedio" prefWidth="200.0" progress="0.29" styleClass="transparent-progress-bar" stylesheets="@../css/style.css" />
+               </children>
                <styleClass>
                   <String fx:value="panel-top-right" />
                   <String fx:value="border-pane" />
                </styleClass>
-              </BorderPane>
-              <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#QuizOnMousePressed" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                  <left>
-                      <Label alignment="CENTER" prefHeight="62.0" prefWidth="160.0" styleClass="general-text" text="Il quiz" wrapText="true" BorderPane.alignment="TOP_RIGHT">
-                          <BorderPane.margin>
-                              <Insets left="10.0" />
-                          </BorderPane.margin>
-                      </Label>
-                  </left>
-                  <right>
-                      <Label styleClass="general-text" text="Principiante" BorderPane.alignment="CENTER">
-                          <BorderPane.margin>
-                              <Insets right="10.0" />
-                          </BorderPane.margin>
-                      </Label>
-                  </right>
-                  <top>
-                      <Label styleClass="general-text" text="Studia i concetti" BorderPane.alignment="CENTER">
-                          <font>
-                              <Font size="18.0" />
-                          </font>
-                      </Label>
-                  </top>
-               <bottom>
-         </bottom>
-               <bottom>
-                  <ProgressBar fx:id="pbPrincipiante" prefWidth="200.0" progress="0.29" styleClass="transparent-progress-bar" stylesheets="@../css/style.css" BorderPane.alignment="CENTER" />
-               </bottom>
+            </VBox>
+            <VBox alignment="CENTER" onMouseClicked="#EspertoOnMouseClicked" prefHeight="200.0" prefWidth="100.0" spacing="30.0" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="lblEsercizioAvanzato1" onMouseClicked="#AvanzatoOnMouseClicked" styleClass="general-text" text="Trova l'errore">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="50.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="general-text" text="Il debug" textAlignment="CENTER" wrapText="true" />
+                        <Label fx:id="lblEsercizioEsperto" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="80.0" styleClass="yellow-label" text="Esperto" textAlignment="CENTER" />
+                     </children>
+                  </HBox>
+                  <ProgressBar fx:id="pbEsperto" prefWidth="200.0" progress="0.29" styleClass="transparent-progress-bar" stylesheets="@../css/style.css" />
+               </children>
+               <styleClass>
+                  <String fx:value="panel-bottom-left" />
+                  <String fx:value="border-pane" />
+               </styleClass>
+            </VBox>
+            <VBox alignment="CENTER" onMouseClicked="#QuizOnMousePressed" prefHeight="200.0" prefWidth="100.0" spacing="30.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Label styleClass="general-text" text="Studia i concetti">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="50.0">
+                     <children>
+                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="general-text" text="Quiz" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="80.0" styleClass="yellow-label" text="Principiante" />
+                     </children>
+                  </HBox>
+                  <ProgressBar fx:id="pbPrincipiante" prefWidth="200.0" progress="0.29" styleClass="transparent-progress-bar" stylesheets="@../css/style.css" />
+               </children>
                <styleClass>
                   <String fx:value="panel-bottom-right" />
                   <String fx:value="border-pane" />
                </styleClass>
-              </BorderPane>
+            </VBox>
          </children>
          <GridPane.margin>
             <Insets bottom="100.0" top="50.0" />
          </GridPane.margin>
+         <rowConstraints>
+            <RowConstraints percentHeight="50.0" />
+            <RowConstraints percentHeight="50.0" />
+         </rowConstraints>
       </GridPane>
-      <Button mnemonicParsing="false" onKeyPressed="#ScollegatiOnKeyPressed" onMouseClicked="#ScollegatiOnMouseClicked" prefHeight="37.0" prefWidth="77.0" text="Scollegati" GridPane.columnIndex="3" />
-      <Button mnemonicParsing="false" onKeyPressed="#ClassificaGeneraleOnKeyPressed" onMouseClicked="#ClassificaGeneraleOnMouseClicked" prefHeight="50.0" prefWidth="140.0" text="Classifica Generale" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-      <Button mnemonicParsing="false" onKeyPressed="#ClassificaUtenteOnKeyPressed" onMouseClicked="#ClassificaUtenteOnMouseClicked" prefHeight="50.0" prefWidth="140.0" text="Classifica Utente" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#ScollegatiOnKeyPressed" onMouseClicked="#ScollegatiOnMouseClicked" prefHeight="37.0" prefWidth="77.0" styleClass="general-btn" text="Scollegati" wrapText="true" GridPane.columnIndex="3" />
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#ClassificaGeneraleOnKeyPressed" onMouseClicked="#ClassificaGeneraleOnMouseClicked" prefHeight="50.0" prefWidth="140.0" styleClass="general-btn" text="Classifica Generale" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#ClassificaUtenteOnKeyPressed" onMouseClicked="#ClassificaUtenteOnMouseClicked" prefHeight="50.0" prefWidth="140.0" styleClass="general-btn" text="Classifica Utente" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
     </children>
 </GridPane>
