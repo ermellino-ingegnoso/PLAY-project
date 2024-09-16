@@ -29,16 +29,22 @@
         <RowConstraints maxHeight="1.7976931348623157E308" minHeight="50.0" percentHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <Label alignment="CENTER" text="Modifica Profilo Utente" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-        <Button fx:id="btnAddUser" mnemonicParsing="false" onKeyPressed="#btnAddUserOnKeyPressed" onMouseClicked="#btnAddUserOnMouseClicked" prefHeight="38.0" prefWidth="107.0" text="Modifica" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+        <Label alignment="CENTER" text="Modifica Profilo Utente" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin></Label>
+        <Button fx:id="btnAddUser" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#btnAddUserOnKeyPressed" onMouseClicked="#btnAddUserOnMouseClicked" prefHeight="40.0" prefWidth="100.0" text="Modifica" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
             <font>
                 <Font size="13.0" />
             </font>
         </Button>
-        <Button mnemonicParsing="false" onMouseClicked="#IndietroOnMouseClicked" prefHeight="32.0" prefWidth="65.0" text="Indietro" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#IndietroOnMouseClicked" prefHeight="40.0" prefWidth="100.0" text="Indietro" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
             <GridPane.margin>
                 <Insets />
             </GridPane.margin>
+         <font>
+            <Font size="13.0" />
+         </font>
         </Button>
         <Label fx:id="lblRegistrato" text="Utente già registrato" textFill="#bca000" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
       <GridPane alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="271.0" prefWidth="680.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
@@ -143,22 +149,25 @@
             <Label fx:id="lblConnessione" text="ERRORE DI CONNESSIONE: scollegarsi dal database" textFill="#9a0000" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
-      <StackPane prefHeight="76.0" prefWidth="250.0" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+      <StackPane prefHeight="76.0" prefWidth="250.0">
          <children>
-            <ImageView fx:id="userAvatar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="avatar" StackPane.alignment="CENTER_LEFT">
+            <ImageView fx:id="userAvatar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="avatar" StackPane.alignment="TOP_LEFT">
                <image>
                   <Image url="@../Images/avatar.png" />
                </image>
             </ImageView>
-            <Circle fx:id="circleAvatar" blendMode="MULTIPLY" fill="WHITE" radius="25.0" stroke="BLACK" strokeLineJoin="ROUND" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
-            <Label fx:id="lblUsername1" prefHeight="18.0" prefWidth="160.0" text="Username" textAlignment="CENTER" StackPane.alignment="CENTER_LEFT">
+            <Circle fx:id="circleAvatar" blendMode="MULTIPLY" fill="WHITE" radius="25.0" stroke="BLACK" strokeLineJoin="ROUND" strokeType="INSIDE" StackPane.alignment="TOP_LEFT" />
+            <Label fx:id="lblUsername1" prefHeight="18.0" prefWidth="160.0" text="Username" textAlignment="CENTER" StackPane.alignment="TOP_LEFT">
                <padding>
                   <Insets left="60.0" />
                </padding>
+               <StackPane.margin>
+                  <Insets top="16.0" />
+               </StackPane.margin>
             </Label>
          </children>
          <padding>
-            <Insets left="30.0" />
+            <Insets left="32.0" top="30.0" />
          </padding>
       </StackPane>
     </children>

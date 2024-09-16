@@ -2,6 +2,8 @@ package unibo.javafxmvc.controller;
 
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import unibo.javafxmvc.DAO.UserDBM;
 import unibo.javafxmvc.Main;
 import unibo.javafxmvc.exception.ConnectionException;
@@ -12,6 +14,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import unibo.javafxmvc.util.ColorUtils;
 
 import java.net.URL;
 import java.sql.SQLException;

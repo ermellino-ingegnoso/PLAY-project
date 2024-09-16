@@ -157,8 +157,7 @@
     -fx-background-color: radial-gradient(
             focus-angle 90deg,
             focus-distance 0%,
-            center 75% 75%, /* Centro per il pannello in basso a destra */
-            radius 300%,
+            center 75% 75%, /* Centro per il pannello in basso a destra */ radius 300%,
             #c777b9 10%,
             #ba83ca 20%,
             #aa8fd8 30%,
