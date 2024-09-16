@@ -14,7 +14,7 @@
 .red{
     -fx-background-color: red;
 }
-.general-btn{
+.button{
     -fx-background-color: -fx-user-color;
     -fx-text-fill: white;
     -fx-border-radius: 15px;
@@ -34,20 +34,6 @@
     -fx-background-insets: 0;
     -fx-background-radius: 6px;
     -fx-border-radius: 6px;
-}
-.button {
-    -fx-background-color: #3498db;
-    -fx-text-fill: white;
-    -fx-font-size: 11px;
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-}
-.button:hover {
-    -fx-background-color: red;
-}
-.label {
-    -fx-font-weight: bold;
-    -fx-text-fill: #2c3e50;
 }
 .radio-button {
     -fx-text-fill: #34495e;
