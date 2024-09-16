@@ -21,7 +21,14 @@ public class User {
         this.avatar = avatar;
         this.color = color;
     }
-
+    public void modificaCampi(String nome, String cognome, String username, String password, Image avatar, String color) {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.username = username;
+        this.password = password;
+        this.avatar = avatar;
+        this.color = color;
+    }
     // equals() e hashCode() sono necessari per la comparazione degli oggetti (User)
     /** @return true <=> nome && cognome && username (!password) */
     @Override

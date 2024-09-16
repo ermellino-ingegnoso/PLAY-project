@@ -16,6 +16,26 @@ public class UserDBM extends DatabaseManager {
     public static Boolean insertUser(User usr, Boolean admin) throws ConnectionException{
         return insertUser(usr, (admin ? "Admin" : "\"User\""));
     }
+    public static Boolean updateUserById(User user, Integer userId, boolean admin) throws ConnectionException {
+        if (connection != null) {
+            String sql = "UPDATE " + (admin ? "Admin" : "\"User\"") + " SET NOME = ?, COGNOME = ?, USERNAME = ?, PASSWORD = ?, AVATAR = ?, COLOR = ? WHERE ID = ?";
+            try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setString(1, user.getNome());
+                pstmt.setString(2, user.getCognome());
+                pstmt.setString(3, user.getUsername());
+                pstmt.setString(4, user.getPassword());
+                pstmt.setBytes(5, convertImageToByteArray(user.getAvatar()));
+                pstmt.setString(6, user.getColor());
+                pstmt.setInt(7, userId);
+                return pstmt.executeUpdate() > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        } else {
+            throw new ConnectionException(connectionExceptionMessage, new NullPointerException(npeMessage));
+        }
+    }
     public static Boolean insertUser(User usr, String table) throws ConnectionException{
         if(connection != null){
             int affectedRows = 0;

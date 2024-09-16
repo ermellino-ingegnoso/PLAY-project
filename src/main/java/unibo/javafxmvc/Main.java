@@ -55,12 +55,14 @@ public class Main extends Application {
     public static Scene currentScene;
     public static Stage thisStage;
     public static User currentUser;
+    public static Boolean admin;
     public static EsercizioGenerico ultimoEsercizioGenerico;
     public static EsercizioEsperto esercizioCorrente;
     public static int bloccoIndex;
     public static int generalCounter;   // Attenzione ad utilizzi multipli: gestire adeguatamente i controllers, controllare la gli usages in procedura (flow)
 
     static {
+        admin = false;
         fxmlPath = "View/Accesso.fxml";
         PropertiesUtil.initialize("src/main/resources/config.properties");
         dbURL = PropertiesUtil.getProperty("db.url");

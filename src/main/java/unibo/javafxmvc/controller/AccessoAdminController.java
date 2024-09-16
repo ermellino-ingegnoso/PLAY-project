@@ -61,6 +61,7 @@ public class AccessoAdminController {
                 if(usr.checkPassword(User.getSHA256Hash(tfPassword.getText()))){
                     lblPassword.setVisible(false);
                     Main.currentUser = usr;
+                    Main.admin = false;
                     Main.changeScene("View/AdminHome.fxml");
                 } else{
                     lblPassword.setVisible(true);
