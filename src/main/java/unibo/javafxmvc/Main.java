@@ -95,7 +95,7 @@ public class Main extends Application {
      * */
     public static void changeScene(String fxmlPath) {
         try {
-            currentScene = new Scene((new FXMLLoader(Main.class.getResource(fxmlPath))).load());    // removeImageTags(fxmlStream)
+            currentScene = new Scene((new FXMLLoader(Main.class.getResource(fxmlPath))).load());
             currentScene.getStylesheets().setAll(Objects.requireNonNull(Main.class.getResource("/unibo/javafxmvc/css/style.css")).toExternalForm());
             thisStage.setMaximized(maximized);
             thisStage.setScene(currentScene);
@@ -106,7 +106,8 @@ public class Main extends Application {
     }
     /**<code>removeImageTags</code> è stato pensato con lo scopo di rimuovere i tag <code>Image</code> dai file FXML, nel caso in cui potessero presentare problemi di caricamento
      * La regex è stata testata su un numero limitato di casi, potrebbe non funzionare con tutti i file FXML
-     * @deprecated Questo metodo è stato deprecato in quanto non è più necessario: il caricamento delle immagini è stato risolto
+     * @deprecated Il caricamento delle immagini con questo metodo è stato rimosso in favore del caricamento diretto da file
+     * @param inputStream InputStream contenente il file FXML da cui rimuovere i tag <code>Image</code>
      * @return InputStream contenente il file FXML senza i tag <code>Image</code>
      * */
     public static InputStream removeImageTags(InputStream inputStream) throws IOException {
