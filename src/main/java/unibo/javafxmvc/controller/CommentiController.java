@@ -9,6 +9,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -20,6 +21,7 @@ import unibo.javafxmvc.model.CommentiModel;
 import unibo.javafxmvc.model.Grado;
 import unibo.javafxmvc.model.Punteggio;
 
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -55,7 +57,6 @@ public class CommentiController implements Initializable {
     private CommentiModel esercizio;
     private int prossimoEsercizio = 0;
     private Punteggio punteggio;
-    
 
 
     @Override
@@ -63,11 +64,11 @@ public class CommentiController implements Initializable {
         System.out.println("CommentiController.initialize");
         CaricaEsercizio();
         punteggio = new Punteggio(Grado.INTERMEDIO, Main.currentUser, "Commenti");
-       // AuxiliaryController.initAvatar(Main.currentUser, ivAvatar, cCircle, lbUsername, gpGridPane);
+        // AuxiliaryController.initAvatar(Main.currentUser, ivAvatar, cCircle, lbUsername, gpGridPane);
     }
 
     @FXML
-    void InviaPressed() {
+    void InviaOnMouseClicked() {
         if (rbOpzione1.isSelected() && esercizio.check(rbOpzione1.getText())) {
             punteggio.addPunteggio(1);
             dueSecondi();
@@ -83,18 +84,13 @@ public class CommentiController implements Initializable {
         }
         CaricaEsercizio();
     }
-    @FXML
-    void InviaOnKeyPressed() {
-        InviaPressed();
-    }
-    @FXML
-    void InviaOnMouseClicked() {
-        InviaPressed();
-    }
+
 
     @FXML
     void IndietroOnMouseClicked() {
-        Main.changeScene("View/UserHome.fxml");
+        if (AuxiliaryController.confirmSave("Conferma abbandono", "Sei sicuro di voler abbandonare l'esercizio?", "I tuoi progressi andranno persi.")) {
+            Main.changeScene("View/UserHome.fxml");
+        }
     }
 
     @FXML
@@ -121,6 +117,7 @@ public class CommentiController implements Initializable {
         rbOpzione2.setText(esercizio.getOpzioni().get(1));
         rbOpzione3.setText(esercizio.getOpzioni().get(2));
     }
+
     private void dueSecondi() {
         lbPunti.setVisible(true);
         lbPunti.setText("Corretto!");
@@ -129,6 +126,7 @@ public class CommentiController implements Initializable {
         pause.setOnFinished(event -> lbPunti.setVisible(false));
         pause.play();
     }
+
     private void treSecondi() {
         lbPunti.setText("Sbagliato!");
         lbPunti.setStyle("-fx-text-fill: red;");
@@ -137,6 +135,7 @@ public class CommentiController implements Initializable {
         pause.setOnFinished(event -> lbPunti.setVisible(false));
         pause.play();
     }
+
     public void aspetta() {
         PauseTransition pause = new PauseTransition(Duration.seconds(3));
         pause.setOnFinished(event -> Main.changeScene("View/PunteggiEsercizio.fxml"));

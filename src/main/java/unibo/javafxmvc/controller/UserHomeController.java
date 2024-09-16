@@ -46,10 +46,6 @@ public class UserHomeController {
     private ImageView userAvatar;
     @FXML
     private Circle circle;
-    @FXML
-    private Label lblEsercizioAvanzato;
-    @FXML
-    private Label lblEsercizioEsperto;
 
     private EsercizioEsperto esEsperto;
     private EsercizioEsperto esAvanzato;

@@ -99,15 +99,17 @@ public class Quiz2Controller {
         // Set the new selected image
         selectedImage = clickedImage;
         // Change the visual state of the selected image (e.g., add border or change opacity)
-        ((ImageView)event.getSource()).getParent().setStyle("-fx-border-color: blue; -fx-border-width: 2;");
+        ((ImageView)event.getSource()).getParent().setStyle("-fx-border-color: #4accff; -fx-border-width: 2;");
 
 
     }
 
     @FXML
     private void IndietroOnMousePressed(MouseEvent event) {
-        Main.changeScene("View/UserHome.fxml");
-    }
+        if (AuxiliaryController.confirmSave("Conferma abbandono", "Sei sicuro di voler abbandonare l'esercizio?", "I tuoi progressi andranno persi.")) {
+            Main.changeScene("View/UserHome.fxml");
+        }
+}
 
     @FXML
     private void InviaOnMOusePressed(MouseEvent event) {
