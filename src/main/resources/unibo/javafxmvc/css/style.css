@@ -9,7 +9,9 @@
     -fx-background-repeat: no-repeat;
 }
 .root{
-    -fx-user-color: #9a9ae1;
+    -fx-blu-oceano: #7676d6;
+    -fx-user-color: -fx-blu-oceano;
+    -fx-home-col-arancione:  #ffbf80;
 }
 .red{
     -fx-background-color: red;
@@ -27,12 +29,7 @@
 .table-cell-right {
     -fx-alignment: CENTER-RIGHT;
 }
-.button {
-    -fx-background-color: #3498db;
-}
-
 .yellow-label {
-
     -fx-text-fill: white;
     -fx-border-color: white;
     -fx-border-width: 1;
@@ -46,13 +43,13 @@
     -fx-padding: 5px;
 }
 .radio-button:selected .radio {
-    -fx-mark-color: #3498db;
+    -fx-mark-color: yellow;
 }
 .radio-button {
-    -fx-border-color: #3498db;
-    -fx-border-width: 1px;
+    -fx-border-color: blue;
+    -fx-border-width: 2px;
     -fx-border-radius: 5px;
-    -fx-padding: 1px;
+    -fx-padding: 5px;
 }
 .radio-button:hover {
     -fx-text-fill: #2c3e50;
@@ -64,12 +61,6 @@
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
 }
-.image-view {
-    -fx-border-color: #e74c3c; /* Colore del bordo esterno */
-    -fx-border-width: 4px;     /* Spessore del bordo esterno */
-    -fx-border-radius: 10px;   /* Angoli arrotondati del bordo */
-}
-
 .progress-bar {
     -fx-accent: linear-gradient(to right, #69bff8, #9a9ae1); /* Colore del riempimento della barra */
     -fx-control-inner-background: transparent; /* Sfondo trasparente per visualizzare solo il riempimento */
@@ -79,7 +70,7 @@
 }
 .transparent-progress-bar {
     -fx-background-color: transparent; /* Sfondo trasparente */
-    -fx-accent: rgba(170, 143, 216, 0.8); /* Riempimento traslucido */
+    -fx-accent: -fx-home-col-arancione; /* Riempimento traslucido */
     -fx-border-color: transparent; /* Bordo trasparente */
 }
 .progress-bar .track {
@@ -93,6 +84,7 @@
     -fx-border-radius: 30px; /* Arrotonda gli angoli del BorderPane */
     -fx-background-radius: 30px ; /* Arrotonda anche lo sfondo del BorderPane */
     -fx-text-fill: white;
+    -fx-background-color: #7676d6;
 }
 .general-text{
     -fx-text-fill: white;
@@ -175,5 +167,4 @@
             #79b3f4 60%,
             #69bff8 65%
     );
-
 }
