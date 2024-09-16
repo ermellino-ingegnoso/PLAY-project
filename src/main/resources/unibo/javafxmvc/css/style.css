@@ -27,7 +27,6 @@
  */
 
 
-
 .button {
     -fx-background-color: #3498db;
     -fx-text-fill: white;
@@ -48,13 +47,13 @@
     -fx-padding: 5px;
 }
 .radio-button:selected .radio {
-    -fx-mark-color: yellow;
+    -fx-mark-color: #3498db;
 }
 .radio-button {
-    -fx-border-color: blue;
-    -fx-border-width: 2px;
+    -fx-border-color: #3498db;
+    -fx-border-width: 1px;
     -fx-border-radius: 5px;
-    -fx-padding: 5px;
+    -fx-padding: 1px;
 }
 .radio-button:hover {
     -fx-text-fill: #2c3e50;
