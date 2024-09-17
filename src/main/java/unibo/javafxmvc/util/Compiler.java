@@ -1,5 +1,7 @@
 package unibo.javafxmvc.util;
 
+import unibo.javafxmvc.Main;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
@@ -10,12 +12,6 @@ import java.io.IOException;
 import java.nio.file.StandardOpenOption;
 
 public class Compiler {
-    private static String tempPath;
-
-    static {
-        tempPath = PropertiesUtil.getProperty("temp.path");    // TODO: gestire diversamente i file: niente più file temporanei
-        System.out.println("Temp path: " + tempPath);
-    }
     /**Compila ed esegue il codice Java fornito.
      * <p>Questo metodo crea un file temporaneo o lo recupera se già presente, lo compila utilizzando <code>javac</code>,
      * e poi esegue la classe compilata utilizzando il <code>java</code>. L'output dell'esecuzione viene restituito come <code>String</code></p>
@@ -28,12 +24,12 @@ public class Compiler {
     public static String compileAndRunCodeVecchio(String combinedCode) throws IOException, InterruptedException, RuntimeException {
         System.out.println("Compilazione ed esecuzione del codice fornito..." +
                 "\nCodice fornito:\n" + combinedCode +
-                "\n" + "Temp path: " + tempPath +
-                "\n" + "Java temp path: " + Path.of(tempPath,  SignatureFinder.extractClassName(combinedCode) + ".java"));
+                "\n" + "Temp path: " + Main.tempPath +
+                "\n" + "Java temp path: " + Path.of(Main.tempPath,  SignatureFinder.extractClassName(combinedCode) + ".java"));
         String className = SignatureFinder.extractClassName(combinedCode);
         if (className == null) throw new RuntimeException("Nome della classe non trovato nel codice fornito.");
         // Recupera il file se esiste già
-        Path file = Path.of(tempPath, className + ".java");
+        Path file = Path.of(Main.tempPath, className + ".java");
         if (!Files.exists(file)) Files.createFile(file);
         // Sovrascrivi il contenuto del file
         try{
@@ -54,12 +50,12 @@ public class Compiler {
     public static String compileAndRunCode(String combinedCode) throws IOException, InterruptedException, RuntimeException {
         System.out.println("Compilazione ed esecuzione del codice fornito..." +
                 "\nCodice fornito:\n" + combinedCode +
-                "\n" + "Temp path: " + tempPath +
-                "\n" + "Java temp path: " + Path.of(tempPath, SignatureFinder.extractClassName(combinedCode) + ".java"));
+                "\n" + "Temp path: " + Main.tempPath +
+                "\n" + "Java temp path: " + Path.of(Main.tempPath, SignatureFinder.extractClassName(combinedCode) + ".java"));
         String className = SignatureFinder.extractClassName(combinedCode);
         if (className == null) throw new RuntimeException("Nome della classe non trovato nel codice fornito.");
 
-        Path filePath = Path.of(tempPath, className + ".java");
+        Path filePath = Path.of(Main.tempPath, className + ".java");
         File fileJava = filePath.toFile();
         if (!Files.exists(filePath)) Files.createFile(filePath);
         try {                       Files.write(filePath, combinedCode.getBytes(), StandardOpenOption.TRUNCATE_EXISTING);}

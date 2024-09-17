@@ -30,7 +30,7 @@ public class DatabaseManager {
     static{
         connection = null;
         connectionExceptionMessage = "Errore di connessione al database: connessione nulla. \n DatabaseManager.inizialize() non è stato eseguito o è stato invocato un metodo senza prevedere la connessione";
-        npeMessage = "Connection point to null";
+        npeMessage = "Connessione puntata su null";
     }
     /**inizializza la connessione al database con l'URL specificato
      * @param dbURL URL del database

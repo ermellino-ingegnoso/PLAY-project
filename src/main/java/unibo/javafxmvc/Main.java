@@ -35,19 +35,18 @@ import unibo.javafxmvc.controller.AuxiliaryController;
 import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.*;
 import unibo.javafxmvc.controller.AppController;
-import unibo.javafxmvc.util.PropertiesUtil;
 
 public class Main extends Application {
     //  Propretà statiche di configurazione:
     private static final String iconPath;
     private static final String dbURL;
     private static final String windowTitle;
-
     //  Proprietà staiche di configurazione:
     private static String fxmlPath;
     public static Image icon;
     private static Boolean fullScreen;
     private static Boolean maximized;
+    public static String tempPath;
 
     //  Proprietà statiche di stato:
         /** Utilizzaata per la gestione delle regole */
@@ -62,23 +61,22 @@ public class Main extends Application {
     public static int bloccoIndex;
     public static int generalCounter;   // Attenzione ad utilizzi multipli: gestire adeguatamente i controllers, controllare la gli usages in procedura (flow)
 
-    static {
+    static {    //  primo blocco ad essere chiamato in run
         admin = false;
         fxmlPath = "View/Accesso.fxml";
-        PropertiesUtil.initialize("src/main/resources/config.properties");
-        dbURL = PropertiesUtil.getProperty("db.url");
-        windowTitle = PropertiesUtil.getProperty("window.title");
-        fullScreen = Boolean.parseBoolean(PropertiesUtil.getProperty("window.fullScreen"));
-        maximized = Boolean.parseBoolean(PropertiesUtil.getProperty("window.maximized"));
-        iconPath = PropertiesUtil.getProperty("icon.path");
+        dbURL = "jdbc:h2:~/playproj/playprojDB";
+        windowTitle = "Progetto PLAY";
+        fullScreen = false;
+        maximized = false;
+        iconPath = "/unibo/javafxmvc/Images/Seal_of_the_University_of_Bologna.png";
         bloccoIndex = 0;
 
         Path playDir = Path.of(System.getProperty("java.io.tmpdir"), "PLAY");
         try {   // Creazione della cartella temporanea PLAY (necessario ad ogni avvio per assicurare la compatibilità con git | alternativa: gitignore sulla proprietà)
             Files.createDirectories(playDir);
-            PropertiesUtil.setProperty("temp.path", playDir.toString() + FileSystems.getDefault().getSeparator());
+            tempPath = (playDir.toString() + FileSystems.getDefault().getSeparator());
         } catch (IOException e) {
-            System.err.println("Errore durante la creazione della cartella PLAY: " + e.getMessage());
+            AuxiliaryController.alertWindow("Errore", "Errore di I/O", "Errore durante la creazione della cartella temporanea: " + e.getMessage());
         }
     }
     public static String getDbURLlikeAbsolutePath() {
@@ -201,27 +199,9 @@ public class Main extends Application {
     /** Inizializza la connessione al database */
     public static void initializeDB() {
         try{DatabaseManager.inizialize(dbURL);}
-        catch (ConnectionException e) {fxmlPath = "View/ErroreDatabase.fxml";}
-    }
-    /** Riporta il valore della proprietà <code>first.run</code>
-     * @see Main#initConfig()
-     * @see Main#setFirstRun(Boolean)
-     * @return <code>true</code> se l'applicazione è stata avviata per la prima volta, <code>false</code> altrimenti
-     * */
-    public static Boolean isFirstRun() {
-        return PropertiesUtil.getProperty("first.run").equals("true");
-    }
-    /**<code>first.run</code> indica se l'applicazione è stata avviata per la prima volta
-     * @see Main#initConfig()
-     * @param value Valore da assegnare alla proprietà <code>first.run</code>
-     *  */
-    public static void setFirstRun(Boolean value) {
-        try{
-            PropertiesUtil.setProperty("first.run", value.toString());
-        } catch (IOException ioe) {
-            System.err.println("Main.setFirstRun: Errore durante il salvataggio della proprietà first.run: " + ioe.getMessage());
-            ioe.printStackTrace();
-        }
+        catch (ConnectionException e) {
+            System.err.println("Errore nella inizializzazione della connessione al database: " + dbURL + "\n" + e.getMessage());
+            fxmlPath = "View/ErroreDatabase.fxml";}
     }
     @Override
     public void init() throws Exception {

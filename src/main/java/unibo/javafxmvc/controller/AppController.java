@@ -3,7 +3,7 @@ package unibo.javafxmvc.controller;
 import javafx.application.Platform;
 import unibo.javafxmvc.DAO.DatabaseManager;
 import unibo.javafxmvc.util.FileUtils;
-import unibo.javafxmvc.util.PropertiesUtil;
+import unibo.javafxmvc.Main;
 
 import java.nio.file.Path;
 import java.sql.SQLException;
@@ -15,7 +15,7 @@ public class AppController {
         } catch (SQLException e) {
             e.printStackTrace();
         }   // Pulizia della cartella temporanea: (per evitare accumulo di file inutili)
-        FileUtils.deleteDirectoryContent(Path.of(PropertiesUtil.getProperty("temp.path")));
+        FileUtils.deleteDirectoryContent(Path.of(Main.tempPath));
         Platform.exit();
     }
 }

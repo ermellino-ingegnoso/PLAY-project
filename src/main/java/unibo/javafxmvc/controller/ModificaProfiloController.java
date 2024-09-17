@@ -211,7 +211,7 @@ public class ModificaProfiloController {
         btnAddUser.setDisable(true);
         trimLbl(lblNome, lblCognome, lblUsername, lblPassword, lblRipetiPassword);
         if (FormValidator.validateName(tfNome.getText()) && FormValidator.validateName(tfCognome.getText())
-                && FormValidator.validateUsername(tfUsername.getText())
+                && FormValidator.validateUsername(tfUsername.getText()) && !tfPassword.getText().isEmpty()
                 && validatePassword(tfPassword.getText(), tfRipetiPassword.getText())) {
             try {
                 int id = UserDBM.getUserID(Main.currentUser.getUsername(), Main.admin);

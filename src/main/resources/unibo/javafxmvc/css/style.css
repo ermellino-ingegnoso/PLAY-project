@@ -52,11 +52,15 @@
 }
 .table-cell {
     -fx-alignment: CENTER;
+    -fx-background-color: white;
 }
-
-.table-cell-right {
-    -fx-alignment: CENTER-RIGHT;
+.table{
+    -fx-border-color: #3a3a96;
+    -fx-border-width: 2px;
+    -fx-border-radius: 18px;
+    -fx-background-radius: 20px;
 }
+.table:header{}
 .yellow-label {
     -fx-text-fill: white;
     -fx-border-color: white;

@@ -101,7 +101,7 @@ public class ClassificaUtenteController {
     }
     private void esci(){ Main.changeScene("View/UserHome.fxml");}
     @FXML
-    private void EsciOnKeyPressed(KeyEvent event) {AuxiliaryController.keyEnterPressed(event); esci();}
+    private void EsciOnKeyPressed(KeyEvent event) {if(AuxiliaryController.keyEnterPressed(event)) esci();}
     @FXML
     private void EsciOnMouseClicked(MouseEvent event) {esci();}
 }
