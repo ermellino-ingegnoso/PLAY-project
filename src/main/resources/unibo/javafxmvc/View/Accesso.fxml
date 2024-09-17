@@ -57,7 +57,7 @@
                   <Font size="14.0" />
                </font>
                 </Button>
-                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="184.0" text="Accesso a PLAY" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="184.0" text="Accesso a Project X" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                     <font>
                         <Font size="13.0" />
                     </font>
