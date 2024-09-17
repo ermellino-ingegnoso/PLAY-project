@@ -128,9 +128,9 @@ public class CommentiController implements Initializable {
     }
 
     private void treSecondi() {
+        lbPunti.setVisible(true);
         lbPunti.setText("Sbagliato!");
         lbPunti.setStyle("-fx-text-fill: red;");
-        lbPunti.setVisible(true);
         PauseTransition pause = new PauseTransition(Duration.seconds(2));
         pause.setOnFinished(event -> lbPunti.setVisible(false));
         pause.play();

@@ -41,7 +41,7 @@
         <RadioButton fx:id="rbOpzione3" mnemonicParsing="false" text="Opzione 3" toggleGroup="$Opzioni" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
         <Label fx:id="lbPunti" alignment="CENTER" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="18.0" />
          </font></Label>
         <Label text="Selezionare il commento corretto da associare alla foto del codice" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
             <font>

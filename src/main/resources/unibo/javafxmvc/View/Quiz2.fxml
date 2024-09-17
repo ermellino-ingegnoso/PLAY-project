@@ -33,7 +33,10 @@
         </Label>
         <Button fx:id="bInvia" mnemonicParsing="false" onMouseClicked="#InviaOnMOusePressed" text="Invia" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         <Button fx:id="bIndietro" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#IndietroOnMousePressed" text="Indietro" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
-        <Label fx:id="lbIstruzione" text="Seleziona il codice corretto" />
+        <Label id="Quiz2istruzione" fx:id="lbIstruzione" text="Seleziona il codice corretto" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
         <Label fx:id="lbCorretto" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
       <StackPane fx:id="spStack1" prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
          <children>
