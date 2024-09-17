@@ -5,11 +5,12 @@
 .text-field {
     -fx-background-color: #f0f0f0;
     -fx-border-color: -fx-blu-oceano;
+    -fx-prompt-text-fill: -fx-blu-oceano;
     -fx-border-width: 1px;
     -fx-border-radius: 5px;
     -fx-font-size: 13px;
     -fx-background-radius: 5px;
-    -fx-text-fill: #3a3a96;
+    -fx-text-fill: -fx-viola-scuro;
 }
 .text-field:hover {
     -fx-border-color: #5a5ac6;

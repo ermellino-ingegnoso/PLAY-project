@@ -1,27 +1,23 @@
 package unibo.javafxmvc.controller;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Background;
-import unibo.javafxmvc.DAO.EsercizioEspertoDBM;
 import javafx.scene.input.MouseEvent;
-import unibo.javafxmvc.Main;
-
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
+
+import javafx.util.Duration;
+import unibo.javafxmvc.Main;
 import unibo.javafxmvc.exception.ConnectionException;
 import unibo.javafxmvc.model.EsercizioEsperto;
 import unibo.javafxmvc.model.Grado;
 import unibo.javafxmvc.model.Punteggio;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.ResourceBundle;
+import unibo.javafxmvc.DAO.EsercizioEspertoDBM;
 
 public class UserHomeController {
     @FXML
@@ -46,6 +42,10 @@ public class UserHomeController {
     private ImageView userAvatar;
     @FXML
     private Circle circle;
+    @FXML
+    private Label code1;
+    @FXML
+    private Label code2;
 
     private EsercizioEsperto esEsperto;
     private EsercizioEsperto esAvanzato;
@@ -70,13 +70,8 @@ public class UserHomeController {
             pbAvanzato.setProgress((punteggioAvanzato.getPunteggio()/punteggioAvanzato.getPunteggioTotale()));
         }
         else pbAvanzato.setProgress(0);
-        /*
-        Main.currentScene.getRoot().lookupAll(".progress-bar").forEach(node -> {
-            if (node instanceof ProgressBar) {
-                ProgressBar progressBar = (ProgressBar) node;
-                progressBar.setBackground(Background.EMPTY);
-            }
-        });*/
+        startTextTypingEffect(code1, "User admin = new User(\"admin\", \"admin\", \"admin\", User.getSHA256Hash(\"admin\"), new Image(Objects.requireNonNull(Main.class.getResourceAsStream(\"/unibo/javafxmvc/Images/avatar.png\"))), \"0xffffffff\");        if (!UserDBM.userExists(\"admin\", true)) UserDBM.insertUser(admin, true);");
+        startTextTypingEffect(code2, "eg.setId(Objects.requireNonNull(insertEsercizioGenerico(eg), \"ID Esercizio Generico Trova errore non recuperato\")); bgSomma.setId(Objects.requireNonNull(insertBloccoGenerico(bgSomma, eg), \"ID Blocco Generico Somma non recuperato\"));     ");
     }
     @FXML
     void AvatarOnMousePressed(MouseEvent event) {
@@ -152,4 +147,39 @@ public class UserHomeController {
     private void ClassificaUtenteOnMouseClicked(MouseEvent event) {classificaUtente();}
     private void classificaGenerale(){  Main.changeScene("View/ClassificaGenerale.fxml");}
     private void classificaUtente(){    Main.changeScene("View/ClassificaUtente.fxml");}
+    private void startTextTypingEffect(Label label, String text) {
+        label.setText("");
+        final int[] index = {0};
+
+        final Timeline[] typingTimeline = new Timeline[1]; // Array per contenere la Timeline
+
+        typingTimeline[0] = new Timeline(new KeyFrame(Duration.millis(100), e -> {
+            if (index[0] < text.length()-1) {
+                label.setText(text.substring(0, index[0] + 1)+ "|");
+                index[0]++;
+            } else {
+                typingTimeline[0].stop();
+                label.setText(text);
+                startTextDeletingEffect(label, text);
+            }
+        }));
+        typingTimeline[0].setCycleCount(text.length());
+        typingTimeline[0].play();
+    }
+    private void startTextDeletingEffect(Label label, String text) {
+        final int[] index = {text.length() - 1};
+        final Timeline[] deletingTimeline = new Timeline[1]; // Array to hold the Timeline
+
+        deletingTimeline[0] = new Timeline(new KeyFrame(Duration.millis(60), e -> {
+            if (index[0] >= 1) {
+                label.setText(text.substring(0, index[0])+"|");
+                index[0]--;
+            } else {
+                deletingTimeline[0].stop();
+                label.setVisible(false);
+            }
+        }));
+        deletingTimeline[0].setCycleCount(text.length());
+        deletingTimeline[0].play();
+    }
 }

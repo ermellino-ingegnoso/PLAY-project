@@ -58,9 +58,9 @@
          <children>
             <VBox alignment="CENTER" focusTraversable="true" minHeight="140.0" minWidth="80.0" onMouseClicked="#QuizOnMousePressed" prefHeight="200.0" prefWidth="100.0" spacing="24.0" styleClass="border-pane" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label styleClass="general-text" text="Studia i concetti">
+                  <Label alignment="CENTER" contentDisplay="CENTER" styleClass="general-text" text="Studia i concetti" textAlignment="CENTER" wrapText="true">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="ROGFonts-Regular" size="17.0" />
                      </font>
                   </Label>
                   <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="50.0">
@@ -74,9 +74,9 @@
             </VBox>
             <VBox alignment="CENTER" focusTraversable="true" minHeight="140.0" minWidth="80.0" onMouseClicked="#OrdinaPassiOnMousePressed" prefHeight="200.0" prefWidth="100.0" spacing="24.0" styleClass="border-pane" GridPane.columnIndex="1">
                <children>
-                      <Label styleClass="general-text" text="Commenti">
+                      <Label alignment="CENTER" contentDisplay="CENTER" styleClass="general-text" text="Commenti" textAlignment="CENTER" wrapText="true">
                           <font>
-                              <Font size="18.0" />
+                              <Font name="ROGFonts-Regular" size="17.0" />
                           </font>
                       </Label>
                   <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="50.0">
@@ -90,9 +90,9 @@
             </VBox>
             <VBox alignment="CENTER" focusTraversable="true" minHeight="140.0" minWidth="80.0" onMouseClicked="#AvanzatoOnMouseClicked" prefHeight="200.0" prefWidth="100.0" spacing="24.0" styleClass="border-pane" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <children>
-                      <Label fx:id="lblEsercizioAvanzato" onMouseClicked="#AvanzatoOnMouseClicked" styleClass="general-text" text="Trova l'errore">
+                      <Label fx:id="lblEsercizioAvanzato" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#AvanzatoOnMouseClicked" styleClass="general-text" text="Trova l'errore" textAlignment="CENTER" wrapText="true">
                           <font>
-                              <Font size="18.0" />
+                              <Font name="ROGFonts-Regular" size="17.0" />
                           </font>
                       </Label>
                   <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="50.0">
@@ -106,9 +106,9 @@
             </VBox>
             <VBox alignment="CENTER" focusTraversable="true" minHeight="140.0" minWidth="80.0" onMouseClicked="#EspertoOnMouseClicked" prefHeight="200.0" prefWidth="100.0" spacing="24.0" styleClass="border-pane" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="lblEsercizioEsperto" onMouseClicked="#AvanzatoOnMouseClicked" styleClass="general-text" text="Trova l'errore">
+                  <Label fx:id="lblEsercizioEsperto" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#AvanzatoOnMouseClicked" styleClass="general-text" text="Completa il blocco mancante" textAlignment="CENTER" wrapText="true">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="ROGFonts-Regular" size="14.0" />
                      </font>
                   </Label>
                   <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="50.0">
@@ -141,5 +141,21 @@
          <font>
             <Font size="13.0" />
          </font></Button>
+      <Label fx:id="code1" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="codice" wrapText="true" GridPane.columnSpan="4" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="100.0" right="100.0" top="-20.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="OCR A Extended" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="code2" alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="codice" textAlignment="RIGHT" wrapText="true" GridPane.columnSpan="4" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="-20.0" left="100.0" right="100.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="OCR A Extended" size="12.0" />
+         </font>
+      </Label>
     </children>
 </GridPane>

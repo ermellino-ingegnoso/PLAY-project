@@ -11,10 +11,16 @@
     -fx-home-col-arancione:  #ffbf80;
     -fx-viola-scuro: #3a3a96;
 }
+.title{
+    -fx-text-fill: -fx-viola-scuro;
+}
 .falling-digit {
     -fx-font-size: 10px;
     -fx-fill: violet; /* Change this to the desired color */
     -fx-opacity: 1.0; /* Initial opacity */
+}
+.codice{
+    -fx-text-fill: violet;
 }
 .color-picker {
     -fx-background-color: white;
@@ -60,7 +66,6 @@
     -fx-border-radius: 18px;
     -fx-background-radius: 20px;
 }
-.table:header{}
 .yellow-label {
     -fx-text-fill: white;
     -fx-border-color: white;

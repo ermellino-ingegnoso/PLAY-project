@@ -65,7 +65,7 @@ public class Main extends Application {
         admin = false;
         fxmlPath = "View/Accesso.fxml";
         dbURL = "jdbc:h2:~/playproj/playprojDB";
-        windowTitle = "Progetto PLAY";
+        windowTitle = "Project X";
         fullScreen = false;
         maximized = false;
         iconPath = "/unibo/javafxmvc/Images/Seal_of_the_University_of_Bologna.png";

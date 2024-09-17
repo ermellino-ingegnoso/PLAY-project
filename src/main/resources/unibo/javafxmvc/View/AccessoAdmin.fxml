@@ -7,61 +7,51 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="599.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.AccessoAdminController">
-    <children>
-        <GridPane alignment="CENTER" prefHeight="635.0" prefWidth="780.0">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="150.0" prefWidth="170.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="400.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="150.0" prefWidth="170.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints maxHeight="100.0" minHeight="50.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="40.0" prefHeight="200.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="60.0" minHeight="30.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="60.0" minHeight="30.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="370.7777777777777" minHeight="10.0" prefHeight="320.0000271267361" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#BackOnKeyPressed" onMouseClicked="#BackOnMousePressed" prefHeight="45.0" prefWidth="104.0" text="Indietro" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM" />
-                <TextField fx:id="tfUsername" alignment="CENTER" prefHeight="25.0" prefWidth="348.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <PasswordField fx:id="tfPassword" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <Label alignment="CENTER" contentDisplay="CENTER" text="Username" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                    <GridPane.margin>
-                        <Insets right="10.0" />
-                    </GridPane.margin>
-                </Label>
-                <Label contentDisplay="RIGHT" text="Password" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-                    <GridPane.margin>
-                        <Insets right="10.0" />
-                    </GridPane.margin>
-                </Label>
-                <Button mnemonicParsing="false" onKeyPressed="#AccediOnKeyPressed" onMousePressed="#AccediOnMousePressed" prefHeight="45.0" prefWidth="124.0" text="Accedi" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
-                    <GridPane.margin>
-                        <Insets top="10.0" />
-                    </GridPane.margin>
-                </Button>
-                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="184.0" text="Accesso a PLAY" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-                    <font>
-                        <Font size="13.0" />
-                    </font>
-                </Label>
-                <Label fx:id="lblUsername" text="utente inesistente" textFill="#d10000" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                    <GridPane.margin>
-                        <Insets left="10.0" />
-                    </GridPane.margin>
-                </Label>
-                <Label fx:id="lblPassword" text="password errata" textFill="#d10000" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                    <GridPane.margin>
-                        <Insets left="10.0" />
-                    </GridPane.margin>
-                </Label>
-                <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#newUserBtnOnKeyPressed" onMouseClicked="#newUserBtnOnMouseClicked" prefHeight="45.0" prefWidth="104.0" text="Registra admin" textAlignment="CENTER" wrapText="true" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM" />
-            </children>
-        </GridPane>
-    </children>
-</StackPane>
+<GridPane fx:id="mainGridPane" alignment="CENTER" prefHeight="635.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.AccessoAdminController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="150.0" prefWidth="170.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="400.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="150.0" prefWidth="170.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="100.0" minHeight="50.0" prefHeight="80.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="40.0" prefHeight="200.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="60.0" minHeight="30.0" prefHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="60.0" minHeight="30.0" prefHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="370.7777777777777" minHeight="10.0" prefHeight="320.0000271267361" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <Pane fx:id="fallingDigitsPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowSpan="5" />
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#BackOnKeyPressed" onMouseClicked="#BackOnMousePressed" prefHeight="50.0" prefWidth="140.0" text="Indietro" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM" />
+      <TextField fx:id="tfUsername" alignment="CENTER" prefHeight="25.0" prefWidth="348.0" promptText="Username" styleClass="text-field" stylesheets="@../css/styleAnag.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <PasswordField fx:id="tfPassword" alignment="CENTER" promptText="Password" styleClass="text-field" stylesheets="@../css/styleAnag.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Button mnemonicParsing="false" onKeyPressed="#AccediOnKeyPressed" onMousePressed="#AccediOnMousePressed" prefHeight="50.0" prefWidth="140.0" text="Accedi" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="10.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Label fx:id="lblUsername" text="utente inesistente" textFill="#d10000" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
+      </Label>
+      <Label fx:id="lblPassword" text="password errata" textFill="#d10000" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
+      </Label>
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onKeyPressed="#newUserBtnOnKeyPressed" onMouseClicked="#newUserBtnOnMouseClicked" prefHeight="50.0" prefWidth="140.0" text="Registra admin" textAlignment="CENTER" wrapText="true" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM" />
+      <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="title" stylesheets="@../css/style.css" text="Accesso Admin Project X" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <font>
+            <Font name="OCR A Extended" size="23.0" />
+         </font>
+      </Label>
+   </children>
+</GridPane>
