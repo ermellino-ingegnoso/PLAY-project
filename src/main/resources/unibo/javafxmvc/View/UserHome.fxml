@@ -29,6 +29,22 @@
         <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
+      <Label fx:id="code1" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="codice" stylesheets="@../css/style.css" wrapText="true" GridPane.columnSpan="4" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets left="100.0" right="100.0" top="-20.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="OCR A Extended" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="code2" alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="codice" stylesheets="@../css/style.css" textAlignment="RIGHT" wrapText="true" GridPane.columnSpan="4" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="-20.0" left="100.0" right="100.0" />
+         </GridPane.margin>
+         <font>
+            <Font name="OCR A Extended" size="12.0" />
+         </font>
+      </Label>
       <StackPane onMouseClicked="#AvatarOnMousePressed" prefHeight="76.0" prefWidth="250.0" GridPane.halignment="LEFT" GridPane.valignment="TOP">
          <children>
             <ImageView fx:id="userAvatar" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="avatar" StackPane.alignment="TOP_LEFT">
@@ -141,21 +157,5 @@
          <font>
             <Font size="13.0" />
          </font></Button>
-      <Label fx:id="code1" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="codice" wrapText="true" GridPane.columnSpan="4" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
-         <GridPane.margin>
-            <Insets left="100.0" right="100.0" top="-20.0" />
-         </GridPane.margin>
-         <font>
-            <Font name="OCR A Extended" size="12.0" />
-         </font>
-      </Label>
-      <Label fx:id="code2" alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="codice" textAlignment="RIGHT" wrapText="true" GridPane.columnSpan="4" GridPane.rowIndex="2">
-         <GridPane.margin>
-            <Insets bottom="-20.0" left="100.0" right="100.0" />
-         </GridPane.margin>
-         <font>
-            <Font name="OCR A Extended" size="12.0" />
-         </font>
-      </Label>
     </children>
 </GridPane>
