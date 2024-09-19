@@ -1,3 +1,14 @@
+.root{
+    -fx-blu-oceano: #7676d6;
+    -fx-home-col-arancione:  #ffbf80;
+    -fx-viola-scuro: #3a3a96;
+}
+.coloredViola{
+    -fx-text-fill: #7676d6;
+}
+.coloredBlue{
+    -fx-text-fill: #3a3a96;
+}
 .avatar {
     -fx-background-color: white;
     -fx-background-radius: 25;
@@ -6,15 +17,16 @@
     -fx-background-position: center;
     -fx-background-repeat: no-repeat;
 }
-.root{
-    -fx-blu-oceano: #7676d6;
-    -fx-home-col-arancione:  #ffbf80;
-    -fx-viola-scuro: #3a3a96;
+.title{
+    -fx-text-fill: -fx-viola-scuro;
 }
 .falling-digit {
     -fx-font-size: 10px;
     -fx-fill: violet; /* Change this to the desired color */
     -fx-opacity: 1.0; /* Initial opacity */
+}
+.codice{
+    -fx-text-fill: violet;
 }
 .color-picker {
     -fx-background-color: white;
@@ -53,6 +65,17 @@
 .table-cell {
     -fx-alignment: CENTER;
     -fx-background-color: white;
+
+    -fx-border-width: 0px;
+    -fx-text-fill: #5a5ac6;
+}
+.table-cell:even{
+    -fx-text-fill: #3a3a96;
+    -fx-background-color: #c1c1e3;
+}
+.table-cell:focused{
+    -fx-text-fill:  #3a3a96;
+    -fx-background-color: white;
 }
 .table{
     -fx-border-color: #3a3a96;
@@ -60,7 +83,38 @@
     -fx-border-radius: 18px;
     -fx-background-radius: 20px;
 }
-.table:header{}
+.column-header{
+    -fx-background-color: transparent;
+}
+.classifica-title{
+    -fx-font-family: "Blackadder ITC";
+    -fx-text-fill: #3a3a96;
+    -fx-font-size: 30px;
+}
+.table-view .column-header .label{
+    -fx-text-fill: #3a3a96;
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+}
+.table-view .column-header-background{
+    -fx-background-color: transparent;
+}
+.table-row-cell:focused{
+    -fx-background-color: white;
+}
+.table-row-cell:odd{
+     -fx-background-color: #c1c1e3;
+      /*-fx-background-insets: 0, 0 0 1 0; */
+     -fx-padding: 0.0em;
+ }
+.filler{
+    -fx-background-radius: 16px;
+    -fx-background-color: white;
+}
+.table:focused{
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-blu-oceano;
+}
 .yellow-label {
     -fx-text-fill: white;
     -fx-border-color: white;

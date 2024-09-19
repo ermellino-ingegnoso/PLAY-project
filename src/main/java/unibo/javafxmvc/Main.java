@@ -16,7 +16,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import unibo.javafxmvc.DAO.DatabaseManager;
@@ -28,8 +27,6 @@ import static unibo.javafxmvc.DAO.RegolaGenericaDBM.regolaExists;
 import static unibo.javafxmvc.util.CodeValidator.checkCodice;
 import static unibo.javafxmvc.util.CodeValidator.checkCodiceAvanzato;
 import static unibo.javafxmvc.util.FileUtils.readFileFromResources;
-
-import unibo.javafxmvc.DAO.PunteggioDBM;
 import unibo.javafxmvc.DAO.UserDBM;
 import unibo.javafxmvc.controller.AuxiliaryController;
 import unibo.javafxmvc.exception.ConnectionException;
@@ -65,7 +62,7 @@ public class Main extends Application {
         admin = false;
         fxmlPath = "View/Accesso.fxml";
         dbURL = "jdbc:h2:~/playproj/playprojDB";
-        windowTitle = "Progetto PLAY";
+        windowTitle = "Project X";
         fullScreen = false;
         maximized = false;
         iconPath = "/unibo/javafxmvc/Images/Seal_of_the_University_of_Bologna.png";

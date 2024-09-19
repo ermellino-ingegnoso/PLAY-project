@@ -23,9 +23,9 @@
     </columnConstraints>
     <rowConstraints>
         <RowConstraints maxHeight="100.0" minHeight="60.0" prefHeight="100.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="100.0" minHeight="20.0" prefHeight="80.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="100.0" minHeight="20.0" prefHeight="80.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="300.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="80.0" minHeight="20.0" prefHeight="60.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="80.0" minHeight="20.0" prefHeight="60.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" vgrow="SOMETIMES" />
       <RowConstraints />
     </rowConstraints>
     <children>
@@ -51,14 +51,14 @@
             <Insets right="30.0" />
          </GridPane.margin>
       </Button>
-      <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Schermata Punteggi" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="classifica-title" stylesheets="@../css/style.css" text="Schermata Punteggi" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
-            <Font size="17.0" />
+            <Font name="Blackadder ITC" size="30.0" />
          </font>
       </Label>
       <TableView fx:id="tbView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/style.css" GridPane.columnSpan="4" GridPane.rowIndex="3" GridPane.rowSpan="2">
          <GridPane.margin>
-            <Insets left="50.0" right="50.0" />
+            <Insets bottom="100.0" left="100.0" right="100.0" />
          </GridPane.margin>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -67,7 +67,7 @@
             <String fx:value="table-cell" />
             <String fx:value="table" />
          </styleClass></TableView>
-      <Label fx:id="lblInfo" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" textAlignment="CENTER" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+      <Label fx:id="lblInfo" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="coloredViola" stylesheets="@../css/style.css" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" textAlignment="CENTER" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -75,7 +75,7 @@
             <Insets left="50.0" right="50.0" />
          </GridPane.margin>
       </Label>
-      <Label fx:id="lblInfoPeso" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" textAlignment="CENTER" GridPane.columnSpan="4" GridPane.rowIndex="2">
+      <Label fx:id="lblInfoPeso" alignment="TOP_CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="coloredViola" stylesheets="@../css/style.css" text="LabelLabelLabelLabelLabelLabelLabelLabelLabelLabelLabel" textAlignment="CENTER" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

@@ -27,7 +27,7 @@
    <children>
       <TextField fx:id="tfTitolo" alignment="BOTTOM_CENTER" promptText="Titolo Esercizio" GridPane.columnSpan="3" GridPane.rowIndex="1">
          <font>
-            <Font name="Segoe UI" size="24.0" />
+            <Font name="ROGFonts-Regular" size="24.0" />
          </font>
          <GridPane.margin>
             <Insets left="50.0" right="50.0" />
@@ -41,9 +41,12 @@
             <Insets left="50.0" right="50.0" />
          </GridPane.margin>
       </TextField>
-      <TextArea fx:id="tfDidascalia" promptText="Descrizione di come l' utente deve completare l' esercizio" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.rowSpan="2" GridPane.valignment="CENTER" />
-      <Button mnemonicParsing="false" onKeyPressed="#SaveOnKeyPressed" onMouseClicked="#SaveOnMouseClicked" prefHeight="43.0" prefWidth="100.0" text="Salva" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <Button mnemonicParsing="false" onKeyPressed="#AnnullaOnKeyPressed" onMouseClicked="#AnnullaOnMouseClicked" prefHeight="43.0" prefWidth="100.0" text="Annulla" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+      <TextArea fx:id="tfDidascalia" promptText="Descrizione di come l' utente deve completare l' esercizio" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+         <font>
+            <Font size="13.0" />
+         </font></TextArea>
+      <Button mnemonicParsing="false" onKeyPressed="#SaveOnKeyPressed" onMouseClicked="#SaveOnMouseClicked" prefHeight="50.0" prefWidth="130.0" text="Salva" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Button mnemonicParsing="false" onKeyPressed="#AnnullaOnKeyPressed" onMouseClicked="#AnnullaOnMouseClicked" prefHeight="50.0" prefWidth="130.0" text="Annulla" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
       <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Descrizione dello svolgimento:" textAlignment="CENTER" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
       <Label text="Aggiungi Regola" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>

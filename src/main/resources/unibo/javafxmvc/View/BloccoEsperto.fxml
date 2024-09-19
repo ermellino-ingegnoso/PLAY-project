@@ -24,11 +24,17 @@
     <RowConstraints maxHeight="80.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button fx:id="btnProsegui" mnemonicParsing="false" onKeyPressed="#SaveOnKeyPressed" onMouseClicked="#SaveOnMouseClicked" prefHeight="43.0" prefWidth="100.0" text="Prosegui" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-      <Button mnemonicParsing="false" onKeyPressed="#AnnullaOnKeyPressed" onMouseClicked="#AnnullaOnMouseClicked" prefHeight="43.0" prefWidth="100.0" text="Termina" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
-      <Label fx:id="lblTitolo" text="Titolo Blocco" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Button fx:id="btnProsegui" mnemonicParsing="false" onKeyPressed="#SaveOnKeyPressed" onMouseClicked="#SaveOnMouseClicked" prefHeight="50.0" prefWidth="120.0" text="Prosegui" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
          <font>
-            <Font name="Georgia" size="18.0" />
+            <Font size="13.0" />
+         </font></Button>
+      <Button mnemonicParsing="false" onKeyPressed="#AnnullaOnKeyPressed" onMouseClicked="#AnnullaOnMouseClicked" prefHeight="50.0" prefWidth="120.0" text="Termina" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <Label fx:id="lblTitolo" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Titolo Blocco" textAlignment="CENTER" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font name="OCR A Extended" size="20.0" />
          </font>
       </Label>
       <Label fx:id="lblIndice" contentDisplay="CENTER" text="Blocco 1 di 6" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
@@ -40,6 +46,9 @@
          <GridPane.margin>
             <Insets left="50.0" right="50.0" />
          </GridPane.margin>
+         <font>
+            <Font size="13.0" />
+         </font>
       </Label>
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="108.0" text="Non modificare la firma del metodo" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
          <GridPane.margin>
