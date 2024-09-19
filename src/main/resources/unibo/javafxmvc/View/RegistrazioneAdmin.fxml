@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.RegistrazioneController">
+<GridPane alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="906.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="unibo.javafxmvc.controller.RegistrazioneAdminController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="80.0" prefWidth="100.0" />
         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="800.0" minWidth="10.0" />
@@ -27,7 +28,10 @@
         <RowConstraints maxHeight="1.7976931348623157E308" minHeight="50.0" prefHeight="120.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <Label alignment="CENTER" text="Aggiungi un nuovo admin" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+        <Label alignment="CENTER" styleClass="coloredBlue" stylesheets="@../css/style.css" text="Aggiungi un nuovo admin" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
         <Button fx:id="btnAddUser" mnemonicParsing="false" onKeyPressed="#btnAddUserOnKeyPressed" onMouseClicked="#btnAddUserOnMouseClicked" prefHeight="38.0" prefWidth="107.0" text="Aggiungi" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
             <font>
                 <Font size="13.0" />
@@ -53,36 +57,31 @@
             <RowConstraints maxHeight="60.0" minHeight="30.0" prefHeight="40.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-              <Label text="Nome" GridPane.halignment="RIGHT">
-                  <GridPane.margin>
-                      <Insets right="10.0" />
-                  </GridPane.margin>
-              </Label>
-              <Label text="Cognome" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-                  <GridPane.margin>
-                      <Insets right="10.0" />
-                  </GridPane.margin>
-              </Label>
-              <Label text="Username" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-                  <GridPane.margin>
-                      <Insets right="10.0" />
-                  </GridPane.margin>
-              </Label>
-              <Label text="Password" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-                  <GridPane.margin>
-                      <Insets right="10.0" />
-                  </GridPane.margin>
-              </Label>
-              <Label text="Ripeti la password" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
-                  <GridPane.margin>
-                      <Insets right="10.0" />
-                  </GridPane.margin>
-              </Label>
-              <TextField fx:id="tfNome" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfNomeOnKeyTyped" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.vgrow="ALWAYS" />
-              <TextField fx:id="tfCognome" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfCognomeOnKeyTyped" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
-              <TextField fx:id="tfUsername" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfUsernameOnKeyTyped" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
-              <PasswordField fx:id="tfPassword" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfPasswordOnKeyTyped" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
-              <PasswordField fx:id="tfRipetiPassword" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfRipetiPasswordOnKeyTyped" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+              <TextField fx:id="tfNome" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfNomeOnKeyTyped" promptText="Nome" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.vgrow="ALWAYS">
+               <stylesheets>
+                  <URL value="@../css/styleAnag.css" />
+                  <URL value="@../css/style.css" />
+               </stylesheets></TextField>
+              <TextField fx:id="tfCognome" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfCognomeOnKeyTyped" promptText="Cognome" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+               <stylesheets>
+                  <URL value="@../css/styleAnag.css" />
+                  <URL value="@../css/style.css" />
+               </stylesheets></TextField>
+              <TextField fx:id="tfUsername" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfUsernameOnKeyTyped" promptText="Username" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+               <stylesheets>
+                  <URL value="@../css/styleAnag.css" />
+                  <URL value="@../css/style.css" />
+               </stylesheets></TextField>
+              <PasswordField fx:id="tfPassword" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfPasswordOnKeyTyped" promptText="Password" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
+               <stylesheets>
+                  <URL value="@../css/styleAnag.css" />
+                  <URL value="@../css/style.css" />
+               </stylesheets></PasswordField>
+              <PasswordField fx:id="tfRipetiPassword" alignment="CENTER" maxWidth="1.7976931348623157E308" onKeyTyped="#tfRipetiPasswordOnKeyTyped" promptText="Ripeti la password" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
+               <stylesheets>
+                  <URL value="@../css/styleAnag.css" />
+                  <URL value="@../css/style.css" />
+               </stylesheets></PasswordField>
               <Label fx:id="lblNome" text="Inserisci solo lettere" textAlignment="CENTER" textFill="#b00000" visible="false" GridPane.columnIndex="2">
                   <GridPane.margin>
                       <Insets left="10.0" />

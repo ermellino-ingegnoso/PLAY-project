@@ -21,7 +21,7 @@ public class RegolaController {
     @FXML
     public void initialize() {
         Main.bloccoIndex = 0;
-        lblTitolo.setText(Main.esercizioCorrente.getRegola().getTitolo());
+        lblTitolo.setText(Main.esercizioCorrente.getRegola().getTitolo().toUpperCase());
         lblDescrizione.setText(Main.esercizioCorrente.getRegola().getDescrizione());
         lblDomanda.setText(Main.esercizioCorrente.getRegola().getDomanda());
         Main.generalCounter = Main.esercizioCorrente.getBlocchiEsperto().size();

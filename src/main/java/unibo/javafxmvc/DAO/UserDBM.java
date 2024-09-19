@@ -14,7 +14,7 @@ public class UserDBM extends DatabaseManager {
      * @throws ConnectionException se la connessione non è stata stabilita correttamente
      * */
     public static Boolean insertUser(User usr, Boolean admin) throws ConnectionException{
-        return insertUser(usr, (admin ? "Admin" : "\"User\""));
+        return insertUser(usr, (admin ? "ADMIN" : "\"User\""));
     }
     public static Boolean updateUserById(User user, Integer userId, boolean admin) throws ConnectionException {
         if (connection != null) {

@@ -61,12 +61,12 @@ public class UserHomeController {
         pbPrincipiante.setProgress((punteggioPrincipiante != null)? (punteggioPrincipiante.getPunteggio()/punteggioPrincipiante.getPunteggioTotale()) : 0.0f);
         pbIntermedio.setProgress((punteggioIntermedio != null)? (punteggioIntermedio.getPunteggio()/punteggioIntermedio.getPunteggioTotale()) : 0.0f);
         if(esEsperto != null){
-            lblEsercizioEsperto.setText(esEsperto.getRegola().getTitolo());
+            lblEsercizioEsperto.setText(esEsperto.getRegola().getTitolo().toUpperCase());
             pbEsperto.setProgress((punteggioEsperto.getPunteggio()/punteggioEsperto.getPunteggioTotale()));
         }
         else pbEsperto.setProgress(0);
         if(esAvanzato != null){
-            lblEsercizioAvanzato.setText(esAvanzato.getRegola().getTitolo());
+            lblEsercizioAvanzato.setText(esAvanzato.getRegola().getTitolo().toUpperCase());
             pbAvanzato.setProgress((punteggioAvanzato.getPunteggio()/punteggioAvanzato.getPunteggioTotale()));
         }
         else pbAvanzato.setProgress(0);
