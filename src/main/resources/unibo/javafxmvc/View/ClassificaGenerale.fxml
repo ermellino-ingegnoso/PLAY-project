@@ -45,19 +45,19 @@
                 <Insets left="30.0" />
             </padding>
         </StackPane>
-      <Button mnemonicParsing="false" onKeyPressed="#EsciOnKeyPressed" onMouseClicked="#EsciOnMouseClicked" prefHeight="41.0" prefWidth="93.0" text="Esci" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
+      <Button mnemonicParsing="false" onKeyPressed="#EsciOnKeyPressed" onMouseClicked="#EsciOnMouseClicked" prefHeight="40.0" prefWidth="100.0" text="Esci" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
          <GridPane.margin>
             <Insets right="30.0" />
          </GridPane.margin>
       </Button>
-      <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Classifica Generale" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="classifica-title" stylesheets="@../css/style.css" text="Classifica Generale" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
-            <Font size="17.0" />
+            <Font name="Blackadder ITC" size="30.0" />
          </font>
       </Label>
-      <TableView fx:id="tbView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/style.css" GridPane.columnSpan="4" GridPane.rowIndex="1">
+      <TableView fx:id="tbView" fixedCellSize="45.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/style.css" GridPane.columnSpan="4" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets left="50.0" right="50.0" />
+            <Insets bottom="100.0" left="50.0" right="50.0" top="30.0" />
          </GridPane.margin>
          <columns>
             <TableColumn fx:id="usernameCol" prefWidth="75.0" text="Username" />

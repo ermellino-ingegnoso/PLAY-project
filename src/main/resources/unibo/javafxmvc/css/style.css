@@ -3,6 +3,12 @@
     -fx-home-col-arancione:  #ffbf80;
     -fx-viola-scuro: #3a3a96;
 }
+.coloredViola{
+    -fx-text-fill: #7676d6;
+}
+.coloredBlue{
+    -fx-text-fill: #3a3a96;
+}
 .avatar {
     -fx-background-color: white;
     -fx-background-radius: 25;
@@ -59,10 +65,17 @@
 .table-cell {
     -fx-alignment: CENTER;
     -fx-background-color: white;
+
+    -fx-border-width: 0px;
+    -fx-text-fill: #5a5ac6;
+}
+.table-cell:even{
+    -fx-text-fill: #3a3a96;
+    -fx-background-color: #c1c1e3;
 }
 .table-cell:focused{
-    -fx-text-fill: -fx-blu-oceano;
-    -fx-background-color: transparent;
+    -fx-text-fill:  #3a3a96;
+    -fx-background-color: white;
 }
 .table{
     -fx-border-color: #3a3a96;
@@ -73,15 +86,21 @@
 .column-header{
     -fx-background-color: transparent;
 }
+.classifica-title{
+    -fx-font-family: "Blackadder ITC";
+    -fx-text-fill: #3a3a96;
+    -fx-font-size: 30px;
+}
 .table-view .column-header .label{
     -fx-text-fill: #3a3a96;
     -fx-background-color: transparent;
+    -fx-font-size: 14px;
 }
 .table-view .column-header-background{
     -fx-background-color: transparent;
 }
 .table-row-cell:focused{
-    -fx-background-color: transparent;
+    -fx-background-color: white;
 }
 .table-row-cell:odd{
      -fx-background-color: #c1c1e3;
