@@ -22,8 +22,8 @@
 }
 .falling-digit {
     -fx-font-size: 10px;
-    -fx-fill: violet; /* Change this to the desired color */
-    -fx-opacity: 1.0; /* Initial opacity */
+    -fx-fill: violet;
+    -fx-opacity: 1.0;
 }
 .codice{
     -fx-text-fill: violet;

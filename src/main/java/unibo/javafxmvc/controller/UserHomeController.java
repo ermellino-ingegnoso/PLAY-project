@@ -90,6 +90,9 @@ public class UserHomeController {
     }
     @FXML
     void AvanzatoOnMouseClicked(MouseEvent event) {
+        esercizioAvanzato();
+    }
+    private void esercizioAvanzato(){
         if(esAvanzato == null){ //  in caso di fallimento nella ricerca di esercizi esperti incompleti
             AuxiliaryController.alertWindow("Errore", "Non è stato possibile creare un nuovo esercizio per il grado avanzato", "Riprova più tardi");
         } else{
@@ -100,6 +103,9 @@ public class UserHomeController {
     }
     @FXML
     void EspertoOnMouseClicked(MouseEvent event) {
+        esercizioEsperto();
+    }
+    private void esercizioEsperto(){
         if(esEsperto == null){ //  in caso di fallimento nella ricerca di esercizi esperti incompleti
             AuxiliaryController.alertWindow("Errore", "Non è stato possibile creare un nuovo esercizio per il grado esperto", "Riprova più tardi");
         } else{
@@ -127,7 +133,6 @@ public class UserHomeController {
         Main.changeScene("View/Accesso.fxml");
     }
     public void caricaEsercizi(){
-        //getEsercizioEspertoWithMaxIdByGrado
         try{
             esEsperto = EsercizioEspertoDBM.getOrCreateEsercizioEspertoForUser(Main.currentUser, Grado.ESPERTO);
             esAvanzato = EsercizioEspertoDBM.getOrCreateEsercizioEspertoForUser(Main.currentUser, Grado.AVANZATO);
@@ -137,6 +142,14 @@ public class UserHomeController {
             Main.changeScene("View/ErroreDatabase.fxml");
         }
     }
+    @FXML
+    void AvanzatoOnKeyPressed(KeyEvent event) {     if(AuxiliaryController.keyEnterPressed(event)) esercizioAvanzato();}
+    @FXML
+    void EspertoOnKeyPressed(KeyEvent event) {      if(AuxiliaryController.keyEnterPressed(event)) esercizioEsperto();}
+    @FXML
+    void PrincipianteOnKeyPressed(KeyEvent event) { if(AuxiliaryController.keyEnterPressed(event)) Main.changeScene("View/Quiz.fxml");}
+    @FXML
+    void IntermedioOnKeyPressed(KeyEvent event) {   if(AuxiliaryController.keyEnterPressed(event)) Main.changeScene("View/Commenti.fxml");}
     @FXML
     private void ClassificaGeneraleOnKeyPressed(KeyEvent event) { if(AuxiliaryController.keyEnterPressed(event)) classificaGenerale();}
     @FXML

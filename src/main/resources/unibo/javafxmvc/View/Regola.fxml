@@ -23,7 +23,7 @@
    <children>
       <Label fx:id="lblTitolo" alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Titolo Esercizio" textAlignment="CENTER" wrapText="true" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
          <font>
-            <Font name="ROGFonts-Regular" size="24.0" />
+            <Font name="Bauhaus 93" size="28.0" />
          </font>
       </Label>
       <Label fx:id="lblDomanda" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Domanda?Domanda?Domanda?" textAlignment="CENTER" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">

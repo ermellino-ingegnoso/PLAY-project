@@ -12,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import unibo.javafxmvc.DAO.UserDBM;
@@ -21,6 +22,7 @@ import unibo.javafxmvc.model.User;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
