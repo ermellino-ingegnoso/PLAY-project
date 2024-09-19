@@ -69,7 +69,9 @@ public class QuizController {
 
     @FXML
     private void IndietroOnMousePressed(MouseEvent event) {
-        Main.changeScene("View/UserHome.fxml");
+        if (AuxiliaryController.confirmSave("Conferma abbandono", "Sei sicuro di voler abbandonare l'esercizio?", "I tuoi progressi andranno persi.")) {
+            Main.changeScene("View/UserHome.fxml");
+        }
     }
 
     @FXML
